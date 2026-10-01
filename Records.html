@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountaineering Records - Alpine Ascents</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- All-In-One Styling -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fdfbf7;
+            color: #333333;
+            padding-bottom: 40px;
+        }
+
+
+/* Navbar Main Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(135deg, #002147, #0056b3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 3px;
+}
+
+/* Navigation Links Menu */
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    padding: 10px 5px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dropdown:hover > a {
+    color: #e6e0d8;
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1001;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: #ffffff;
+}
+
+/* Mobile Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #002147;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 70px 20px 50px 20px;
+        }
+
+        .page-header h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            color: #d1e3ff;
+            font-size: 1.1rem;
+            margin-top: 8px;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 30px 20px;
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            color: #002147;
+            border: 1px solid #0056b3;
+            padding: 8px 20px;
+            margin: 4px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            border-color: #002147;
+        }
+
+        /* Record Cards */
+        .records-section {
+            padding-bottom: 50px;
+        }
+
+        .record-card {
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+            border: 1px solid #eef2f7;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .record-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 20px rgba(0,33,71,0.15);
+        }
+
+        .record-image {
+            position: relative;
+            height: 200px;
+        }
+
+        .record-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .record-year {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .record-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .record-tag {
+            color: #0056b3;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .record-content h3 {
+            font-size: 1.2rem;
+            color: #002147;
+            font-weight: 700;
+        }
+
+        .record-content h5 {
+            font-size: 0.92rem;
+            color: #555555;
+            margin-bottom: 10px;
+        }
+
+        .record-content p {
+            font-size: 0.88rem;
+            color: #666666;
+            flex-grow: 1;
+            margin-bottom: 15px;
+        }
+
+        .record-btn {
+            display: inline-block;
+            text-align: center;
+            border: 1px solid #0056b3;
+            color: #0056b3;
+            padding: 7px 14px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .record-btn:hover {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+        }
+
+        /* Table Section */
+        .table-section {
+            background: #f4f7fa;
+            padding: 50px 20px;
+        }
+
+        .section-heading h2 {
+            color: #002147;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .table-box {
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .record-table thead {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+        }
+
+        .record-table th, .record-table td {
+            padding: 14px 18px;
+        }
+
+        /* Site Footer */
+        .site-footer {
+            background: linear-gradient(135deg, #002147, #001228);
+            color: #ffffff;
+            padding: 50px 20px 70px 20px;
+            border-top: 3px solid #0056b3;
+        }
+
+        .footer-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .contact-text, .sub-text {
+            color: #d1e3ff;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .contact-text a {
+            color: #d1e3ff;
+            text-decoration: none;
+        }
+
+        .contact-text a:hover {
+            color: #ffffff;
+            text-decoration: underline;
+        }
+
+        .social-icons {
+            margin-top: 15px;
+        }
+
+        .social-icons a {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            width: 36px;
+            height: 36px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 8px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: #0056b3;
+        }
+
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0056b3, #002147);
+            border: 2px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px auto;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .brand-tagline {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .footer-right h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        /* Ticker Styles */
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #002147;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 99999;
+            border-top: 1px solid #0056b3;
+        }
+
+        .ticker-title {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            padding: 0 16px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 13px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            animation: tickerMove 20s linear infinite;
+        }
+
+        .ticker-container:hover .ticker-track {
+            animation-play-state: paused;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+        }
+
+        .ticker-item {
+            padding: 0 30px;
+            font-size: 13px;
+            color: #f0eae1;
+        }
+
+        @keyframes tickerMove {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+    </style>
+</head>
+<body>
+
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="mount.png" alt="Alpine Ascents Logo">
+                <span>ALPINE<br><b>ASCENTS</b></span>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="dropdown">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="Gallery.html">Gallery</a>
+            </li>
+            <li class="dropdown">
+                <a href="Climbs.html">Climbs</a>
+            </li>
+            <li class="dropdown">
+                <a href="History.html">History</a>
+            </li>
+            <li class="dropdown">
+                <a href="treks.html">Treks</a>
+                <div class="dropdown-menu">
+                    <a href="Expeditions.html">Expeditions</a>
+                    <a href="Organization.html">Organization</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Ski.html">Ski</a>
+                <div class="dropdown-menu">
+                    <a href="Hazards.html">Hazards</a>
+                    <a href="Guidelines.html">Guidelines</a>
+                    <a href="Safety.html">Safety</a>
+                    <a href="Records.html">Records</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Gear.html">Gear Shop</a>
+                <div class="dropdown-menu">
+                    <a href="Latest-Development.html">Latest-Development</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="About.html">About Us</a>
+            </li>
+            <li class="dropdown">
+                <a href="Contact Us.html">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<!-- ================= PAGE HEADER ================= -->
+<section class="page-header">
+    <div class="container text-center">
+        <h1>Alpine Ascents Records</h1>
+        <p>Explore historic mountaineering records, legendary summits, and extraordinary human achievements.</p>
+    </div>
+</section>
+
+<!-- ================= FILTER BUTTONS ================= -->
+<section class="filter-section">
+    <div class="container text-center">
+        <button class="filter-btn active" data-filter="all">All Records</button>
+        <button class="filter-btn" data-filter="everest">Everest</button>
+        <button class="filter-btn" data-filter="k2">K2</button>
+        <button class="filter-btn" data-filter="women">Women Records</button>
+        <button class="filter-btn" data-filter="speed">Speed & Oxygen</button>
+    </div>
+</section>
+
+<!-- ================= RECORD CARDS SECTION ================= -->
+<section class="records-section">
+    <div class="container">
+        <div class="row g-4">
+
+            <!-- RECORD 1 -->
+            <div class="col-lg-4 col-md-6 record-item everest">
+                <div class="record-card">
+                    <div class="record-image">
+                        <img src="K1.jpg" alt="Mount Everest Summit">
+                        <span class="record-year">1953</span>
+                    </div>
+                    <div class="record-content">
+                        <span class="record-tag">EVEREST</span>
+                        <h3>First Successful Everest Summit</h3>
+                        <h5>Sir Edmund Hillary & Tenzing Norgay</h5>
+                        <p>First confirmed summit of Mount Everest (8,848m) via the South Col route on May 29, 1953.</p>
+                        <a href="#recordTable" class="record-btn">View Milestone</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECORD 2 -->
+            <div class="col-lg-4 col-md-6 record-item k2 speed">
+                <div class="record-card">
+                    <div class="record-image">
+                        <img src="K2.webp" alt="K2 Winter Summit">
+                        <span class="record-year">2021</span>
+                    </div>
+                    <div class="record-content">
+                        <span class="record-tag">K2 • WINTER</span>
+                        <h3>First K2 Winter Ascent</h3>
+                        <h5>Nirmal Purja & Nepali Team</h5>
+                        <p>Historic first winter summit of K2 (8,611m), the savage mountain, accomplished on January 16, 2021.</p>
+                        <a href="#recordTable" class="record-btn">View Milestone</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECORD 3 -->
+            <div class="col-lg-4 col-md-6 record-item women everest">
+                <div class="record-card">
+                    <div class="record-image">
+                        <img src="https://images.unsplash.com/photo-1517825738774-7de9363ef735?auto=format&fit=crop&w=900&q=85" alt="Woman Mountain Climber">
+                        <span class="record-year">1975</span>
+                    </div>
+                    <div class="record-content">
+                        <span class="record-tag">WOMEN</span>
+                        <h3>First Woman on Everest</h3>
+                        <h5>Junko Tabei</h5>
+                        <p>Japanese mountaineer Junko Tabei became the first woman to reach the summit of Mount Everest.</p>
+                        <a href="#recordTable" class="record-btn">View Milestone</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECORD 4 -->
+            <div class="col-lg-4 col-md-6 record-item speed everest">
+                <div class="record-card">
+                    <div class="record-image">
+                        <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=900&q=85" alt="Snow Peak Climbing">
+                        <span class="record-year">1978</span>
+                    </div>
+                    <div class="record-content">
+                        <span class="record-tag">NO OXYGEN</span>
+                        <h3>Everest Without Bottled Oxygen</h3>
+                        <h5>Reinhold Messner & Peter Habeler</h5>
+                        <p>Proved humanly possible to summit Everest without supplemental oxygen in alpine style.</p>
+                        <a href="#recordTable" class="record-btn">View Milestone</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECORD 5 -->
+            <div class="col-lg-4 col-md-6 record-item speed">
+                <div class="record-card">
+                    <div class="record-image">
+                        <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=85" alt="High Altitude Mountain">
+                        <span class="record-year">2019</span>
+                    </div>
+                    <div class="record-content">
+                        <span class="record-tag">WORLD RECORD</span>
+                        <h3>All 14 8,000m Peaks Speed Record</h3>
+                        <h5>Nirmal Purja (Nimsdai)</h5>
+                        <p>Climbed all 14 of the world's 8,000-meter peaks in a record-breaking 6 months and 6 days.</p>
+                        <a href="#recordTable" class="record-btn">View Milestone</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RECORD 6 -->
+            <div class="col-lg-4 col-md-6 record-item everest">
+                <div class="record-card">
+                    <div class="record-image">
+                        <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=900&q=85" alt="Mountain Expedition Camp">
+                        <span class="record-year">2026</span>
+                    </div>
+                    <div class="record-content">
+                        <span class="record-tag">MOST SUMMITS</span>
+                        <h3>Most Everest Ascents</h3>
+                        <h5>Kami Rita Sherpa</h5>
+                        <p>Legendary Sherpa climber extended his world record by completing his 32nd Everest summit.</p>
+                        <a href="#recordTable" class="record-btn">View Milestone</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= RECORD TABLE ================= -->
+<section class="table-section" id="recordTable">
+    <div class="container">
+        <div class="section-heading text-center">
+            <span class="section-label">TIMELINE</span>
+            <h2>Historic Mountaineering Records</h2>
+        </div>
+
+        <div class="table-responsive table-box">
+            <table class="table record-table">
+                <thead>
+                    <tr>
+                        <th>Year</th>
+                        <th>Climber / Team</th>
+                        <th>Mountain Peak</th>
+                        <th>Historical Record</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1953</td>
+                        <td>Edmund Hillary & Tenzing Norgay</td>
+                        <td>Mount Everest (8,848m)</td>
+                        <td>First Successful Summit Ascent</td>
+                    </tr>
+                    <tr>
+                        <td>1954</td>
+                        <td>Achille Compagnoni & Lino Lacedelli</td>
+                        <td>K2 (8,611m)</td>
+                        <td>First Successful K2 Ascent</td>
+                    </tr>
+                    <tr>
+                        <td>1975</td>
+                        <td>Junko Tabei</td>
+                        <td>Mount Everest (8,848m)</td>
+                        <td>First Female Ascent</td>
+                    </tr>
+                    <tr>
+                        <td>1978</td>
+                        <td>Reinhold Messner & Peter Habeler</td>
+                        <td>Mount Everest (8,848m)</td>
+                        <td>First Summit without Oxygen</td>
+                    </tr>
+                    <tr>
+                        <td>2021</td>
+                        <td>Nirmal Purja & Nepali Team</td>
+                        <td>K2 (8,611m)</td>
+                        <td>First Winter Ascent</td>
+                    </tr>
+                    <tr>
+                        <td>2026</td>
+                        <td>Kami Rita Sherpa</td>
+                        <td>Mount Everest (8,848m)</td>
+                        <td>World Record 32 Everest Ascents</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-col footer-left text-center text-md-start">
+            <p class="contact-text">Phone: +1 300 303 343</p>
+            <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-col footer-center text-center">
+            <div class="logo-circle">
+                <span>AA</span>
+            </div>
+            <p class="brand-tagline">Alpine Ascents</p>
+        </div>
+
+        <div class="footer-col footer-right text-center text-md-end">
+            <h3>Explore The World</h3>
+            <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ================= LIVE TICKER ================= -->
+<div class="ticker-wrapper">
+    <div class="ticker-title">Live Updates</div>
+    <div class="ticker-container">
+        <div class="ticker-track">
+            <div class="ticker-content">
+                <span class="ticker-item tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">Explore • Climb • Discover</span>
+            </div>
+            <div class="ticker-content" aria-hidden="true">
+                <span class="ticker-item tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- JS Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* Category Filter Logic */
+const filterButtons = document.querySelectorAll(".filter-btn");
+const recordItems = document.querySelectorAll(".record-item");
+
+filterButtons.forEach(button => {
+    button.addEventListener("click", function() {
+        filterButtons.forEach(btn => btn.classList.remove("active"));
+        this.classList.add("active");
+
+        const filter = this.getAttribute("data-filter");
+        recordItems.forEach(item => {
+            if (filter === "all" || item.classList.contains(filter)) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+});
+
+/* Ticker Live DateTime Logic */
+document.addEventListener("DOMContentLoaded", () => {
+    function updateDateTime() {
+        const now = new Date();
+        const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+        document.querySelectorAll(".tickerDate").forEach(el => el.innerText = `📅 Date: ${dateStr}`);
+        document.querySelectorAll(".tickerTime").forEach(el => el.innerText = `⏰ Time: ${timeStr}`);
+    }
+    updateDateTime();
+    setInterval(updateDateTime, 1000);
+});
+</script>
+
+</body>
+</html>

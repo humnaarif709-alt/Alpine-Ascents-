@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine Ascents | Mountain Guides</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        /* ================= GENERAL & RESET STYLES ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ================= NAVIGATION BAR ================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+            padding: 3px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown>a {
+            padding: 10px 5px;
+            font-weight: 600;
+            color: #ffffff;
+            transition: color 0.3s;
+        }
+
+        .dropdown:hover>a {
+            color: #e6e0d8;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-menu a:hover {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* ================= GRADIENT BUTTONS & RESPONSIVENESS ================= */
+        .main-btn,
+        .dark-btn {
+            background: linear-gradient(135deg, #002147, #0056b3) !important;
+            color: #ffffff;
+            border: none;
+            display: inline-block;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 33, 71, 0.2);
+        }
+
+        .main-btn:hover,
+        .dark-btn:hover {
+            background: linear-gradient(135deg, #0056b3, #002147) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0, 33, 71, 0.35);
+        }
+
+        .outline-btn {
+            background: transparent;
+            color: #ffffff !important;
+            border: 2px solid #002147;
+            display: inline-block;
+            padding: 14px 28px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .outline-btn:hover {
+            background: linear-gradient(135deg, #002147, #0056b3) !important;
+            color: #ffffff;
+            border-color: transparent;
+            transform: translateY(-2px);
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* Blurred background pseudo-element */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+            filter: blur(5px);
+            transform: scale(1.05);
+            /* Prevents blur edges from showing */
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+            color: white;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            /* Optional dark overlay for better text contrast */
+            backdrop-filter: blur(3px);
+        }
+
+        .hero-content h1 {
+            font-size: 42px;
+            margin: 15px 0;
+            font-weight: 800;
+        }
+
+        .hero-text {
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+
+        /* ================= SECTIONS SETUP ================= */
+        section {
+            padding: 60px 5%;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .small-title {
+            color: #0056b3;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #002147;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .cards,
+        .school-grid,
+        .guide-grid,
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card,
+        .guide,
+        .blog-grid article {
+            background: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s;
+        }
+
+        .card:hover,
+        .blog-grid article:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img,
+        .guide img,
+        .blog-grid img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content,
+        .guide,
+        .blog-grid article div {
+            padding: 20px;
+        }
+
+        .card-content a,
+        .blog-grid article a,
+        .school-grid a {
+            display: grid;
+            margin-top: 15px;
+            font-weight: 700;
+            color: #0056b3;
+            cursor: pointer;
+            padding-bottom: 20px;
+            
+        }
+
+        /* ================= ABOUT SECTION ================= */
+        .about {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+            background: #ffffff;
+        }
+
+        .about-image,
+        .about-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* ================= SITE FOOTER ================= */
+        footer.site-footer {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 50px;
+            margin-bottom: 0;
+            background: #002147;
+            color: #faf8f5;
+            padding: 40px 0 75px 0;
+            box-sizing: border-box;
+            clear: both;
+            border-top: 1px solid #0056b3;
+        }
+
+        footer.site-footer .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        footer.site-footer .footer-col {
+            flex: 1;
+            background: transparent;
+        }
+
+        footer.site-footer .footer-left {
+            text-align: left;
+        }
+
+        footer.site-footer .footer-left .contact-text {
+            font-size: 13px;
+            margin: 4px 0;
+            color: #b8aea5;
+        }
+
+        footer.site-footer .footer-left a {
+            color: #f0eae1;
+            text-decoration: none;
+        }
+
+        footer.site-footer .social-icons {
+            margin-top: 12px;
+            display: flex;
+            gap: 12px;
+        }
+
+        footer.site-footer .social-icons a {
+            color: #b8aea5;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        footer.site-footer .social-icons a:hover {
+            color: #0056b3;
+        }
+
+        footer.site-footer .footer-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        footer.site-footer .logo-circle {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #0056b3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        footer.site-footer .logo-circle span {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        footer.site-footer .brand-tagline {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: #a3978c;
+            text-transform: uppercase;
+        }
+
+        footer.site-footer .footer-right {
+            text-align: right;
+        }
+
+        footer.site-footer .footer-right h3 {
+            font-size: 15px;
+            color: #ffffff;
+            margin-bottom: 6px;
+            border-left: none;
+            padding-left: 0;
+        }
+
+        footer.site-footer .footer-right .sub-text {
+            font-size: 13px;
+            color: #a3978c;
+            max-width: 300px;
+            margin-left: auto;
+        }
+
+        /* ================= LIVE TICKER ================= */
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #002147;
+            color: #e6e0d8;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 99999;
+            border-top: 1px solid #0056b3;
+        }
+
+        .ticker-title {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 0 14px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 13px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+        }
+
+        .ticker-item {
+            padding: 0 30px;
+            font-size: 13px;
+        }
+
+        /* ================= MOBILE MEDIA QUERIES ================= */
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: #002147;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                padding: 15px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .outline-btn,
+            .main-btn,
+            .dark-btn {
+                width: 100%;
+                display: block;
+                margin: 10px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 28px;
+            }
+
+            footer.site-footer .footer-container {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            footer.site-footer .footer-left,
+            footer.site-footer .footer-right {
+                text-align: center;
+            }
+
+            footer.site-footer .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="mount.png" alt="img">
+                    <span>ALPINE<br><b>ASCENTS</b></span>
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="dropdown">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Gallery.html">Gallery</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Climbs.html">Climbs</a>
+                </li>
+                <li class="dropdown">
+                    <a href="History.html">History</a>
+                </li>
+                <li class="dropdown">
+                    <a href="treks.html">Treks</a>
+                    <div class="dropdown-menu">
+                        <a href="Expeditions.html">Expeditions</a>
+                        <a href="Organization.html">Organization</a>
+
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Ski.html">Ski</a>
+                    <div class="dropdown-menu">
+                        <a href="Hazards.html">Hazards</a>
+                        <a href="Guidelines.html">Guidelines</a>
+                        <a href="Safety.html">Safety</a>
+                        <a href="Records.html">Records</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Gear.html">Gear Shop</a>
+                    <div class="dropdown-menu">
+                        <a href="Latest-Development.html">Latest-Development</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="About.html">About Us</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Contact Us.html">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ================= HERO ================= -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p>THE SEVEN SUMMITS COMPANY</p>
+            <h1>EXPLORE THE<br>WORLD'S GREAT PEAKS</h1>
+            <p class="hero-text">
+                Exceptional mountain adventures, professional guides and world-class climbing education.
+            </p>
+            <a href="Climbs.html" class="main-btn">EXPLORE OUR CLIMBS</a>
+        </div>
+    </section>
+
+    <!-- ================= INTRO ================= -->
+    <section class="intro">
+        <div class="container">
+            <p class="small-title">WELCOME TO ALPINE ASCENTS</p>
+            <h2>UNPARALLELED MOUNTAIN ADVENTURES</h2>
+            <p>
+                Alpine Ascents is dedicated to providing challenging, rewarding and professionally guided mountain
+                adventures.
+                Our programs combine experienced guides, careful planning and a strong commitment to mountain
+                environments.
+            </p>
+            <br>
+            <a href="About.html" class="main-btn">LEARN MORE ABOUT US</a>
+        </div>
+    </section>
+
+    <!-- ================= FEATURED ================= -->
+    <section class="featured" id="climbs">
+        <div class="container">
+            <div class="section-heading">
+                <p class="small-title">OUR ADVENTURES</p>
+                <h2>FEATURED CLIMBS</h2>
+            </div>
+            <div class="cards">
+                <article class="card">
+                    <img
+                        src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=900&q=80">
+                    <div class="card-content">
+                        <span>ALASKA</span>
+                        <h3>DENALI</h3>
+                        <p>Experience one of the world's most challenging and rewarding mountain adventures.</p>
+                        <a href="denali.html">LEARN MORE →</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img
+                        src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80">
+                    <div class="card-content">
+                        <span>WASHINGTON</span>
+                        <h3>MOUNT RAINIER</h3>
+                        <p>Build your mountaineering skills while climbing one of America's iconic peaks.</p>
+                        <a href="m-r.html">LEARN MORE →</a>
+                    </div>
+                </article>
+
+                <article class="card">
+                    <img
+                        src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80">
+                    <div class="card-content">
+                        <span>AFRICA</span>
+                        <h3>KILIMANJARO</h3>
+                        <p>Discover an unforgettable high-altitude adventure in Tanzania.</p>
+                        <a href="kilim.html">LEARN MORE →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+    <section class="about" id="about">
+        <div class="about-image">
+            <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=1200&q=80">
+        </div>
+        <div class="about-content">
+            <p class="small-title">ABOUT ALPINE ASCENTS</p>
+            <h2>EXPERIENCE.<br>EXPERTISE.<br>EXPLORATION.</h2>
+            <p>
+                Our mountain guides bring years of experience to every expedition. We believe that preparation,
+                teamwork,
+                responsible climbing and professional instruction are essential parts of a successful adventure.
+            </p>
+            <br>
+            <a href="story.html" class="main-btn dark-btn">OUR STORY</a>
+        </div>
+    </section>
+
+    <!-- ================= SCHOOL ================= -->
+    <section class="school" id="school">
+        <div class="container">
+            <div class="section-heading">
+                <p class="small-title">MOUNTAINEERING SCHOOL</p>
+                <h2>LEARN TO CLIMB</h2>
+            </div>
+            <div class="school-grid">
+                <div>
+                    <h3>BEGINNER COURSES</h3>
+                    <p>Learn fundamental mountaineering skills from experienced instructors.</p>
+                    <a href="b.html">VIEW COURSES →</a>
+                </div>
+                <div>
+                    <h3>INTERMEDIATE COURSES</h3>
+                    <p>Take your climbing knowledge and technical skills to the next level.</p>
+                    <a href="i.html">VIEW COURSES →</a>
+                </div>
+                <div>
+                    <h3>ROCK CLIMBING</h3>
+                    <p>Develop movement, rope and climbing techniques through practical training.</p>
+                    <a href="r.html">VIEW COURSES →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= BLOG ================= -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <div class="section-heading">
+                <p class="small-title">LATEST NEWS</p>
+                <h2>FROM THE BLOG</h2>
+            </div>
+            <div class="blog-grid">
+                <article>
+                    <img
+                        src="https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=80">
+                    <div>
+                        <small>MOUNTAINEERING</small>
+                        <h3>Preparing For Your Next Mountain Adventure</h3>
+                        <a href="h.html">READ MORE →</a>
+                    </div>
+                </article>
+
+                <article>
+                    <img
+                        src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?auto=format&fit=crop&w=900&q=80">
+                    <div>
+                        <small>EXPEDITIONS</small>
+                        <h3>Planning A Successful Expedition</h3>
+                        <a href="e.html">READ MORE →</a>
+                    </div>
+                </article>
+
+                <article>
+                    <img
+                        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80">
+                    <div>
+                        <small>ADVENTURE</small>
+                        <h3>Why We Climb</h3>
+                        <a href="c.html">READ MORE →</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= SITE FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text">Phone: +1 300 303 343</p>
+                <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.intagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.twitter.com"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <p class="brand-tagline">Alpine Ascents</p>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= LIVE TICKER ================= -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Live Updates</div>
+        <div class="ticker-container" id="tickerContainer">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener("click", () => {
+                    navMenu.classList.toggle("active");
+                });
+            }
+
+            const tickerContent = document.getElementById("tickerContent");
+            const tickerContainer = document.getElementById("tickerContainer");
+
+            function updateDateTime() {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+                document.querySelectorAll("#tickerDate").forEach(el => el.innerText = `📅 Date: ${dateStr}`);
+                document.querySelectorAll("#tickerTime").forEach(el => el.innerText = `⏰ Time: ${timeStr}`);
+            }
+
+            if (tickerContent && tickerContainer) {
+                const clone = tickerContent.cloneNode(true);
+                tickerContainer.appendChild(clone);
+
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+
+                let speed = 1;
+                let position = 0;
+                let isPaused = false;
+
+                const animateTicker = () => {
+                    const contentWidth = tickerContent.offsetWidth;
+                    if (!isPaused) {
+                        position -= speed;
+                        if (Math.abs(position) >= contentWidth) {
+                            position = 0;
+                        }
+                        tickerContent.style.transform = `translateX(${position}px)`;
+                        clone.style.transform = `translateX(${position}px)`;
+                    }
+                    requestAnimationFrame(animateTicker);
+                };
+
+                tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+                tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+                animateTicker();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

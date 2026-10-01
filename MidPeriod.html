@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mid Period - 1850 to 1950</title>
+    <!-- Font Awesome Icons for Arrow -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+    body { 
+        font-family: 'Segoe UI', Arial, sans-serif; 
+        margin: 0; 
+        background: #f0f4f8; 
+        color: #333; 
+        line-height: 1.7;
+    }
+
+
+/* Navbar Main Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(135deg, #002147, #0056b3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 3px;
+}
+
+/* Navigation Links Menu */
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    padding: 10px 5px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dropdown:hover > a {
+    color: #e6e0d8;
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1001;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: #ffffff;
+}
+
+/* Mobile Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #002147;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+
+
+
+    /* Main Container */
+    .container { 
+        max-width: 900px; 
+        margin: 30px auto; 
+        padding: 30px; 
+        background: white; 
+        border-radius: 12px; 
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+            
+    h1 { 
+        text-align: center; 
+        color: #002147; 
+        margin-bottom: 40px; 
+        font-size: 36px;
+        border-bottom: 3px solid #007bff;
+        padding-bottom: 15px;
+    }
+            
+    /* Detailed Section Card */
+    .detail-section { 
+        margin-bottom: 60px; 
+        scroll-margin-top: 80px;
+        padding: 25px;
+        border-left: 5px solid #007bff;
+        background: #fafafa;
+        border-radius: 8px;
+    }
+
+    .detail-section img { 
+        width: 100%; 
+        height: 450px; 
+        object-fit: cover; 
+        border-radius: 10px; 
+        margin-bottom: 20px;
+    }
+
+    .detail-section h2 { 
+        color: #004080; 
+        margin-top: 10px; 
+        font-size: 28px; 
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 10px;
+    }
+
+    .detail-section h3 {
+        color: #0056b3;
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .detail-section p { 
+        line-height: 1.8; 
+        font-size: 16px; 
+        text-align: justify; 
+        color: #444;
+        margin: 0;
+    }
+
+    /* Accordion Custom Styling */
+    .accordion-item {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        background: white;
+        overflow: hidden;
+    }
+
+    .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        cursor: pointer;
+        background: #f8fafc;
+        user-select: none;
+    }
+
+    /* Arrow Styling & Rotation */
+    .arrow-icon {
+        font-size: 18px;
+        color: #0056b3;
+        transition: transform 0.3s ease;
+    }
+
+    /* Content Area (Hidden by Default) */
+    .accordion-content {
+        display: none;
+        padding: 15px 20px;
+        border-top: 1px solid #e2e8f0;
+        background: #fff;
+    }
+
+    .accordion-content ul { 
+        line-height: 1.8; 
+        font-size: 16px; 
+        padding-left: 20px;
+        margin: 0;
+    }
+    .accordion-content ul li {
+        margin-bottom: 10px;
+    }
+    .accordion-content ul li b {
+        color: #002147;
+    }
+
+    /* Active State - Jab Open Ho To ^ Banne Aur Content Dikhne Ke Liye */
+    .accordion-item.active .accordion-content {
+        display: block;
+    }
+
+    .accordion-item.active .arrow-icon {
+        transform: rotate(180deg);
+    }
+
+    /* Back Button */
+    .btn-back {
+        display: inline-block;
+        background: #6c757d;
+        color: white;
+        padding: 12px 25px;
+        text-decoration: none;
+        border-radius: 6px;
+        margin-top: 20px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+    .btn-back:hover { 
+        background: #5a6268; 
+        transform: translateX(-3px);
+    }
+
+    footer { 
+        text-align: center; 
+        padding: 20px; 
+        background: #002147; 
+        color: white; 
+        margin-top: 30px; 
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .container { padding: 15px; margin: 15px; }
+        .detail-section img { height: 250px; }
+        h1 { font-size: 28px; }
+        .detail-section h2 { font-size: 22px; }
+    }
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+/* ================= SITE FOOTER ================= */
+footer.site-footer {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 50px;
+    margin-bottom: 0;
+    background: #002147;
+    color: #faf8f5;
+    padding: 40px 0 75px 0;
+    box-sizing: border-box;
+    clear: both;
+    border-top: 1px solid #0056b3;
+}
+
+footer.site-footer .footer-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+}
+
+footer.site-footer .footer-col {
+    flex: 1;
+    background: transparent;
+}
+
+footer.site-footer .footer-left {
+    text-align: left;
+}
+
+footer.site-footer .footer-left .contact-text {
+    font-size: 13px;
+    margin: 4px 0;
+    color: #b8aea5;
+}
+
+footer.site-footer .footer-left a {
+    color: #f0eae1;
+    text-decoration: none;
+}
+
+footer.site-footer .social-icons {
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+}
+
+footer.site-footer .social-icons a {
+    color: #b8aea5;
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+
+footer.site-footer .social-icons a:hover {
+    color: #0056b3;
+}
+
+footer.site-footer .footer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+footer.site-footer .logo-circle {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #0056b3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+footer.site-footer .logo-circle span {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+footer.site-footer .brand-tagline {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #a3978c;
+    text-transform: uppercase;
+}
+
+footer.site-footer .footer-right {
+    text-align: right;
+}
+
+footer.site-footer .footer-right h3 {
+    font-size: 15px;
+    color: #ffffff;
+    margin-bottom: 6px;
+    border-left: none;
+    padding-left: 0;
+}
+
+footer.site-footer .footer-right .sub-text {
+    font-size: 13px;
+    color: #a3978c;
+    max-width: 300px;
+    margin-left: auto;
+}
+
+/* ================= LIVE TICKER ================= */
+.ticker-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #002147;
+    color: #e6e0d8;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 99999;
+    border-top: 1px solid #0056b3;
+}
+
+.ticker-title {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: #ffffff;
+    padding: 0 14px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.ticker-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-content {
+    display: flex;
+    white-space: nowrap;
+    position: absolute;
+    left: 0;
+}
+
+.ticker-item {
+    padding: 0 30px;
+    font-size: 13px;
+}
+
+/* ================= MOBILE MEDIA QUERIES ================= */
+@media screen and (max-width: 768px) {
+    footer.site-footer .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    footer.site-footer .footer-left,
+    footer.site-footer .footer-right {
+        text-align: center;
+    }
+
+    footer.site-footer .footer-right .sub-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    footer.site-footer .social-icons {
+        justify-content: center;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+
+
+    <header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="mount.png" alt="Alpine Ascents Logo">
+                <span>ALPINE<br><b>ASCENTS</b></span>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="dropdown">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="Gallery.html">Gallery</a>
+            </li>
+            <li class="dropdown">
+                <a href="Climbs.html">Climbs</a>
+            </li>
+            <li class="dropdown">
+                <a href="History.html">History</a>
+            </li>
+            <li class="dropdown">
+                <a href="Climbs.html">Treks</a>
+                <div class="dropdown-menu">
+                    <a href="Expeditions.html">Expeditions</a>
+                    <a href="Organization.html">Organization</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#">Ski</a>
+                <div class="dropdown-menu">
+                    <a href="Hazards.html">Hazards</a>
+                    <a href="Guidelines.html">Guidelines</a>
+                    <a href="Safety.html">Safety</a>
+                    <a href="Records.html">Records</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#">Gear Shop</a>
+                <div class="dropdown-menu">
+                    <a href="Latest-Development.html">Latest-Development</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="About.html">About Us</a>
+            </li>
+            <li class="dropdown">
+                <a href="Contact Us.html">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+    <div class="container">
+        <div id="Mid" class="detail-section">
+            <img src="logo2.jpg" alt="logo">
+            <h2>2. Mid Period - 1850 to 1950</h2>
+            <p style="margin-bottom: 20px;">
+                The 19th and early 20th century is called the "Golden Age of Mountaineering". This was when climbing became a proper sport. 
+                Rich people from Europe, especially Britain, started coming to the Alps with professional guides. The main goal was to climb 
+                every big peak in the Alps. New equipment like ropes, ice axes, and crampons were invented.
+            </p>
+
+            <!-- Key Point Accordion 1 -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3>Why Did People Climb?</h3>
+                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <ul>
+                        <li><b>Sport:</b> Climbing became a hobby and competition for adventure and fame</li>
+                        <li><b>Science:</b> Scientists climbed to study weather, rocks, and plants at high altitude</li>
+                        <li><b>National Pride:</b> Countries competed to have their people climb the first ascents</li>
+                        <li><b>Tourism:</b> Mountain hotels and railways were built to bring tourists</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Point Accordion 2 -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3>Key Events</h3>
+                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <ul>
+                        <li><b>1857:</b> Alpine Club founded in London - First mountaineering club in the world</li>
+                        <li><b>1865:</b> First ascent of Matterhorn by Edward Whymper. This was the most famous climb of the era</li>
+                        <li><b>1895:</b> First winter ascent of Mont Blanc</li>
+                        <li><b>1924:</b> George Mallory and Andrew Irvine disappeared on Mount Everest</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Key Point Accordion 3 (Equipment Section) -->
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <h3>Equipment in Mid Period</h3>
+                    <i class="fa-solid fa-chevron-down arrow-icon"></i>
+                </div>
+                <div class="accordion-content">
+                    <p>
+                        Better boots with nails, hemp ropes, wooden ice axes, and wool clothes were used. Pitons and carabiners were invented for safety. 
+                        Tents and stoves made it possible to stay on mountains for many days.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript for Auto-close logic -->
+    <script>
+        function toggleAccordion(headerElement) {
+            const currentItem = headerElement.parentElement;
+            const allItems = document.querySelectorAll('.accordion-item');
+
+            allItems.forEach(item => {
+                if (item !== currentItem) {
+                    item.classList.remove('active');
+                }
+            });
+
+            currentItem.classList.toggle('active');
+        }
+    </script>
+
+
+    <!-- ================= SITE FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text">Phone: +1 300 303 343</p>
+                <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <p class="brand-tagline">Alpine Ascents</p>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= LIVE TICKER ================= -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Live Updates</div>
+        <div class="ticker-container" id="tickerContainer">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tickerContent = document.getElementById("tickerContent");
+            const tickerContainer = document.getElementById("tickerContainer");
+
+            function updateDateTime() {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+                document.querySelectorAll("#tickerDate").forEach(el => el.innerText = `📅 Date: ${dateStr}`);
+                document.querySelectorAll("#tickerTime").forEach(el => el.innerText = `⏰ Time: ${timeStr}`);
+            }
+
+            if (tickerContent && tickerContainer) {
+                const clone = tickerContent.cloneNode(true);
+                tickerContainer.appendChild(clone);
+
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+
+                let speed = 1;
+                let position = 0;
+                let isPaused = false;
+
+                const animateTicker = () => {
+                    const contentWidth = tickerContent.offsetWidth;
+                    if (!isPaused) {
+                        position -= speed;
+                        if (Math.abs(position) >= contentWidth) {
+                            position = 0;
+                        }
+                        tickerContent.style.transform = `translateX(${position}px)`;
+                        clone.style.transform = `translateX(${position}px)`;
+                    }
+                    requestAnimationFrame(animateTicker);
+                };
+
+                tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+                tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+                animateTicker();
+            }
+        });
+    </script>
+
+</body>
+</html>

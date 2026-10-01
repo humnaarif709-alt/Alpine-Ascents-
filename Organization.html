@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountaineering Organizations & Clubs</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Leaflet OpenStreetMap CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+
+/* Navbar Main Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(135deg, #002147, #0056b3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 3px;
+}
+
+/* Navigation Links Menu */
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    padding: 10px 5px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dropdown:hover > a {
+    color: #e6e0d8;
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1001;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: #ffffff;
+}
+
+/* Mobile Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #002147;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+        .btn-Hazards {
+            position: fixed;
+            bottom: 60px;
+            /* Ticker (45px) ke theek upar set karne ke liye */
+            right: 20px;
+            z-index: 999;
+            /* Page ke baki elements ke upar dikhane ke liye */
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            color: #ffffff;
+            background-color: #007bff;
+            /* Primary Blue */
+            text-decoration: none;
+
+            border-radius: 50px;
+            /* Smooth rounded shape */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        /* Hover Effect */
+        .btn-Hazards:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            /* Hover par thoda upar slide hoga */
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+        }
+
+        /* Active/Click Effect */
+        .btn-Hazards:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Mobile Screens Adjustment */
+        @media (max-width: 600px) {
+            .btn-Hazards {
+                bottom: 55px;
+                right: 15px;
+                padding: 10px 18px;
+                font-size: 13px;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f0f4f8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            background: #002147;
+            padding: 15px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        nav a {
+            color: white;
+            margin: 0 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #ffcc00;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+
+        /* Page Header */
+        /* Page Header Base Styling */
+        .page-header {
+            text-align: center;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            /* Transition Smooth Rakhne ke Liye */
+        }
+
+        /* Page Header Base Styling */
+        .page-header {
+            text-align: center;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            padding: 40px 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            /* Transition Smooth Rakhne ke Liye */
+        }
+
+        /* 1. Header Main Title Transition */
+        .page-header h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+            opacity: 0;
+            /* Initially Hidden */
+            animation: slideUpFade 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.2s;
+            /* Thoda late start hone ke liye */
+        }
+
+        /* 2. Header Paragraph Transition */
+        .page-header p {
+            font-size: 16px;
+            opacity: 0;
+            /* Initially Hidden */
+            animation: slideUpFade 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation-delay: 0.5s;
+            /* Heading ke baad show hone ke liye */
+        }
+
+        /* Keyframes Animation Definition */
+        @keyframes slideUpFade {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                /* Thoda neeche aur chota */
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                /* Apni jagah par wapas aana */
+            }
+        }
+
+        /* Keyframes Animation Definition */
+        @keyframes slideUpFade {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                /* Thoda neeche aur chota */
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                /* Apni jagah par wapas aana */
+            }
+        }
+
+        .section-title {
+            color: #002147;
+            font-size: 26px;
+            margin-bottom: 25px;
+            border-left: 5px solid #007bff;
+            padding-left: 12px;
+        }
+
+        /* Organizations Grid & Cards */
+        .org-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-body h3 {
+            color: #002147;
+            margin-bottom: 5px;
+        }
+
+        .location-tag {
+            color: #6c757d;
+            font-size: 14px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .card-body p {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        /* Buttons & Accordion Details */
+        .btn {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            text-decoration: none;
+            transition: background 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #007bff;
+            transform: translateY(-2px);
+        }
+
+        .details-box {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            background: #f8fafc;
+            border-top: 1px dashed #ddd;
+            font-size: 13px;
+        }
+
+        .details-box.open {
+            max-height: 250px;
+            padding: 15px;
+        }
+
+        /* Clubs Slider Styling */
+        .slider-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .club-card {
+            min-width: 100%;
+            background: white;
+            padding: 35px 45px;
+            border-radius: 12px;
+            border-left: 6px solid #0056b3;
+        }
+
+        .club-card h3 {
+            color: #002147;
+            font-size: 26px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        .club-info-list {
+            list-style: none;
+        }
+
+        .club-info-list li {
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: #444;
+        }
+
+        .club-info-list li b {
+            color: #002147;
+            display: inline-block;
+            min-width: 130px;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 33, 71, 0.85);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .slider-btn:hover {
+            background: #007bff;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-btn.prev {
+            left: 10px;
+        }
+
+        .slider-btn.next {
+            right: 10px;
+        }
+
+        /* Map Section */
+        .map-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 40px;
+        }
+
+        .geo-btn-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #map {
+            height: 380px;
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #002147;
+            color: white;
+            margin-top: 30px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .club-card {
+                padding: 25px 20px;
+            }
+
+            .club-info-list li b {
+                display: block;
+                margin-bottom: 2px;
+            }
+
+            .slider-btn {
+                width: 35px;
+                height: 35px;
+            }
+        }
+
+
+
+
+        /* Note: Apne body ya footer mein extra bottom padding (e.g., padding-bottom: 60px;) zaroor dein taake content hide na ho */
+
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            background-color: #002147;
+            /* Theme Navy Blue */
+            color: #e9f5ff;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            z-index: 1000;
+        }
+
+        .ticker-title {
+            background-color: #007bff;
+            /* Theme Primary Blue */
+            color: #ffffff;
+            padding: 0 15px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 10;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+            will-change: transform;
+        }
+
+        .ticker-item {
+            padding: 0 35px;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .ticker-title {
+                font-size: 12px;
+                padding: 0 10px;
+            }
+
+            .ticker-item {
+                font-size: 13px;
+                padding: 0 20px;
+            }
+        }
+
+
+
+        /* Page Padding to avoid ticker overlap */
+        body {
+            padding-bottom: 50px;
+        }
+
+        /* Base Fixed Wrapper */
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 45px;
+            background-color: #002147;
+            /* Navy Blue */
+            color: #e9f5ff;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.3);
+            font-family: 'Segoe UI', Arial, sans-serif;
+            z-index: 9999;
+            border-radius: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Left Title Badge */
+        .ticker-title {
+            background-color: #007bff;
+            /* Primary Blue */
+            color: #ffffff;
+            padding: 0 15px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+            z-index: 10;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+            border-radius: 0;
+        }
+
+        /* Overriding Generic DIV Rules */
+        .ticker-wrapper,
+        .ticker-wrapper div,
+        .ticker-container,
+        .ticker-content {
+            background: transparent;
+            box-shadow: none;
+            border-radius: 0;
+            max-width: 100%;
+        }
+
+        .ticker-wrapper {
+            background-color: #002147;
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+            will-change: transform;
+        }
+
+        .ticker-item {
+            padding: 0 35px;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            color: #e9f5ff;
+            background: transparent;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .ticker-title {
+                font-size: 12px;
+                padding: 0 10px;
+            }
+
+            .ticker-item {
+                font-size: 13px;
+                padding: 0 20px;
+            }
+        }
+
+
+        /* Body overflow fix to support 100vw full-width calculation */
+        body {
+            overflow-x: hidden;
+        }
+
+
+
+        /* --- SITE FOOTER --- */
+        footer.site-footer {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 50px;
+            margin-bottom: 0;
+            background: #002147;
+            color: #faf8f5;
+            padding: 40px 0 75px 0;
+            box-sizing: border-box;
+            clear: both;
+            border-top: 1px solid #0056b3;
+        }
+
+        footer.site-footer .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        footer.site-footer .footer-col {
+            flex: 1;
+            background: transparent;
+        }
+
+        footer.site-footer .footer-left {
+            text-align: left;
+        }
+
+        footer.site-footer .footer-left .contact-text {
+            font-size: 13px;
+            margin: 4px 0;
+            color: #b8aea5;
+        }
+
+        footer.site-footer .footer-left a {
+            color: #f0eae1;
+            text-decoration: none;
+        }
+
+        footer.site-footer .social-icons {
+            margin-top: 12px;
+            display: flex;
+            gap: 12px;
+        }
+
+        footer.site-footer .social-icons a {
+            color: #b8aea5;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        footer.site-footer .social-icons a:hover {
+            color: #0056b3;
+        }
+
+        footer.site-footer .footer-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        footer.site-footer .logo-circle {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #0056b3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        footer.site-footer .logo-circle span {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        footer.site-footer .brand-tagline {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: #a3978c;
+            text-transform: uppercase;
+        }
+
+        footer.site-footer .footer-right {
+            text-align: right;
+        }
+
+        footer.site-footer .footer-right h3 {
+            font-size: 15px;
+            color: #ffffff;
+            margin-bottom: 6px;
+            border-left: none;
+            padding-left: 0;
+        }
+
+        footer.site-footer .footer-right .sub-text {
+            font-size: 13px;
+            color: #a3978c;
+            max-width: 300px;
+            margin-left: auto;
+        }
+
+
+
+
+
+
+
+
+        /* Mobile Responsiveness Adjustment */
+        @media (max-width: 768px) {
+            footer.site-footer .footer-container {
+                flex-direction: column;
+                gap: 25px;
+                text-align: center;
+            }
+
+            footer.site-footer .footer-left,
+            footer.site-footer .footer-right {
+                text-align: center;
+            }
+
+            footer.site-footer .social-icons {
+                justify-content: center;
+            }
+
+            footer.site-footer .footer-right .sub-text {
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="mount.png" alt="Alpine Ascents Logo">
+                <span>ALPINE<br><b>ASCENTS</b></span>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="dropdown">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="Gallery.html">Gallery</a>
+            </li>
+            <li class="dropdown">
+                <a href="Climbs.html">Climbs</a>
+            </li>
+            <li class="dropdown">
+                <a href="History.html">History</a>
+            </li>
+            <li class="dropdown">
+                <a href="treks.html">Treks</a>
+                <div class="dropdown-menu">
+                    <a href="Expeditions.html">Expeditions</a>
+                    <a href="Organization.html">Organization</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Ski.html">Ski</a>
+                <div class="dropdown-menu">
+                    <a href="Hazards.html">Hazards</a>
+                    <a href="Guidelines.html">Guidelines</a>
+                    <a href="Safety.html">Safety</a>
+                    <a href="Records.html">Records</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Gear.html">Gear Shop</a>
+                <div class="dropdown-menu">
+                    <a href="Latest-Development.html">Latest-Development</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="About.html">About Us</a>
+            </li>
+            <li class="dropdown">
+                <a href="Contact Us.html">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+    <!-- Live Dynamic Ticker -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Live Updates</div>
+        <div class="ticker-container" id="tickerContainer">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">🏔️ Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tickerContent = document.getElementById("tickerContent");
+            const tickerContainer = document.getElementById("tickerContainer");
+
+            // 1. Live Date & Time Update Function
+            function updateDateTime() {
+                const now = new Date();
+
+                // Date Format: September 7, 2026
+                const optionsDate = { month: 'long', day: 'numeric', year: 'numeric' };
+                const dateStr = now.toLocaleDateString('en-US', optionsDate);
+
+                // Time Format: 03:20 PM
+                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                const timeStr = now.toLocaleTimeString('en-US', optionsTime);
+
+                // DOM elements update (Original aur Clone dono)
+                document.querySelectorAll("#tickerDate").forEach(el => {
+                    el.innerText = `📅 Date: ${dateStr}`;
+                });
+                document.querySelectorAll("#tickerTime").forEach(el => {
+                    el.innerText = `⏰ Time: ${timeStr}`;
+                });
+            }
+
+            if (tickerContent && tickerContainer) {
+                // Continuous Scroll ke liye Clone banana
+                const clone = tickerContent.cloneNode(true);
+                clone.id = "tickerContentClone";
+                tickerContainer.appendChild(clone);
+
+                // Date/Time initial set aur har second update
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+
+                // 2. Continuous Scroll Logic
+                let speed = 1; // Speed control
+                let position = 0;
+                let isPaused = false;
+
+                const animateTicker = () => {
+                    const contentWidth = tickerContent.offsetWidth;
+                    if (!isPaused) {
+                        position -= speed;
+                        if (Math.abs(position) >= contentWidth) {
+                            position = 0;
+                        }
+                        tickerContent.style.transform = `translateX(${position}px)`;
+                        clone.style.transform = `translateX(${position}px)`;
+                    }
+                    requestAnimationFrame(animateTicker);
+                };
+
+                // Hover par pause hone ke liye
+                tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+                tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+
+                animateTicker();
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+
+        <!-- A. Header -->
+        <div class="page-header">
+            <h1>Mountaineering Organizations & Clubs</h1>
+            <p>Connecting global climbers, managing high-altitude expeditions, and building mountain safety networks.
+            </p>
+        </div>
+
+        <!-- B. Organizations Cards Grid -->
+        <h2 class="section-title">International & National Organizations</h2>
+        <div class="org-grid">
+
+            <!-- Card 1 -->
+            <div class="card">
+                <img src="o1.jpg" alt="Alpine Club of Pakistan" class="card-img">
+                <div class="card-body">
+                    <h3>Alpine Club of Pakistan (ACP)</h3>
+                    <div class="location-tag"><i class="fa-solid fa-location-dot"></i> Islamabad, Pakistan</div>
+                    <p>The official national mountaineering federation regulating climbing activities, permits, and
+                        training across Karakoram and Himalayas.</p>
+                    <button class="btn" onclick="toggleDetails('details-1')">More Details</button>
+                    <div id="details-1" class="details-box">
+                        <p><b>Website:</b> <a href="https://www.alpineclubpakistan.org"
+                                target="_blank">alpineclub.org.pk</a></p>
+                        <p><b>Contact:</b> +92 51 9215282 | info@alpineclub.org.pk</p>
+                        <p><b>Location:</b> Jinnah Sports Complex, Islamabad</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="card">
+                <img src="o2.jpg" alt="UIAA" class="card-img">
+                <div class="card-body">
+                    <h3>UIAA - World Climbing Body</h3>
+                    <div class="location-tag"><i class="fa-solid fa-location-dot"></i> Bern, Switzerland</div>
+                    <p>International Climbing and Mountaineering Federation setting global equipment safety standards,
+                        competition rules, and ethics.</p>
+                    <button class="btn" onclick="toggleDetails('details-2')">More Details</button>
+                    <div id="details-2" class="details-box">
+                        <p><b>Website:</b> <a href="https://theuiaa.org" target="_blank">theuiaa.org</a></p>
+                        <p><b>Contact:</b> info@theuiaa.org</p>
+                        <p><b>Location:</b> Monbijoustrasse 61, Bern</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <img src="o3.jpg" alt="The Alpine Club UK" class="card-img">
+                <div class="card-body">
+                    <h3>The Alpine Club (UK)</h3>
+                    <div class="location-tag"><i class="fa-solid fa-location-dot"></i> London, United Kingdom</div>
+                    <p>Founded in 1857, it is the world's oldest mountaineering club, archiving historic Himalayan and
+                        Alpine exploration records.</p>
+                    <button class="btn" onclick="toggleDetails('details-3')">More Details</button>
+                    <div id="details-3" class="details-box">
+                        <p><b>Website:</b> <a href="https://alpine-club.org.uk" target="_blank">alpine-club.org.uk</a>
+                        </p>
+                        <p><b>Contact:</b> admin@alpine-club.org.uk</p>
+                        <p><b>Location:</b> 55 Charlotte Rd, London</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- C. Clubs Section (Slider) -->
+        <h2 class="section-title">Prominent Regional Clubs & Expeditions</h2>
+        <div class="slider-wrapper">
+            <button class="slider-btn prev" onclick="moveSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="slider-btn next" onclick="moveSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+
+            <div class="slider-track" id="sliderTrack">
+
+                <!-- Slide 1 -->
+                <div class="club-card">
+                    <h3>Alpine Club of Pakistan (National HQ)</h3>
+                    <ul class="club-info-list">
+                        <li><b>Location:</b> Jinnah Sports Complex, Islamabad, Pakistan</li>
+                        <li><b>Activities:</b> High-altitude expedition management, rock climbing championships, ice
+                            climbing, and glacier navigation across Karakoram and Himalayas.</li>
+                        <li><b>Training:</b> Comprehensive mountaineering courses, avalanche rescue drills, and
+                            wilderness safety certifications.</li>
+                        <li><b>Expeditions:</b> Organizes national & international ascents to K2, Nanga Parbat, Broad
+                            Peak, and Spantik.</li>
+                        <li><b>Contact:</b> info@alpineclub.org.pk | +92 51 9215282</li>
+                    </ul>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="club-card">
+                    <h3>Karimabad Climbing & Trekking Club</h3>
+                    <ul class="club-info-list">
+                        <li><b>Location:</b> Karimabad, Hunza Valley, Gilgit-Baltistan, Pakistan</li>
+                        <li><b>Activities:</b> Granite wall rock climbing, high-altitude guiding, bouldering, and winter
+                            ice climbing near Passu and Ultar Sar.</li>
+                        <li><b>Training:</b> High Altitude Porter (HAP) professional safety courses, eco-friendly
+                            climbing techniques, and crevasse rescue operations.</li>
+                        <li><b>Expeditions:</b> Guided treks to Rakaposhi Base Camp, Ladyfinger Peak, and Rush Lake.
+                        </li>
+                        <li><b>Contact:</b> hunzaclimbing@gmail.com | +92 355 4123456</li>
+                    </ul>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="club-card">
+                    <h3>Baltistan Alpine Rescue & Climbing Club</h3>
+                    <ul class="club-info-list">
+                        <li><b>Location:</b> Skardu City, Gilgit-Baltistan, Pakistan</li>
+                        <li><b>Activities:</b> Technical big-wall rock climbing, glacier logistics management, and
+                            emergency high-altitude rescue operations.</li>
+                        <li><b>Training:</b> Specialized winter survival techniques, fixed-rope management, and
+                            high-altitude emergency first aid.</li>
+                        <li><b>Expeditions:</b> Trango Towers technical ascents, K2 Basecamp logistics, and Concordia
+                            treks.</li>
+                        <li><b>Contact:</b> baltistanclimbing@gmail.com | +92 358 1122334</li>
+                    </ul>
+                </div>
+
+                <!-- Slide 4 -->
+                <div class="club-card">
+                    <h3>Mountain Adventure Club</h3>
+                    <ul class="club-info-list">
+                        <li><b>Location:</b> Chamonix-Mont-Blanc, France</li>
+                        <li><b>Activities:</b> Alpine rock climbing, multi-pitch ascents, high-altitude ski touring, and
+                            technical bouldering.</li>
+                        <li><b>Training:</b> Certified IFMGA guide workshops, wilderness survival, rope handling, and
+                            ice axe navigation skills.</li>
+                        <li><b>Expeditions:</b> Mont Blanc ascents, Matterhorn ridge climbs, and Himalayan trekking
+                            routes.</li>
+                        <li><b>Contact:</b> contact@mountainclub.org | +33 4 50 53 00 00</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- D. Location / Map Section -->
+        <h2 class="section-title">Find Organizations & Nearby Hubs</h2>
+        <div class="map-section">
+            <div class="geo-btn-box">
+                <button class="btn" onclick="getUserLocation()"><i class="fa-solid fa-crosshairs"></i> Get My Location &
+                    Locate Nearby Hubs</button>
+                <p id="geoStatus" style="margin-top: 10px; font-size: 14px; color: #0056b3;"></p>
+            </div>
+            <!-- Leaflet Map Container -->
+            <div id="map"></div>
+        </div>
+
+    </div>
+
+
+
+    <!-- Leaflet OpenStreetMap JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        /* Accordion Toggle */
+        function toggleDetails(id) {
+            const detailElement = document.getElementById(id);
+            detailElement.classList.toggle('open');
+        }
+
+        /* Club Slider Logic */
+        let currentSlide = 0;
+        function moveSlide(direction) {
+            const track = document.getElementById('sliderTrack');
+            const totalSlides = track.children.length;
+
+            currentSlide += direction;
+
+            if (currentSlide < 0) {
+                currentSlide = totalSlides - 1;
+            } else if (currentSlide >= totalSlides) {
+                currentSlide = 0;
+            }
+
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        /* Map Setup (Centered around Northern Pakistan / Himalayas) */
+        const map = L.map('map').setView([33.7294, 73.0931], 5);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        /* Organization & Club Markers */
+        L.marker([33.7294, 73.0931]).addTo(map).bindPopup('<b>Alpine Club of Pakistan</b><br>Islamabad HQ');
+        L.marker([36.3167, 74.6500]).addTo(map).bindPopup('<b>Karimabad Climbing Club</b><br>Hunza Valley');
+        L.marker([35.2971, 75.6333]).addTo(map).bindPopup('<b>Baltistan Alpine Club</b><br>Skardu');
+        L.marker([46.9480, 7.4474]).addTo(map).bindPopup('<b>UIAA HQ</b><br>Bern, Switzerland');
+        L.marker([51.5207, -0.0833]).addTo(map).bindPopup('<b>The Alpine Club</b><br>London, UK');
+
+        /* Geolocation API */
+        function getUserLocation() {
+            const statusText = document.getElementById('geoStatus');
+
+            if ("geolocation" in navigator) {
+                statusText.innerText = "Locating your position...";
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLat = position.coords.latitude;
+                        const userLng = position.coords.longitude;
+
+                        statusText.innerHTML = `<b>Location Found!</b> Lat: ${userLat.toFixed(4)}, Lng: ${userLng.toFixed(4)}`;
+
+                        map.setView([userLat, userLng], 10);
+
+                        L.marker([userLat, userLng]).addTo(map)
+                            .bindPopup('<b>You are here!</b>')
+                            .openPopup();
+                    },
+                    (error) => {
+                        statusText.innerText = "Unable to retrieve location. Showing map hubs.";
+                    }
+                );
+            } else {
+                statusText.innerText = "Geolocation is not supported by your browser.";
+            }
+        }
+    </script>
+
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text">Phone: +1 300 303 343</p>
+                <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <p class="brand-tagline">Alpine Ascents</p>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+</body>
+
+</html>

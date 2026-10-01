@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Intermediate Course - Alpine Ascents</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #fff;
+            color: #222;
+            line-height: 1.7
+        }
+
+        .hero img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px
+        }
+
+        .container h1 {
+            font-size: 44px;
+            margin-top: 1px;
+             background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            padding: 20px;
+            line-height: 1.1
+        }
+
+        .small {
+            color: #0077b6;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-top: 25px
+        }
+
+        .info-box {
+            display: flex;
+            gap: 20px;
+            background: #f5f8ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: center;
+            border: 1px solid #ddd
+        }
+
+        .info-box div {
+            flex: 1
+        }
+
+        .info-box strong {
+            display: block;
+            font-size: 22px;
+            color: #0a1931
+        }
+
+        .list-box {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            text-decoration: none;
+            margin-top: 25px;
+            border-radius: 5px
+        }
+
+        .dark {
+             background: linear-gradient(135deg, #002147, #0056b3);
+            color: white
+        }
+
+
+        
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+}
+
+/* ================= SITE FOOTER ================= */
+footer.site-footer {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 50px;
+    margin-bottom: 0;
+    background: #002147;
+    color: #faf8f5;
+    padding: 40px 0 75px 0;
+    box-sizing: border-box;
+    clear: both;
+    border-top: 1px solid #0056b3;
+}
+
+footer.site-footer .footer-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+}
+
+footer.site-footer .footer-col {
+    flex: 1;
+    background: transparent;
+}
+
+footer.site-footer .footer-left {
+    text-align: left;
+}
+
+footer.site-footer .footer-left .contact-text {
+    font-size: 13px;
+    margin: 4px 0;
+    color: #b8aea5;
+}
+
+footer.site-footer .footer-left a {
+    color: #f0eae1;
+    text-decoration: none;
+}
+
+footer.site-footer .social-icons {
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+}
+
+footer.site-footer .social-icons a {
+    color: #b8aea5;
+    font-size: 16px;
+    transition: color 0.2s ease;
+}
+
+footer.site-footer .social-icons a:hover {
+    color: #0056b3;
+}
+
+footer.site-footer .footer-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+footer.site-footer .logo-circle {
+    width: 60px;
+    height: 60px;
+    border: 1px solid #0056b3;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+footer.site-footer .logo-circle span {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+footer.site-footer .brand-tagline {
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #a3978c;
+    text-transform: uppercase;
+}
+
+footer.site-footer .footer-right {
+    text-align: right;
+}
+
+footer.site-footer .footer-right h3 {
+    font-size: 15px;
+    color: #ffffff;
+    margin-bottom: 6px;
+    border-left: none;
+    padding-left: 0;
+}
+
+footer.site-footer .footer-right .sub-text {
+    font-size: 13px;
+    color: #a3978c;
+    max-width: 300px;
+    margin-left: auto;
+}
+
+/* ================= LIVE TICKER ================= */
+.ticker-wrapper {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background-color: #002147;
+    color: #e6e0d8;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    z-index: 99999;
+    border-top: 1px solid #0056b3;
+}
+
+.ticker-title {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: #ffffff;
+    padding: 0 14px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 13px;
+    white-space: nowrap;
+    z-index: 10;
+}
+
+.ticker-container {
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-content {
+    display: flex;
+    white-space: nowrap;
+    position: absolute;
+    left: 0;
+}
+
+.ticker-item {
+    padding: 0 30px;
+    font-size: 13px;
+}
+
+/* ================= MOBILE MEDIA QUERIES ================= */
+@media screen and (max-width: 768px) {
+    footer.site-footer .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    footer.site-footer .footer-left,
+    footer.site-footer .footer-right {
+        text-align: center;
+    }
+
+    footer.site-footer .footer-right .sub-text {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    footer.site-footer .social-icons {
+        justify-content: center;
+    }
+}
+    
+    </style>
+</head>
+
+<body>
+
+    <div class="hero">
+        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?auto=format&fit=crop&w=1200&q=80"
+            alt="Intermediate Course">
+    </div>
+
+    <div class="container">
+        <h1>INTERMEDIATE<br>MOUNTAINEERING COURSE</h1>
+
+        <div class="info-box">
+            <div><strong>5 Days</strong>Duration</div>
+            <div><strong>Intermediate</strong>Level</div>
+            <div><strong>$1150</strong>Course Fee</div>
+            <div><strong>12</strong>Max Students</div>
+        </div>
+
+        <h2>Course Overview</h2>
+        <p>
+            This course is for climbers who have completed the beginner course and want to go to the next level. 
+            In this course, we will prepare you for 4000m - 5000m peaks. Full focus will be on safety, speed, and technical skills.
+        </p>
+
+        <div class="list-box">
+            <h3>What You Will Learn:</h3>
+            <ul>
+                <li>✓ Advanced Rope Work & Anchor Building</li>
+                <li>✓ Steep Ice Climbing (60-70 Degree)</li>
+                <li>✓ Crevasse Rescue - Real Scenario Training</li>
+                <li>✓ Avalanche Awareness & Safety</li>
+                <li>✓ Navigation & Weather Reading</li>
+                <li>✓ 1 Night Glacier Camping</li>
+            </ul>
+        </div>
+
+        <h3>Day Wise Schedule:</h3>
+        <p>
+            <b>Day 1-2:</b> Revision + Advanced knots & rescue<br>
+            <b>Day 3-4:</b> Ice wall climbing & glacier travel<br>
+            <b>Day 5:</b> Final Exam Climb + Certification
+        </p>
+
+        <h3>Requirement:</h3>
+        <p>A beginner course certificate or 2+ mountain experiences are required.</p>
+
+        <a href="index.html" class="btn dark">← BACK TO HOME</a>
+        
+    </div>
+
+
+        <!-- ================= SITE FOOTER ================= -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text">Phone: +1 300 303 343</p>
+                <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <p class="brand-tagline">Alpine Ascents</p>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= LIVE TICKER ================= -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Live Updates</div>
+        <div class="ticker-container" id="tickerContainer">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tickerContent = document.getElementById("tickerContent");
+            const tickerContainer = document.getElementById("tickerContainer");
+
+            function updateDateTime() {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+                document.querySelectorAll("#tickerDate").forEach(el => el.innerText = `📅 Date: ${dateStr}`);
+                document.querySelectorAll("#tickerTime").forEach(el => el.innerText = `⏰ Time: ${timeStr}`);
+            }
+
+            if (tickerContent && tickerContainer) {
+                const clone = tickerContent.cloneNode(true);
+                tickerContainer.appendChild(clone);
+
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+
+                let speed = 1;
+                let position = 0;
+                let isPaused = false;
+
+                const animateTicker = () => {
+                    const contentWidth = tickerContent.offsetWidth;
+                    if (!isPaused) {
+                        position -= speed;
+                        if (Math.abs(position) >= contentWidth) {
+                            position = 0;
+                        }
+                        tickerContent.style.transform = `translateX(${position}px)`;
+                        clone.style.transform = `translateX(${position}px)`;
+                    }
+                    requestAnimationFrame(animateTicker);
+                };
+
+                tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+                tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+                animateTicker();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

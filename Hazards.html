@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine Ascents - Hazards Assessment</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ================= GENERAL RESET ================= */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #ffffff;
+            color: #1e293b;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ================= NAVIGATION BAR (FROM INDEX) ================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+            padding: 3px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown>a {
+            padding: 10px 5px;
+            font-weight: 600;
+            color: #ffffff;
+            transition: color 0.3s;
+        }
+
+        .dropdown:hover>a {
+            color: #e6e0d8;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            z-index: 1001;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* Hero Linear Gradient Header Section */
+        .hero-header {
+            width: 100%;
+            padding: 70px 20px;
+            background: linear-gradient(135deg, rgba(0, 33, 71, 0.95), rgba(0, 123, 255, 0.85));
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .hazard-section-title {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #38bdf8;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .hazard-filter-wrapper {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 50px;
+            padding: 6px;
+            display: inline-flex;
+            gap: 6px;
+        }
+
+        .filter-chip {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            border: 1px solid #003366;
+            color: #ffffff;
+            padding: 8px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .filter-chip:hover, .filter-chip.active {
+            background: #e0f2fe;
+            color: #0369a1;
+            border-color: #7dd3fc;
+            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.35);
+        }
+
+        .flip-card-container {
+            perspective: 1000px;
+            margin-bottom: 24px;
+        }
+
+        .flip-card {
+            width: 100%;
+            height: 160px;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .flip-card-front {
+            background: #f8fafc;
+            border-left: 6px solid #0056b3;
+            color: #1e293b;
+        }
+
+        .flip-card-front h5 {
+            color: #0f172a !important;
+        }
+
+        .flip-card-front p {
+            color: #475569 !important;
+        }
+
+        .hazard-icon-box {
+            width: 55px;
+            height: 55px;
+            background: #e2e8f0;
+            color: #0056b3;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .flip-card-container:hover .flip-card {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            border: 1px solid #cbd5e1;
+            display: flex;
+            align-items: center;
+        }
+
+        .flip-card-container[data-risk="extreme"] .flip-card-front {
+            border-left-color: #dc2626;
+        }
+
+        .flip-card-container[data-risk="high"] .flip-card-front {
+            border-left-color: #ea580c;
+        }
+
+        .flip-card-container[data-risk="moderate"] .flip-card-front {
+            border-left-color: #ca8a04;
+        }
+
+        .flip-card-back {
+            background: #002147;
+            color: #ffffff;
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .risk-badge {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            animation: pulseEffect 1.5s infinite ease-in-out;
+            display: inline-block;
+        }
+
+        @keyframes pulseEffect {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.08); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .risk-extreme {
+            background: #fee2e2;
+            color: #dc2626;
+            border: 1px solid #fca5a5;
+        }
+
+        .risk-high {
+            background: #ffedd5;
+            color: #ea580c;
+            border: 1px solid #fed7aa;
+        }
+
+        .risk-moderate {
+            background: #fef9c3;
+            color: #ca8a04;
+            border: 1px solid #fef08a;
+        }
+
+        footer.site-footer {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 50px;
+            margin-bottom: 0;
+            background: #002147;
+            color: #faf8f5;
+            padding: 40px 0 75px 0;
+            box-sizing: border-box;
+            clear: both;
+            border-top: 1px solid #0056b3;
+        }
+
+        footer.site-footer .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        footer.site-footer .footer-col { flex: 1; background: transparent; }
+        footer.site-footer .footer-left { text-align: left; }
+        footer.site-footer .footer-left .contact-text { font-size: 13px; margin: 4px 0; color: #b8aea5; }
+        footer.site-footer .footer-left a { color: #f0eae1; text-decoration: none; }
+        footer.site-footer .social-icons { margin-top: 12px; display: flex; gap: 12px; }
+        footer.site-footer .social-icons a { color: #b8aea5; font-size: 16px; transition: color 0.2s ease; }
+        footer.site-footer .social-icons a:hover { color: #0056b3; }
+        footer.site-footer .footer-center { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        footer.site-footer .logo-circle {
+            width: 60px; height: 60px; border: 1px solid #0056b3; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 8px; background: rgba(255, 255, 255, 0.05);
+        }
+        footer.site-footer .logo-circle span { color: #ffffff; font-size: 18px; font-weight: 600; }
+        footer.site-footer .brand-tagline { font-size: 11px; letter-spacing: 1px; color: #a3978c; text-transform: uppercase; }
+        footer.site-footer .footer-right { text-align: right; }
+        footer.site-footer .footer-right h3 { font-size: 15px; color: #ffffff; margin-bottom: 6px; border-left: none; padding-left: 0; }
+        footer.site-footer .footer-right .sub-text { font-size: 13px; color: #a3978c; max-width: 300px; margin-left: auto; }
+
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #002147;
+            color: #e6e0d8;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            font-family: inherit;
+            z-index: 99999;
+            border-top: 1px solid #0056b3;
+        }
+
+        .ticker-title {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 0 14px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 13px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+            will-change: transform;
+        }
+
+        .ticker-item {
+            padding: 0 30px;
+            font-size: 13px;
+            color: #f0eae1;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: #002147;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                padding: 15px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .flip-card { height: 200px; }
+            footer.site-footer .footer-container { flex-direction: column; gap: 25px; text-align: center; }
+            footer.site-footer .footer-left, footer.site-footer .footer-right { text-align: center; }
+            footer.site-footer .footer-right .sub-text { margin: 0 auto; }
+            footer.site-footer .social-icons { justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR FROM INDEX -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="mount.png" alt="img">
+                    <span>ALPINE<br><b>ASCENTS</b></span>
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="dropdown">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Gallery.html">Gallery</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Climbs.html">Climbs</a>
+                </li>
+                <li class="dropdown">
+                    <a href="History.html">History</a>
+                </li>
+                <li class="dropdown">
+                    <a href="treks.html">Treks</a>
+                    <div class="dropdown-menu">
+                        <a href="Expeditions.html">Expeditions</a>
+                        <a href="Organization.html">Organization</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Ski.html">Ski</a>
+                    <div class="dropdown-menu">
+                        <a href="Hazards.html">Hazards</a>
+                        <a href="Guidelines.html">Guidelines</a>
+                        <a href="Safety.html">Safety</a>
+                        <a href="Records.html">Records</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Gear.html">Gear Shop</a>
+                    <div class="dropdown-menu">
+                        <a href="Latest-Development.html">Latest-Development</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="About.html">About Us</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Contact Us.html">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- HERO LINEAR GRADIENT HEADER SECTION -->
+    <div class="hero-header">
+        <span class="hazard-section-title"><i class="fa-solid fa-triangle-exclamation me-1"></i> Safety Protocols</span>
+        <h1 class="fw-bold text-white display-5 my-2">Mountaineering Risk Assessment</h1>
+        <p class="lead text-light mb-0 mx-auto" style="max-width: 650px;">Essential safety guidelines and emergency mitigation protocols for alpine expeditions.</p>
+    </div>
+
+    <div class="container my-4">
+        <!-- Filter Tabs -->
+        <div class="text-center mb-4">
+            <div class="hazard-filter-wrapper">
+                <button class="filter-chip active" onclick="filterHazards('all', this)">All Hazards</button>
+                <button class="filter-chip" onclick="filterHazards('objective', this)">Environmental</button>
+                <button class="filter-chip" onclick="filterHazards('medical', this)">Medical</button>
+                <button class="filter-chip" onclick="filterHazards('subjective', this)">Human Error</button>
+            </div>
+        </div>
+
+        <!-- Hazards List Container -->
+        <div id="hazardsList">
+            <!-- ITEM 1: AVALANCHES -->
+            <div class="flip-card-container hazard-box" data-category="objective" data-risk="extreme">
+                <div class="flip-card">
+                    <div class="flip-card-front">
+                        <div class="row align-items-center w-100">
+                            <div class="col-auto">
+                                <div class="hazard-icon-box">
+                                    <i class="fa-solid fa-snowflake"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <h5 class="fw-bold mb-0">Snow & Slab Avalanches</h5>
+                                    <span class="risk-badge risk-extreme">Extreme Risk</span>
+                                </div>
+                                <p class="small mb-0">Rapid snow movement down steep slopes triggered by weather changes or weight load.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h6 class="text-info fw-bold mb-1"><i class="fa-solid fa-shield-halved me-1"></i> Safety Action Plan:</h6>
+                        <p class="small mb-2">Equip transceiver, probe, shovel, and airbag. Avoid angles over 30° during unstable snowpack conditions.</p>
+                        <span class="badge bg-danger">Primary Cause: Unstable snow layer</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ITEM 2: ALTITUDE SICKNESS -->
+            <div class="flip-card-container hazard-box" data-category="medical" data-risk="high">
+                <div class="flip-card">
+                    <div class="flip-card-front">
+                        <div class="row align-items-center w-100">
+                            <div class="col-auto">
+                                <div class="hazard-icon-box">
+                                    <i class="fa-solid fa-heart-pulse"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <h5 class="fw-bold mb-0">Acute Altitude Sickness (AMS)</h5>
+                                    <span class="risk-badge risk-high">High Risk</span>
+                                </div>
+                                <p class="small mb-0">Physiological impact of low oxygen pressure leading to potential pulmonary complications.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h6 class="text-info fw-bold mb-1"><i class="fa-solid fa-shield-halved me-1"></i> Safety Action Plan:</h6>
+                        <p class="small mb-2">Follow gradual ascent schedules, use oxygen above threshold heights, and descend promptly if symptoms escalate.</p>
+                        <span class="badge bg-warning text-dark">Primary Cause: Rapid elevation gains</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ITEM 3: CREVASSE FALL -->
+            <div class="flip-card-container hazard-box" data-category="objective" data-risk="high">
+                <div class="flip-card">
+                    <div class="flip-card-front">
+                        <div class="row align-items-center w-100">
+                            <div class="col-auto">
+                                <div class="hazard-icon-box">
+                                    <i class="fa-solid fa-person-falling"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <h5 class="fw-bold mb-0">Glacier Crevasses</h5>
+                                    <span class="risk-badge risk-high">High Risk</span>
+                                </div>
+                                <p class="small mb-0">Deep structural cracks hidden beneath weak, unsolidified snow bridges.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h6 class="text-info fw-bold mb-1"><i class="fa-solid fa-shield-halved me-1"></i> Safety Action Plan:</h6>
+                        <p class="small mb-2">Travel rope-attached in teams, utilize ice anchors, and continuously probe route integrity.</p>
+                        <span class="badge bg-warning text-dark">Primary Cause: Glacial movement</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ITEM 4: FROSTBITE -->
+            <div class="flip-card-container hazard-box" data-category="medical" data-risk="moderate">
+                <div class="flip-card">
+                    <div class="flip-card-front">
+                        <div class="row align-items-center w-100">
+                            <div class="col-auto">
+                                <div class="hazard-icon-box">
+                                    <i class="fa-solid fa-temperature-arrow-down"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <h5 class="fw-bold mb-0">Frostbite & Extreme Cold Exposure</h5>
+                                    <span class="risk-badge risk-moderate">Moderate Risk</span>
+                                </div>
+                                <p class="small mb-0">Severe tissue damage resulting from sub-zero temperatures and strong wind chills.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h6 class="text-info fw-bold mb-1"><i class="fa-solid fa-shield-halved me-1"></i> Safety Action Plan:</h6>
+                        <p class="small mb-2">Use thermal insulated gear, protect extremities, and replace wet apparel instantly.</p>
+                        <span class="badge bg-primary">Primary Cause: Sub-zero wind chill</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ITEM 5: HUMAN FATIGUE -->
+            <div class="flip-card-container hazard-box" data-category="subjective" data-risk="high">
+                <div class="flip-card">
+                    <div class="flip-card-front">
+                        <div class="row align-items-center w-100">
+                            <div class="col-auto">
+                                <div class="hazard-icon-box">
+                                    <i class="fa-solid fa-user-xmark"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="d-flex align-items-center gap-2 mb-1">
+                                    <h5 class="fw-bold mb-0">Fatigue & Navigation Errors</h5>
+                                    <span class="risk-badge risk-high">High Risk</span>
+                                </div>
+                                <p class="small mb-0">Physical exhaustion affecting decision-making capabilities during mountain descent.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h6 class="text-info fw-bold mb-1"><i class="fa-solid fa-shield-halved me-1"></i> Safety Action Plan:</h6>
+                        <p class="small mb-2">Establish firm turnaround deadlines, maintain caloric intake, and use reliable navigation tools.</p>
+                        <span class="badge bg-warning text-dark">Primary Cause: Overexertion</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SITE FOOTER SECTION -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text">Phone: +1 300 303 343</p>
+                <p class="contact-text">
+                    <a href="mailto:info@alpineascents.com">info@alpineascents.com</a>
+                </p>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <span class="brand-tagline">Alpine Ascents</span>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">
+                    Discover unique immersive mountain expedition experiences for your next adventure.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Dynamic Ticker -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Live Updates</div>
+        <div class="ticker-container" id="tickerContainer">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener("click", () => {
+                    navMenu.classList.toggle("active");
+                });
+            }
+
+            const tickerContent = document.getElementById("tickerContent");
+            const tickerContainer = document.getElementById("tickerContainer");
+
+            function updateDateTime() {
+                const now = new Date();
+                const optionsDate = { month: 'long', day: 'numeric', year: 'numeric' };
+                const dateStr = now.toLocaleDateString('en-US', optionsDate);
+                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                const timeStr = now.toLocaleTimeString('en-US', optionsTime);
+
+                document.querySelectorAll("#tickerDate").forEach(el => {
+                    el.innerText = `📅 Date: ${dateStr}`;
+                });
+                document.querySelectorAll("#tickerTime").forEach(el => {
+                    el.innerText = `⏰ Time: ${timeStr}`;
+                });
+            }
+
+            if (tickerContent && tickerContainer) {
+                const clone = tickerContent.cloneNode(true);
+                clone.id = "tickerContentClone";
+                tickerContainer.appendChild(clone);
+
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+
+                let speed = 1;
+                let position = 0;
+                let isPaused = false;
+
+                const animateTicker = () => {
+                    const contentWidth = tickerContent.offsetWidth;
+                    if (!isPaused) {
+                        position -= speed;
+                        if (Math.abs(position) >= contentWidth) {
+                            position = 0;
+                        }
+                        tickerContent.style.transform = `translateX(${position}px)`;
+                        clone.style.transform = `translateX(${position}px)`;
+                    }
+                    requestAnimationFrame(animateTicker);
+                };
+
+                tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+                tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+
+                animateTicker();
+            }
+        });
+
+        function filterHazards(cat, btn) {
+            document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            document.querySelectorAll('.hazard-box').forEach(box => {
+                if (cat === 'all' || box.getAttribute('data-category') === cat) {
+                    box.style.display = 'block';
+                } else {
+                    box.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>

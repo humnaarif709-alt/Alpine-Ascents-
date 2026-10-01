@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mountain Gallery | Alpine Ascents</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7f6 0%, #e2e8f0 100%);
+            color: #0f172a;
+            overflow-x: hidden;
+            padding-bottom: 42px; /* Ticker space */
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+/* Navbar Main Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(135deg, #002147, #0056b3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 3px;
+}
+
+/* Navigation Links Menu */
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    padding: 10px 5px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dropdown:hover > a {
+    color: #e6e0d8;
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1001;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: #ffffff;
+}
+
+/* Mobile Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #002147;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+        /* Page Header */
+        .page-header {
+            min-height: 330px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            background: 
+                linear-gradient(135deg, rgba(0, 33, 71, 0.88), rgba(0, 86, 179, 0.80)),
+                url("images/mountains.jpg") center/cover no-repeat;
+        }
+
+        .page-header h1 {
+            font-size: 55px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            animation: slideDown 1s ease;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            animation: fadeUp 1.3s ease;
+        }
+
+        /* Section Headings & Spacing */
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .small-heading {
+            color: #0056b3;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .gallery-intro h2,
+        .section-heading h2 {
+            color: #002147;
+            font-size: 38px;
+            font-weight: 800;
+            margin: 12px 0 18px;
+        }
+
+        .gallery-intro p,
+        .section-heading p {
+            max-width: 700px;
+            margin: auto;
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            padding: 25px 15px;
+            background: linear-gradient(90deg, #ffffff 0%, #f1f5f9 50%, #ffffff 100%);
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .filter-btn {
+            border: 1px solid #0056b3;
+            background: transparent;
+            color: #0056b3;
+            padding: 10px 22px;
+            margin: 6px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 18px rgba(0, 86, 179, 0.25);
+        }
+
+        /* Image Gallery Cards */
+        .gallery-card {
+            height: 330px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #002147;
+            box-shadow: 0 10px 25px rgba(0, 33, 71, 0.12);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.15);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: flex-end;
+            padding: 25px;
+            background: linear-gradient(
+                to top,
+                rgba(0, 33, 71, 0.95),
+                rgba(0, 86, 179, 0.4) 60%,
+                transparent 100%
+            );
+            opacity: 0;
+            transition: 0.5s ease;
+        }
+
+        .gallery-card:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h4 {
+            color: white;
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .gallery-overlay p {
+            color: #e2e8f0;
+            margin-bottom: 18px;
+        }
+
+        .gallery-btn {
+            display: inline-block;
+            border: none;
+            color: white;
+            background: linear-gradient(135deg, #0056b3, #002147);
+            padding: 10px 22px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .gallery-btn:hover {
+            background: linear-gradient(135deg, #38bdf8, #0284c7);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .gallery-item {
+            transition: 0.5s ease;
+        }
+
+        .gallery-item.hide {
+            display: none;
+        }
+
+        .gallery-item.show {
+            display: block;
+            animation: galleryAppear 0.6s ease;
+        }
+
+        /* CTA Section */
+        .gallery-cta {
+            background: 
+                linear-gradient(135deg, rgba(0, 33, 71, 0.92), rgba(0, 86, 179, 0.88)),
+                url("images/mountains.jpg") center/cover no-repeat;
+            color: white;
+        }
+
+        .gallery-cta h2 {
+            font-size: 38px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .gallery-cta p {
+            margin-bottom: 0;
+            color: #e2e8f0;
+        }
+
+        /* Details Modal Custom Styling */
+        .modal-content {
+            border: none;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 33, 71, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            border-bottom: none;
+            padding: 20px 25px;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        .modal-body {
+            padding: 25px;
+            background: #f8fafc;
+        }
+
+        .modal-media-wrapper {
+            max-height: 380px;
+            overflow: hidden;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+        }
+
+        .modal-media-wrapper img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+        }
+
+        .details-badge {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .detail-item-box {
+            background: white;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border-left: 4px solid #0056b3;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .detail-item-box strong {
+            color: #002147;
+        }
+
+        /* Site Footer */
+        footer.site-footer {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            background: #002147;
+            color: #faf8f5;
+            padding: 40px 0 75px 0;
+            border-top: 1px solid #0056b3;
+        }
+
+        footer.site-footer .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer.site-footer .footer-col { flex: 1; }
+        footer.site-footer .footer-left { text-align: left; }
+        footer.site-footer .footer-left .contact-text { font-size: 13px; margin: 4px 0; color: #b8aea5; }
+        footer.site-footer .footer-left a { color: #f0eae1; text-decoration: none; }
+        footer.site-footer .social-icons { margin-top: 12px; display: flex; gap: 12px; }
+        footer.site-footer .social-icons a { color: #b8aea5; font-size: 16px; transition: color 0.2s ease; }
+        footer.site-footer .social-icons a:hover { color: #0056b3; }
+        footer.site-footer .footer-center { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        footer.site-footer .logo-circle {
+            width: 60px; height: 60px; border: 1px solid #0056b3; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 8px; background: rgba(255, 255, 255, 0.05);
+        }
+        footer.site-footer .logo-circle span { color: #ffffff; font-size: 18px; font-weight: 600; }
+        footer.site-footer .brand-tagline { font-size: 11px; letter-spacing: 1px; color: #a3978c; text-transform: uppercase; }
+        footer.site-footer .footer-right { text-align: right; }
+        footer.site-footer .footer-right h3 { font-size: 15px; color: #ffffff; margin-bottom: 6px; }
+        footer.site-footer .footer-right .sub-text { font-size: 13px; color: #a3978c; max-width: 300px; margin-left: auto; }
+
+        /* Live Ticker */
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #002147;
+            color: #e6e0d8;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 99999;
+            border-top: 1px solid #0056b3;
+        }
+
+        .ticker-title {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 0 14px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 13px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+            will-change: transform;
+        }
+
+        .ticker-item {
+            padding: 0 30px;
+            font-size: 13px;
+            color: #f0eae1;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-35px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes galleryAppear {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .page-header { min-height: 280px; }
+            .page-header h1 { font-size: 35px; }
+            .gallery-intro h2, .section-heading h2, .gallery-cta h2 { font-size: 30px; }
+            footer.site-footer .footer-container { flex-direction: column; gap: 20px; text-align: center; }
+            footer.site-footer .footer-left, footer.site-footer .footer-right { text-align: center; }
+            footer.site-footer .footer-right .sub-text { margin: auto; }
+            footer.site-footer .social-icons { justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="mount.png" alt="Alpine Ascents Logo">
+                <span>ALPINE<br><b>ASCENTS</b></span>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="dropdown">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="Gallery.html">Gallery</a>
+            </li>
+            <li class="dropdown">
+                <a href="Climbs.html">Climbs</a>
+            </li>
+            <li class="dropdown">
+                <a href="History.html">History</a>
+            </li>
+            <li class="dropdown">
+                <a href="treks.html">Treks</a>
+                <div class="dropdown-menu">
+                    <a href="Expeditions.html">Expeditions</a>
+                    <a href="Organization.html">Organization</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Ski.html">Ski</a>
+                <div class="dropdown-menu">
+                    <a href="Hazards.html">Hazards</a>
+                    <a href="Guidelines.html">Guidelines</a>
+                    <a href="Safety.html">Safety</a>
+                    <a href="Records.html">Records</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Gear.html">Gear Shop</a>
+                <div class="dropdown-menu">
+                    <a href="Latest-Development.html">Latest-Development</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="About.html">About Us</a>
+            </li>
+            <li class="dropdown">
+                <a href="Contact Us.html">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Mountain Gallery</h1>
+            <p>Explore the beauty, adventure and unforgettable moments of the mountains.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Introduction -->
+    <section class="gallery-intro section-padding">
+        <div class="container text-center">
+            <span class="small-heading">OUR VISUAL JOURNEY</span>
+            <h2>Explore Our Mountain World</h2>
+            <p>
+                Discover breathtaking mountain views, brave climbers, exciting
+                expeditions, snowy peaks and the beauty of nature through our gallery.
+            </p>
+        </div>
+    </section>
+
+    <!-- Filter Buttons -->
+    <section class="filter-section">
+        <div class="container text-center">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="mountains">Mountains</button>
+            <button class="filter-btn" data-filter="climbers">Climbers</button>
+            <button class="filter-btn" data-filter="expeditions">Expeditions</button>
+            <button class="filter-btn" data-filter="snow">Snow Mountains</button>
+            <button class="filter-btn" data-filter="nature">Nature</button>
+            <button class="filter-btn" data-filter="equipment">Equipment</button>
+        </div>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="image-gallery section-padding">
+        <div class="container">
+            <div class="row g-4 gallery-grid">
+
+                <!-- Item 1: Mountain -->
+                <div class="col-lg-4 col-md-6 gallery-item mountains">
+                    <div class="gallery-card">
+                        <img src="G1.jpg" alt="Beautiful Mountain">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Beautiful Mountains</h4>
+                                <p>Majestic peaks touching the sky.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Beautiful Mountains"
+                                        data-category="Mountains"
+                                        data-src="G1.jpg"
+                                        data-desc="Majestic peaks towering above the clouds, providing panoramic wilderness vistas."
+                                        data-location="Karakoram Range, Pakistan"
+                                        data-height="7,200 Meters"
+                                        data-season="June to September">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2: Mountain -->
+                <div class="col-lg-4 col-md-6 gallery-item mountains">
+                    <div class="gallery-card">
+                        <img src="G2.jpg" alt="Mountain Landscape">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Mountain Landscape</h4>
+                                <p>A peaceful view of the mountain range.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Mountain Landscape"
+                                        data-category="Mountains"
+                                        data-src="G2.jpg"
+                                        data-desc="A tranquil valley landscape surrounded by rugged granite summits and clear skies."
+                                        data-location="Hindukush Range"
+                                        data-height="6,500 Meters"
+                                        data-season="May to October">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3: Climber -->
+                <div class="col-lg-4 col-md-6 gallery-item climbers">
+                    <div class="gallery-card">
+                        <img src="G13.jpg" alt="Mountain Climber">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Brave Climbers</h4>
+                                <p>Strength, courage and determination.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Brave Climbers"
+                                        data-category="Climbers"
+                                        data-src="G13.jpg"
+                                        data-desc="Professional mountaineers navigating steep ice walls and technical ridge traverses."
+                                        data-location="Broad Peak Ridge"
+                                        data-height="8,051 Meters"
+                                        data-season="July to August">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4: Climber -->
+                <div class="col-lg-4 col-md-6 gallery-item climbers">
+                    <div class="gallery-card">
+                        <img src="G4.jpg" alt="Climber on Mountain">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Climbing Adventure</h4>
+                                <p>Every step brings a new challenge.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Climbing Adventure"
+                                        data-category="Climbers"
+                                        data-src="G4.jpg"
+                                        data-desc="High-altitude summit push pushing human endurance and willpower to the limit."
+                                        data-location="Nanga Parbat Wall"
+                                        data-height="8,126 Meters"
+                                        data-season="June to July">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5: Expedition -->
+                <div class="col-lg-4 col-md-6 gallery-item expeditions">
+                    <div class="gallery-card">
+                        <img src="G14.jpg" alt="Mountain Expedition">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Mountain Expedition</h4>
+                                <p>Adventure begins beyond the ordinary.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Mountain Expedition"
+                                        data-category="Expeditions"
+                                        data-src="G14.jpg"
+                                        data-desc="Fully organized alpine expedition establishing high camps along remote glacier routes."
+                                        data-location="Baltoro Glacier"
+                                        data-height="5,100 Meters Base Camp"
+                                        data-season="June to September">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6: Expedition -->
+                <div class="col-lg-4 col-md-6 gallery-item expeditions">
+                    <div class="gallery-card">
+                        <img src="G6.jpg" alt="Expedition Team">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Expedition Team</h4>
+                                <p>Teamwork makes every journey successful.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Expedition Team"
+                                        data-category="Expeditions"
+                                        data-src="G6.jpg"
+                                        data-desc="International team of mountaineers cooperating during extreme high-altitude conditions."
+                                        data-location="K2 Base Camp"
+                                        data-height="5,150 Meters"
+                                        data-season="Summer Season">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 7: Snow -->
+                <div class="col-lg-4 col-md-6 gallery-item snow">
+                    <div class="gallery-card">
+                        <img src="G7.jpg" alt="Snow Covered Mountain">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Snow Mountains</h4>
+                                <p>White peaks and frozen beauty.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Snow Mountains"
+                                        data-category="Snow Mountains"
+                                        data-src="G7.jpg"
+                                        data-desc="Pristine winter landscape wrapped in heavy snow layers and crystal glacier ice."
+                                        data-location="Shimshal Valley"
+                                        data-height="6,200 Meters"
+                                        data-season="December to March">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 8: Snow -->
+                <div class="col-lg-4 col-md-6 gallery-item snow">
+                    <div class="gallery-card">
+                        <img src="G8.jpg" alt="Snowy Mountain Peak">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Frozen Peaks</h4>
+                                <p>A magical world of snow and ice.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Frozen Peaks"
+                                        data-category="Snow Mountains"
+                                        data-src="G8.jpg"
+                                        data-desc="Glacier-clad summits shining brightly under alpine sunlight."
+                                        data-location="Passu Cones"
+                                        data-height="6,106 Meters"
+                                        data-season="All Year Round">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 9: Nature -->
+                <div class="col-lg-4 col-md-6 gallery-item nature">
+                    <div class="gallery-card">
+                        <img src="G9.jpg" alt="Mountain Nature">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Mountain Nature</h4>
+                                <p>Fresh air, green valleys and peace.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Mountain Nature"
+                                        data-category="Nature"
+                                        data-src="G9.jpg"
+                                        data-desc="Lush alpine meadows, clear streams, and pristine wilderness scenery."
+                                        data-location="Hunza Valley"
+                                        data-height="2,438 Meters"
+                                        data-season="April to October">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 10: Nature -->
+                <div class="col-lg-4 col-md-6 gallery-item nature">
+                    <div class="gallery-card">
+                        <img src="G10.jpg" alt="Green Mountain Valley">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Green Valleys</h4>
+                                <p>Nature creates the perfect scenery.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Green Valleys"
+                                        data-category="Nature"
+                                        data-src="G10.jpg"
+                                        data-desc="Vibrant green valleys surrounded by towering snow-capped mountain walls."
+                                        data-location="Swat Valley"
+                                        data-height="1,980 Meters"
+                                        data-season="Spring & Summer">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 11: Equipment -->
+                <div class="col-lg-4 col-md-6 gallery-item equipment">
+                    <div class="gallery-card">
+                        <img src="G11.jpg" alt="Climbing Equipment">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Climbing Equipment</h4>
+                                <p>Safety tools for every adventure.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Climbing Equipment"
+                                        data-category="Equipment"
+                                        data-src="G11.jpg"
+                                        data-desc="Essential high-grade climbing gear including harnesses, ropes, carabiners, and ice axes."
+                                        data-location="Base Camp Prep Station"
+                                        data-height="Technical Safety Tools"
+                                        data-season="Pre-Expedition Inspection">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 12: Equipment -->
+                <div class="col-lg-4 col-md-6 gallery-item equipment">
+                    <div class="gallery-card">
+                        <img src="G12.jpg" alt="Mountain Gear">
+                        <div class="gallery-overlay">
+                            <div>
+                                <h4>Mountain Gear</h4>
+                                <p>Reliable gear for difficult journeys.</p>
+                                <button class="gallery-btn open-details-btn" 
+                                        data-title="Mountain Gear"
+                                        data-category="Equipment"
+                                        data-src="G12.jpg"
+                                        data-desc="Heavy-duty winter outerwear, crampons, tents, and thermal alpine gear."
+                                        data-location="High Altitude Gear Room"
+                                        data-height="Extreme Weather Gear"
+                                        data-season="Winter Expeditions">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action -->
+    <section class="gallery-cta section-padding">
+        <div class="container text-center">
+            <h2>Ready For Your Own Adventure?</h2>
+            <p>Join Alpine Ascents and discover the mountains with confidence.</p>
+        </div>
+    </section>
+
+    <!-- Site Footer (history.html footer integrated) -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text">Phone: +1 300 303 343</p>
+                <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <p class="brand-tagline">Alpine Ascents</p>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Dynamic Ticker -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Live Updates</div>
+        <div class="ticker-container" id="tickerContainer">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Interactive Modal -->
+    <div class="modal fade" id="itemDetailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold" id="modalTitle">Item Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-media-wrapper" id="modalMediaContainer">
+                        <!-- Dynamic Media Loaded Here -->
+                    </div>
+
+                    <span class="details-badge" id="modalCategory">Category</span>
+                    <p class="mt-2 text-secondary" id="modalDescription">Detailed information about this selection.</p>
+
+                    <div class="row g-2 mt-3">
+                        <div class="col-md-4">
+                            <div class="detail-item-box">
+                                <div><small class="text-muted">Location</small></div>
+                                <strong id="modalLocation">-</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="detail-item-box">
+                                <div><small class="text-muted">Elevation / Type</small></div>
+                                <strong id="modalHeight">-</strong>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="detail-item-box">
+                                <div><small class="text-muted">Best Season</small></div>
+                                <strong id="modalSeason">-</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Filter Buttons Functionality
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const galleryItems = document.querySelectorAll(".gallery-item");
+
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                button.classList.add("active");
+
+                const filterValue = button.getAttribute("data-filter");
+
+                galleryItems.forEach(item => {
+                    if (filterValue === "all" || item.classList.contains(filterValue)) {
+                        item.classList.remove("hide");
+                        item.classList.add("show");
+                    } else {
+                        item.classList.remove("show");
+                        item.classList.add("hide");
+                    }
+                });
+            });
+        });
+
+        // Dynamic Modal Details Loader
+        const detailsModal = new bootstrap.Modal(document.getElementById('itemDetailsModal'));
+        const modalTitle = document.getElementById('modalTitle');
+        const modalCategory = document.getElementById('modalCategory');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalLocation = document.getElementById('modalLocation');
+        const modalHeight = document.getElementById('modalHeight');
+        const modalSeason = document.getElementById('modalSeason');
+        const modalMediaContainer = document.getElementById('modalMediaContainer');
+
+        document.querySelectorAll('.open-details-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const title = btn.getAttribute('data-title');
+                const category = btn.getAttribute('data-category');
+                const src = btn.getAttribute('data-src');
+                const desc = btn.getAttribute('data-desc');
+                const location = btn.getAttribute('data-location');
+                const height = btn.getAttribute('data-height');
+                const season = btn.getAttribute('data-season');
+
+                modalTitle.textContent = title;
+                modalCategory.textContent = category;
+                modalDescription.textContent = desc;
+                modalLocation.textContent = location;
+                modalHeight.textContent = height;
+                modalSeason.textContent = season;
+
+                modalMediaContainer.innerHTML = `<img src="${src}" alt="${title}">`;
+
+                detailsModal.show();
+            });
+        });
+
+        // Live Dynamic Ticker Date & Time Logic
+        document.addEventListener("DOMContentLoaded", () => {
+            const tickerContent = document.getElementById("tickerContent");
+            const tickerContainer = document.getElementById("tickerContainer");
+
+            function updateDateTime() {
+                const now = new Date();
+                const optionsDate = { month: 'long', day: 'numeric', year: 'numeric' };
+                const dateStr = now.toLocaleDateString('en-US', optionsDate);
+                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                const timeStr = now.toLocaleTimeString('en-US', optionsTime);
+
+                document.querySelectorAll("#tickerDate").forEach(el => {
+                    el.innerText = `📅 Date: ${dateStr}`;
+                });
+                document.querySelectorAll("#tickerTime").forEach(el => {
+                    el.innerText = `⏰ Time: ${timeStr}`;
+                });
+            }
+
+            if (tickerContent && tickerContainer) {
+                const clone = tickerContent.cloneNode(true);
+                clone.id = "tickerContentClone";
+                tickerContainer.appendChild(clone);
+
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+
+                let speed = 1;
+                let position = 0;
+                let isPaused = false;
+
+                const animateTicker = () => {
+                    const contentWidth = tickerContent.offsetWidth;
+                    if (!isPaused) {
+                        position -= speed;
+                        if (Math.abs(position) >= contentWidth) {
+                            position = 0;
+                        }
+                        tickerContent.style.transform = `translateX(${position}px)`;
+                        clone.style.transform = `translateX(${position}px)`;
+                    }
+                    requestAnimationFrame(animateTicker);
+                };
+
+                tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+                tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+
+                animateTicker();
+            }
+        });
+    </script>
+</body>
+</html>

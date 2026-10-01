@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History of Mountaineering</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #ffffff;
+            margin: 0;
+            padding: 0;
+            color: #4a423d;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* ================= NAVIGATION BAR (FROM INDEX) ================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+            padding: 3px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 0;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown>a {
+            padding: 10px 5px;
+            font-weight: 600;
+            color: #ffffff;
+            transition: color 0.3s;
+        }
+
+        .dropdown:hover>a {
+            color: #e6e0d8;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            z-index: 1001;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* Subtle Warm Dot Pattern */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: radial-gradient(#dcd5cb 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.3;
+        }
+
+        /* Header flip container */
+        .header-flip-container {
+            max-width: 900px;
+            height: 110px;
+            margin: 30px auto 35px auto;
+            perspective: 1200px;
+            cursor: pointer;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-flip-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transform-style: preserve-3d;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 33, 71, 0.25), 0 0 15px rgba(0, 86, 179, 0.2);
+        }
+
+        .header-flip-container:hover .header-flip-inner {
+            transform: rotateY(180deg);
+        }
+
+        .header-front, .header-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 15px 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .header-front {
+            background: linear-gradient(135deg, #001730 0%, #002147 50%, #0056b3 100%);
+            flex-direction: column;
+        }
+
+        .header-front h2 {
+            color: #ffffff;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-back {
+            background: linear-gradient(135deg, #002147, #001730);
+            color: #ffffff;
+            transform: rotateY(180deg);
+        }
+
+        .header-back p {
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 0;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        div.card-box {
+            position: relative;
+            z-index: 1;
+            background: #ffffff;
+            max-width: 800px;
+            margin: 25px auto;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            border: 1px solid #e6e0d8;
+        }
+
+        div.card-box:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .card-slider {
+            position: relative;
+            width: 100%;
+            max-height: 350px;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+        }
+
+        .slider-slides {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .slider-slides img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: beige;
+            color: #002147;
+            border: 1px solid #e6e0d8;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            z-index: 2;
+        }
+
+        .slider-btn.prev { left: 12px; }
+        .slider-btn.next { right: 12px; }
+
+        h1 {
+            color: #2c2825;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 15px;
+            line-height: 1.6;
+            text-align: justify;
+            color: #5c524b;
+        }
+
+        h3 {
+            color: #002147;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            border-left: 3px solid #0056b3;
+            padding-left: 10px;
+            text-align: left;
+        }
+
+        .key-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 15px 0 20px 0;
+            perspective: 1000px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.5s ease;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 6px 12px;
+            box-sizing: border-box;
+        }
+
+        .flip-card-front {
+            background: #ffffff;
+            border: 1px solid #dcd5cb;
+            color: #2c2825;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #001730 0%, #002147 50%, #0056b3 100%);
+            color: #ffffff;
+            transform: rotateY(180deg);
+            font-size: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 9px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        footer.site-footer {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 50px;
+            margin-bottom: 0;
+            background: #002147;
+            color: #faf8f5;
+            padding: 40px 0 75px 0;
+            box-sizing: border-box;
+            border-top: 1px solid #0056b3;
+        }
+
+        footer.site-footer .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer.site-footer .footer-col { flex: 1; }
+        footer.site-footer .footer-left { text-align: left; }
+        footer.site-footer .footer-left .contact-text { font-size: 13px; margin: 4px 0; color: #b8aea5; }
+        footer.site-footer .footer-left a { color: #f0eae1; text-decoration: none; }
+        footer.site-footer .social-icons { margin-top: 12px; display: flex; gap: 12px; }
+        footer.site-footer .social-icons a { color: #b8aea5; font-size: 16px; }
+        footer.site-footer .footer-center { display: flex; flex-direction: column; align-items: center; text-align: center; }
+        footer.site-footer .logo-circle {
+            width: 60px; height: 60px; border: 1px solid #0056b3; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 8px; background: rgba(255, 255, 255, 0.05);
+        }
+        footer.site-footer .logo-circle span { color: #ffffff; font-size: 18px; font-weight: 600; }
+        footer.site-footer .brand-tagline { font-size: 11px; letter-spacing: 1px; color: #a3978c; text-transform: uppercase; }
+        footer.site-footer .footer-right { text-align: right; }
+        footer.site-footer .footer-right h3 { font-size: 15px; color: #ffffff; margin-bottom: 6px; }
+        footer.site-footer .footer-right .sub-text { font-size: 13px; color: #a3978c; max-width: 300px; margin-left: auto; }
+
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background-color: #002147;
+            color: #e6e0d8;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 99999;
+            border-top: 1px solid #0056b3;
+        }
+
+        .ticker-title {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 0 14px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 13px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+        }
+
+        .ticker-item {
+            padding: 0 30px;
+            font-size: 13px;
+            color: #f0eae1;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: #002147;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                padding: 15px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="bg-particles"></div>
+
+    <!-- NAVBAR FROM INDEX -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="mount.png" alt="img">
+                    <span>ALPINE<br><b>ASCENTS</b></span>
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="dropdown">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Gallery.html">Gallery</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Climbs.html">Climbs</a>
+                </li>
+                <li class="dropdown">
+                    <a href="History.html">History</a>
+                </li>
+                <li class="dropdown">
+                    <a href="treks.html">Treks</a>
+                    <div class="dropdown-menu">
+                        <a href="Expeditions.html">Expeditions</a>
+                        <a href="Organization.html">Organization</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Ski.html">Ski</a>
+                    <div class="dropdown-menu">
+                        <a href="Hazards.html">Hazards</a>
+                        <a href="Guidelines.html">Guidelines</a>
+                        <a href="Safety.html">Safety</a>
+                        <a href="Records.html">Records</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Gear.html">Gear Shop</a>
+                    <div class="dropdown-menu">
+                        <a href="Latest-Development.html">Latest-Development</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="About.html">About Us</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Contact Us.html">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Header -->
+    <div class="header-flip-container" id="headerFlipBox">
+        <div class="header-flip-inner">
+            <div class="header-front">
+                <h2>History of Mountaineering</h2>
+            </div>
+            <div class="header-back">
+                <p>Journey through time to discover how human bravery and passion transformed dangerous peaks into world-renowned expedition adventures!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Early Period -->
+    <div class="card-box">
+        <div class="card-slider">
+            <div class="slider-slides">
+                <img src="logo1.jpg" alt="Early Period 1">
+                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Early Period 2">
+                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Early Period 3">
+            </div>
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <h1>Early Period</h1>
+        <p>Before the 18th century, people climbed mountains mainly for religious reasons, hunting, or to find new routes. Mountains were considered dangerous and sacred places. There was no sport involved, only survival and faith.</p>
+        <h3>Key Points:</h3>
+        <div class="key-points-grid">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">1336</div>
+                    <div class="flip-card-back">First recreational climb - Mount Ventoux</div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">1786</div>
+                    <div class="flip-card-back">First ascent of Mont Blanc</div>
+                </div>
+            </div>
+        </div>
+        <a href="EarlyPeriod.html" class="btn">Read More</a>
+    </div>
+
+    <!-- Mid Period -->
+    <div class="card-box">
+        <div class="card-slider">
+            <div class="slider-slides">
+                <img src="logo2.jpg" alt="Mid Period 1">
+                <img src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=800&q=80" alt="Mid Period 2">
+                <img src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?auto=format&fit=crop&w=800&q=80" alt="Mid Period 3">
+            </div>
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <h1>Mid Period / Golden Age</h1>
+        <p>The 19th century is called the "Golden Age of Mountaineering". Rich Europeans started climbing with professional guides. Better equipment like ropes and ice axes were invented.</p>
+        <h3>Key Points:</h3>
+        <div class="key-points-grid">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">1857</div>
+                    <div class="flip-card-back">Alpine Club founded in London</div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">1865</div>
+                    <div class="flip-card-back">First ascent of the Matterhorn</div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">1870s</div>
+                    <div class="flip-card-back">Climbing spread to Himalayas and Andes</div>
+                </div>
+            </div>
+        </div>
+        <a href="MidPeriod.html" class="btn">Read More</a>
+    </div>
+
+    <!-- Modern Period -->
+    <div class="card-box">
+        <div class="card-slider">
+            <div class="slider-slides">
+                <img src="logo3.jpg" alt="Modern Period 1">
+                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Modern Period 2">
+                <img src="https://images.unsplash.com/photo-1465056836041-7f43ac27dcb5?auto=format&fit=crop&w=800&q=80" alt="Modern Period 3">
+            </div>
+            <button class="slider-btn prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-btn next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <h1>Modern Period</h1>
+        <p>The modern period started after World War 2. The goal was to climb all 14 peaks above 8000m. Technology and synthetic clothing made climbing safer.</p>
+        <h3>Key Points:</h3>
+        <div class="key-points-grid">
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">1953</div>
+                    <div class="flip-card-back">First ascent of Mount Everest</div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">1986</div>
+                    <div class="flip-card-back">Reinhold Messner all 14 Eight-Thousands</div>
+                </div>
+            </div>
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">2019</div>
+                    <div class="flip-card-back">Nirmal Purja set world record</div>
+                </div>
+            </div>
+        </div>
+        <a href="ModernPeriod.html" class="btn">Read More</a>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text">Phone: +1 300 303 343</p>
+                <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <p class="brand-tagline">Alpine Ascents</p>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Dynamic Ticker -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Live Updates</div>
+        <div class="ticker-container" id="tickerContainer">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+                <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-item">Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener("click", () => {
+                    navMenu.classList.toggle("active");
+                });
+            }
+
+            const tickerContent = document.getElementById("tickerContent");
+            const tickerContainer = document.getElementById("tickerContainer");
+
+            function updateDateTime() {
+                const now = new Date();
+                const optionsDate = { month: 'long', day: 'numeric', year: 'numeric' };
+                const dateStr = now.toLocaleDateString('en-US', optionsDate);
+                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                const timeStr = now.toLocaleTimeString('en-US', optionsTime);
+
+                document.querySelectorAll("#tickerDate").forEach(el => {
+                    el.innerText = `📅 Date: ${dateStr}`;
+                });
+                document.querySelectorAll("#tickerTime").forEach(el => {
+                    el.innerText = `⏰ Time: ${timeStr}`;
+                });
+            }
+
+            if (tickerContent && tickerContainer) {
+                const clone = tickerContent.cloneNode(true);
+                clone.id = "tickerContentClone";
+                tickerContainer.appendChild(clone);
+
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+
+                let speed = 1;
+                let position = 0;
+                let isPaused = false;
+
+                const animateTicker = () => {
+                    const contentWidth = tickerContent.offsetWidth;
+                    if (!isPaused) {
+                        position -= speed;
+                        if (Math.abs(position) >= contentWidth) {
+                            position = 0;
+                        }
+                        tickerContent.style.transform = `translateX(${position}px)`;
+                        clone.style.transform = `translateX(${position}px)`;
+                    }
+                    requestAnimationFrame(animateTicker);
+                };
+
+                tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+                tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+
+                animateTicker();
+            }
+
+            document.querySelectorAll('.card-slider').forEach(slider => {
+                const slides = slider.querySelector('.slider-slides');
+                const images = slides.querySelectorAll('img');
+                const prevBtn = slider.querySelector('.prev');
+                const nextBtn = slider.querySelector('.next');
+                let index = 0;
+
+                function showSlide(i) {
+                    index = (i + images.length) % images.length;
+                    slides.style.transform = `translateX(${-index * 100}%)`;
+                }
+
+                nextBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showSlide(index + 1);
+                });
+
+                prevBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    showSlide(index - 1);
+                });
+
+                setInterval(() => {
+                    showSlide(index + 1);
+                }, 4000);
+            });
+        }); 
+    </script>
+</body>
+
+</html>

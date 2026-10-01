@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Developments in Mountaineering</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-dark: #0f172a;
+            --accent-blue: #0284c7;
+            --light-bg: #f8fafc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: #334155;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        /* Navbar Main Container */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Logo Styling */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+            padding: 3px;
+        }
+
+        /* Navigation Links Menu */
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown>a {
+            padding: 10px 5px;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .dropdown:hover>a {
+            color: #e6e0d8;
+        }
+
+        /* Dropdown Menu Items */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            z-index: 1001;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            font-size: 14px;
+            border-bottom: 1px solid #f0f0f0;
+            text-decoration: none;
+        }
+
+        .dropdown-menu a:hover {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+        }
+
+        /* Mobile Toggle Button */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* Responsive Styling for Mobile */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: #002147;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                padding: 15px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+        }
+
+
+
+        /* Hero Header */
+        .hero-header {
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)),
+                url('H.jpg') center/cover no-repeat;
+            color: white;
+            padding: 100px 0 80px 0;
+            text-align: center;
+        }
+
+        /* Custom Specified Linear Gradient Buttons */
+        .btn-gradient {
+            background: linear-gradient(135deg, #1e293b 0%, #3b82f6 100%) !important;
+            color: white !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease !important;
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e293b 100%) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(59, 130, 246, 0.5);
+            color: white !important;
+        }
+
+        .btn-filter.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e293b 100%) !important;
+            color: white !important;
+        }
+
+        /* Auto-Scrolling Slider Styles for Tech Section */
+        .slider-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+            padding: 15px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 24px;
+            width: max-content;
+            animation: autoScrollTrack 25s linear infinite;
+        }
+
+        .slider-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes autoScrollTrack {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .slide-card {
+            width: 350px;
+            flex-shrink: 0;
+        }
+
+        /* Tech Section Image Wrapper */
+        .tech-img-wrapper {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        .tech-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .slide-card:hover .tech-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        /* Card Styling */
+        .card-custom {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-custom:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card-custom:hover .card-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .date-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(59, 130, 246, 0.9);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Tech Section Icons */
+        .tech-icon {
+            width: 50px;
+            height: 50px;
+            background: #e0f2fe;
+            color: #3b82f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+
+        /* Full Width Expedition Image Styling */
+        .expedition-img-full {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        /* Custom Dedicated Video Container Div */
+        .video-wrapper-box {
+            background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 20px;
+            padding: 45px 30px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            margin: 50px 0;
+            color: #ffffff;
+        }
+
+        .video-wrapper-box video {
+            width: 100%;
+            max-height: 520px;
+            border-radius: 14px;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        /* FIXED LIVE TICKER STYLES */
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 42px;
+            background-color: #002147;
+            color: #e6e0d8;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 99999;
+            border-top: 2px solid #0056b3;
+        }
+
+        .ticker-title {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 0 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 13px;
+            white-space: nowrap;
+            z-index: 10;
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.4);
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-scroll-track {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            width: max-content;
+            animation: tickerScroll 20s linear infinite;
+        }
+
+        .ticker-container:hover .ticker-scroll-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes tickerScroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            font-size: 13.5px;
+            color: #f0eae1;
+            font-weight: 500;
+            padding: 0 20px;
+        }
+
+        .ticker-bullet {
+            color: #3b82f6;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 0 10px;
+        }
+
+        /* --- SITE FOOTER --- */
+        footer.site-footer {
+            width: 100%;
+            background: #002147;
+            color: #faf8f5;
+            padding: 40px 0 75px 0;
+            box-sizing: border-box;
+            border-top: 1px solid #0056b3;
+            margin-top: 50px;
+        }
+
+        footer.site-footer .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background: transparent;
+        }
+
+        footer.site-footer .footer-col {
+            flex: 1;
+            background: transparent;
+        }
+
+        footer.site-footer .footer-left {
+            text-align: left;
+        }
+
+        footer.site-footer .footer-left .contact-text {
+            font-size: 13px;
+            margin: 4px 0;
+            color: #b8aea5;
+        }
+
+        footer.site-footer .footer-left a {
+            color: #f0eae1;
+            text-decoration: none;
+        }
+
+        footer.site-footer .social-icons {
+            margin-top: 12px;
+            display: flex;
+            gap: 12px;
+        }
+
+        footer.site-footer .social-icons a {
+            color: #b8aea5;
+            font-size: 16px;
+            transition: color 0.2s ease;
+        }
+
+        footer.site-footer .social-icons a:hover {
+            color: #0056b3;
+        }
+
+        footer.site-footer .footer-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        footer.site-footer .logo-circle {
+            width: 60px;
+            height: 60px;
+            border: 1px solid #0056b3;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        footer.site-footer .logo-circle span {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        footer.site-footer .brand-tagline {
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: #a3978c;
+            text-transform: uppercase;
+        }
+
+        footer.site-footer .footer-right {
+            text-align: right;
+        }
+
+        footer.site-footer .footer-right h3 {
+            font-size: 15px;
+            color: #ffffff;
+            margin-bottom: 6px;
+            border-left: none;
+            padding-left: 0;
+        }
+
+        footer.site-footer .footer-right .sub-text {
+            font-size: 13px;
+            color: #a3978c;
+            max-width: 300px;
+            margin-left: auto;
+        }
+
+        @media (max-width: 768px) {
+            footer.site-footer .footer-container {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            footer.site-footer .footer-left,
+            footer.site-footer .footer-right {
+                text-align: center;
+            }
+
+            footer.site-footer .footer-right .sub-text {
+                margin: 0 auto;
+            }
+
+            footer.site-footer .social-icons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="mount.png" alt="Alpine Ascents Logo">
+                    <span>ALPINE<br><b>ASCENTS</b></span>
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="dropdown">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Gallery.html">Gallery</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Climbs.html">Climbs</a>
+                </li>
+                <li class="dropdown">
+                    <a href="History.html">History</a>
+                </li>
+                <li class="dropdown">
+                    <a href="treks.html">Treks</a>
+                    <div class="dropdown-menu">
+                        <a href="Expeditions.html">Expeditions</a>
+                        <a href="Organization.html">Organization</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Ski.html">Ski</a>
+                    <div class="dropdown-menu">
+                        <a href="Hazards.html">Hazards</a>
+                        <a href="Guidelines.html">Guidelines</a>
+                        <a href="Safety.html">Safety</a>
+                        <a href="Records.html">Records</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Gear.html">Gear Shop</a>
+                    <div class="dropdown-menu">
+                        <a href="Latest-Development.html">Latest-Development</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="About.html">About Us</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Contact Us.html">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+
+    <!-- Live Dynamic Ticker HTML -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title">Live Updates</div>
+        <div class="ticker-container">
+            <div class="ticker-scroll-track">
+                <!-- Original Content -->
+                <span class="ticker-item" id="tickerDate1">📅 Date: Loading...</span>
+                <span class="ticker-bullet">•</span>
+                <span class="ticker-item" id="tickerTime1">⏰ Time: Loading...</span>
+                <span class="ticker-bullet">•</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-bullet">•</span>
+                <span class="ticker-item">⛰️ Explore • Climb • Discover</span>
+                <span class="ticker-bullet">•</span>
+
+                <!-- Duplicate Content For Seamless Infinite Loop -->
+                <span class="ticker-item" id="tickerDate2">📅 Date: Loading...</span>
+                <span class="ticker-bullet">•</span>
+                <span class="ticker-item" id="tickerTime2">⏰ Time: Loading...</span>
+                <span class="ticker-bullet">•</span>
+                <span class="ticker-item">📍 Location: Karachi</span>
+                <span class="ticker-bullet">•</span>
+                <span class="ticker-item">⛰️ Explore • Climb • Discover</span>
+                <span class="ticker-bullet">•</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- A. Page Header -->
+    <header class="hero-header">
+        <div class="container" data-aos="fade-down">
+            <span class="text-uppercase tracking-wide text-info fw-bold mb-2 d-block">Explore The Frontiers</span>
+            <h1 class="display-3 fw-bold mb-3">Latest Developments in Mountaineering</h1>
+            <p class="lead text-light max-w-2xl mx-auto">Discover modern safety technologies, groundbreaking peak
+                achievements, and next-generation expedition strategies reshaping high-altitude climbing.</p>
+        </div>
+    </header>
+
+    <div class="container my-5">
+
+        <!-- Filter Controls -->
+        <div class="row mb-4" data-aos="fade-up">
+            <div class="col-12 text-center">
+                <div class="btn-group flex-wrap gap-2" role="group" id="filter-buttons">
+                    <button class="btn btn-gradient rounded-pill px-4 btn-filter active" data-filter="all">All
+                        Updates</button>
+                    <button class="btn btn-gradient rounded-pill px-4 btn-filter" data-filter="tech">Technology</button>
+                    <button class="btn btn-gradient rounded-pill px-4 btn-filter"
+                        data-filter="expedition">Expeditions</button>
+                    <button class="btn btn-gradient rounded-pill px-4 btn-filter" data-filter="safety">Safety &
+                        Gear</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- B. News / Updates Cards Section -->
+        <section class="mb-5">
+            <h2 class="fw-bold mb-4 border-start border-4 border-info ps-3" data-aos="fade-right">Latest News & Updates
+            </h2>
+            <div class="row g-4" id="news-cards-container">
+
+                <!-- Card 1 -->
+                <div class="col-md-6 col-lg-4 news-item" data-category="tech" data-aos="fade-up">
+                    <div class="card card-custom h-100">
+                        <div class="card-img-wrapper">
+                            <img src="C1.jpg" alt="High Altitude Radar Weather Station">
+                            <span class="date-badge">Sep 10, 2026</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">Micro-Radar AI Weather Forecasting Deployed</h5>
+                            <p class="card-text text-muted flex-grow-1">Climbers on Everest and K2 are now utilizing
+                                localized AI satellite radar networks providing real-time wind gust predictions down to
+                                15-minute intervals.</p>
+                            <button class="btn btn-gradient btn-detail mt-3 w-100" data-bs-toggle="modal"
+                                data-bs-target="#detailModal" data-title="Micro-Radar AI Weather Forecasting"
+                                data-img="H1.jpg"
+                                data-desc="Micro-radar units integrated with satellite AI models now give mountaineers hyper-local atmospheric data. This reduces summit attempt risks by predicting localized jet stream shifts, avalanche probability windows, and extreme temperature drops up to 48 hours in advance with 94% accuracy.">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="col-md-6 col-lg-4 news-item" data-category="expedition" data-aos="fade-up"
+                    data-aos-delay="100">
+                    <div class="card card-custom h-100">
+                        <div class="card-img-wrapper">
+                            <img src="C2.jpg" alt="K2 Winter Expedition Basecamp">
+                            <span class="date-badge">Aug 28, 2026</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">Record-Breaking Alpine Style Ascent on Nanga Parbat</h5>
+                            <p class="card-text text-muted flex-grow-1">A international duo completed a light-and-fast
+                                alpine style line without supplemental oxygen via a previously unclimbed technical face.
+                            </p>
+                            <button class="btn btn-gradient btn-detail mt-3 w-100" data-bs-toggle="modal"
+                                data-bs-target="#detailModal" data-title="Alpine Style Ascent on Nanga Parbat"
+                                data-img="H2.jpg"
+                                data-desc="Moving continuously for 58 hours, the team carried all equipment on their backs without fixed ropes or high-altitude porter support. The ascent marks a major shift back toward pure, minimal-impact high-altitude mountaineering style in the Himalayas.">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="col-md-6 col-lg-4 news-item" data-category="safety" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card card-custom h-100">
+                        <div class="card-img-wrapper">
+                            <img src="C3.jpeg" alt="Modern Climbing Gear Ice Axe and Harness">
+                            <span class="date-badge">Aug 15, 2026</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">Graphene-Infused Lightweight Protection Gear</h5>
+                            <p class="card-text text-muted flex-grow-1">New climbing harnesses, helmets, and ice tools
+                                forged from ultra-light carbon-graphene alloys hit the high-altitude gear market.</p>
+                            <button class="btn btn-gradient btn-detail mt-3 w-100" data-bs-toggle="modal"
+                                data-bs-target="#detailModal" data-title="Graphene Lightweight Gear Revolution"
+                                data-img="H3.jpg"
+                                data-desc="Graphene-enhanced equipment reduces total pack weight by up to 35% while doubling tensile strength against sharp rock impacts and extreme cold fatigue. Climbers report increased stamina and speed in death-zone elevations.">
+                                Read More <i class="fas fa-arrow-right ms-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- C. Recent Expeditions (Full Width Image Layout) -->
+        <section class="my-5 py-4 bg-white rounded-3 shadow-sm p-4">
+            <h2 class="fw-bold mb-4 border-start border-4 border-info ps-3" data-aos="fade-right">Recent Successful &
+                Famous Expeditions</h2>
+
+            <div class="row g-4 mb-4" data-aos="fade-up">
+                <!-- Image - Full Width Banner Row -->
+                <div class="col-12">
+                    <img src="K2.jpg" class="expedition-img-full shadow" alt="K2 Winter Summit Push">
+                </div>
+                <!-- Content Below Image -->
+                <div class="col-12 mt-3">
+                    <span class="badge bg-danger mb-2">Historic Achievement</span>
+                    <h3 class="fw-bold">Winter K2 & 8000m Speed Traverse</h3>
+                    <p class="text-muted">High-altitude mountaineering history was rewritten with recent clean, fast
+                        winter climbs on 8,000m peaks. Teams utilized smart micro-heating suits and real-time biometric
+                        telemetry to safely execute pushes in sub-40°C conditions.</p>
+                    <div class="row mt-3">
+                        <div class="col-md-4 mb-2">
+                            <p class="mb-0"><i class="fas fa-check-circle text-info me-2"></i>Zero reliance on
+                                single-use plastics at Base Camp.</p>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <p class="mb-0"><i class="fas fa-check-circle text-info me-2"></i>Real-time 3D telemetry
+                                broadcasted to global safety teams.</p>
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <p class="mb-0"><i class="fas fa-check-circle text-info me-2"></i>Complete leave-no-trace
+                                waste retrieval system used.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Single Dedicated Video Container Div -->
+            <div class="video-wrapper-box" data-aos="fade-up">
+                <div class="text-center mb-4">
+                    <span class="badge bg-info text-dark text-uppercase px-3 py-2 rounded-pill fw-bold mb-2">Featured
+                        Expedition Film</span>
+                    <h2 class="display-6 fw-bold text-white mb-2">Mountains Teach Patience</h2>
+                    <p class="text-light opacity-75 max-w-xl mx-auto">Experience the raw beauty, silent strength, and
+                        unforgiving perils of high-altitude peak climbing through our cinematic camera lens.</p>
+                </div>
+
+                <div class="position-relative">
+                    <video controls autoplay loop muted>
+                        <source src="video (3).mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="row mt-4 text-center text-md-start pt-2 border-top border-secondary">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                            <i class="fas fa-film text-info fa-2x me-3"></i>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-white">4K Cinematic Visuals</h6>
+                                <small class="text-muted">Captured on sub-zero high-alt gear</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                            <i class="fas fa-mountain text-info fa-2x me-3"></i>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-white">High Elevation Routes</h6>
+                                <small class="text-muted">Featuring Himalayan & Karakoram trails</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="d-flex align-items-center justify-content-center justify-content-md-start">
+                            <i class="fas fa-compass text-info fa-2x me-3"></i>
+                            <div>
+                                <h6 class="fw-bold mb-0 text-white">True Alpine Spirit</h6>
+                                <small class="text-muted">Resilience in extreme elements</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- D. Technology in Mountaineering -->
+        <section class="my-5">
+            <h2 class="fw-bold mb-4 border-start border-4 border-info ps-3" data-aos="fade-right">Technology in
+                Mountaineering</h2>
+            <p class="lead text-muted mb-4">Modern advancements have fundamentally transformed mountain safety,
+                communication, and route planning.</p>
+
+            <div class="slider-container">
+                <div class="slider-track">
+
+                    <!-- Slide 1 -->
+                    <div class="slide-card">
+                        <div class="bg-white rounded-3 shadow-sm h-100 border-top border-4 border-info overflow-hidden">
+                            <div class="tech-img-wrapper">
+                                <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=600&q=80"
+                                    alt="Advanced GPS Systems">
+                            </div>
+                            <div class="p-4">
+                                <div class="tech-icon"><i class="fas fa-location-crosshairs"></i></div>
+                                <h4 class="fw-bold">1. Advanced GPS Systems</h4>
+                                <p class="text-muted">Multi-constellation GNSS receivers utilize dual-frequency GPS to
+                                    pinpoint climber location down to 10 centimeters inside deep crevasses.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="slide-card">
+                        <div class="bg-white rounded-3 shadow-sm h-100 border-top border-4 border-info overflow-hidden">
+                            <div class="tech-img-wrapper">
+                                <img src="https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?auto=format&fit=crop&w=600&q=80"
+                                    alt="Satellite Communication">
+                            </div>
+                            <div class="p-4">
+                                <div class="tech-icon"><i class="fas fa-satellite-dish"></i></div>
+                                <h4 class="fw-bold">2. Satellite Communication</h4>
+                                <p class="text-muted">Pocket-sized satellite communicators enable instant global SOS
+                                    triggers, two-way text communication, and live tracking.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="slide-card">
+                        <div class="bg-white rounded-3 shadow-sm h-100 border-top border-4 border-info overflow-hidden">
+                            <div class="tech-img-wrapper">
+                                <img src="S1.jpg" alt="Weather Forecasting">
+                            </div>
+                            <div class="p-4">
+                                <div class="tech-icon"><i class="fas fa-cloud-sun-rain"></i></div>
+                                <h4 class="fw-bold">3. Weather Forecasting</h4>
+                                <p class="text-muted">Supercomputing delivers micro-climate forecasts, warning
+                                    expeditions about jet stream movements and extreme temperature drops.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4 -->
+                    <div class="slide-card">
+                        <div class="bg-white rounded-3 shadow-sm h-100 border-top border-4 border-info overflow-hidden">
+                            <div class="tech-img-wrapper">
+                                <img src="S4.webp" alt="Modern Equipment">
+                            </div>
+                            <div class="p-4">
+                                <div class="tech-icon"><i class="fas fa-tools"></i></div>
+                                <h4 class="fw-bold">4. Modern Equipment</h4>
+                                <p class="text-muted">Carbon fiber ice axes, heated boots powered by lithium batteries,
+                                    and Kevlar static ropes boost efficiency in extreme cold.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5 -->
+                    <div class="slide-card">
+                        <div class="bg-white rounded-3 shadow-sm h-100 border-top border-4 border-info overflow-hidden">
+                            <div class="tech-img-wrapper">
+                                <img src="S5.jpg" alt="Real-Time Tracking">
+                            </div>
+                            <div class="p-4">
+                                <div class="tech-icon"><i class="fas fa-chart-line"></i></div>
+                                <h4 class="fw-bold">5. Real-Time Tracking</h4>
+                                <p class="text-muted">Wearable IoT sensors transmit heart rate, SpO2, and core
+                                    temperature to basecamp medical officers in real time.</p>              </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Read More Modal -->
+    <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title fw-bold" id="modalTitle">Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" class="img-fluid rounded mb-3 w-100"
+                        style="max-height: 250px; object-fit: cover;" alt="Modal image">
+                    <p id="modalDescription" class="text-muted"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary rounded-pill px-4"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Site Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text">Phone: +1 300 303 343</p>
+                <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <p class="brand-tagline">Alpine Ascents</p>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            AOS.init({
+                duration: 800,
+                once: true
+            });
+
+            $('.btn-filter').on('click', function () {
+                $('.btn-filter').removeClass('active');
+                $(this).addClass('active');
+
+                var filter = $(this).data('filter');
+
+                if (filter === 'all') {
+                    $('.news-item').fadeIn(400);
+                } else {
+                    $('.news-item').hide();
+                    $('.news-item[data-category="' + filter + '"]').fadeIn(400);
+                }
+            });
+
+            $('.btn-detail').on('click', function () {
+                var title = $(this).data('title');
+                var img = $(this).data('img');
+                var desc = $(this).data('desc');
+
+                $('#modalTitle').text(title);
+                $('#modalImage').attr('src', img);
+                $('#modalDescription').text(desc);
+            });
+
+            // Clean Time & Date Update Function
+            function updateDateTime() {
+                const now = new Date();
+                const optionsDate = { month: 'long', day: 'numeric', year: 'numeric' };
+                const dateStr = now.toLocaleDateString('en-US', optionsDate);
+                const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+                const timeStr = now.toLocaleTimeString('en-US', optionsTime);
+
+                $('#tickerDate1, #tickerDate2').text(`📅 Date: ${dateStr}`);
+                $('#tickerTime1, #tickerTime2').text(`⏰ Time: ${timeStr}`);
+            }
+
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+        });
+    </script>
+</body>
+
+</html>

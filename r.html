@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rock Master</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif
+        }
+
+
+        /* Navbar Main Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(135deg, #002147, #0056b3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 3px;
+}
+
+/* Navigation Links Menu */
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    padding: 10px 5px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dropdown:hover > a {
+    color: #e6e0d8;
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1001;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: #ffffff;
+}
+
+/* Mobile Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #002147;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+        .hero img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover
+        }
+
+        .box {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            line-height: 1.7
+        }
+
+        .box h1 {
+            font-size: 42px;
+            margin-top: 1px;
+             background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            padding: 15px
+        }
+
+        .info {
+            display: flex;
+            gap: 20px;
+            background: #e8ffe8;
+            padding: 20px;
+            border-radius: 10px
+        }
+
+        .btn {
+          background: linear-gradient(135deg, #002147, #0056b3);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="mount.png" alt="Alpine Ascents Logo">
+                <span>ALPINE<br><b>ASCENTS</b></span>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="dropdown">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="Gallery.html">Gallery</a>
+            </li>
+            <li class="dropdown">
+                <a href="Climbs.html">Climbs</a>
+            </li>
+            <li class="dropdown">
+                <a href="History.html">History</a>
+            </li>
+            <li class="dropdown">
+                <a href="Climbs.html">Treks</a>
+                <div class="dropdown-menu">
+                    <a href="Expeditions.html">Expeditions</a>
+                    <a href="Organization.html">Organization</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#">Ski</a>
+                <div class="dropdown-menu">
+                    <a href="Hazards.html">Hazards</a>
+                    <a href="Guidelines.html">Guidelines</a>
+                    <a href="Safety.html">Safety</a>
+                    <a href="Records.html">Records</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="#">Gear Shop</a>
+                <div class="dropdown-menu">
+                    <a href="Latest-Development.html">Latest-Development</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="About.html">About Us</a>
+            </li>
+            <li class="dropdown">
+                <a href="Contact Us.html">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+    <div class="hero"><img
+            src="https://images.unsplash.com/photo-1522163182402-834f871fd851?auto=format&fit=crop&w=1200&q=80"></div>
+    <div class="box">
+        <h1>ROCK MASTER COURSE</h1>
+        <div class="info">
+            <div><b>Duration:</b> 2 Days</div>
+            <div><b>For:</b> All Levels</div>
+            <div><b>Fee:</b> $400</div>
+        </div>
+        <h2>Course Overview</h2>
+        <p>In rock climbing, technique matters more than power. In this course, you will get professional training in finger grip, body balance, and rope safety.</p>
+        <ul>
+            <li>Bouldering Basics</li>
+            <li>Top Rope & Lead Climbing</li>
+            <li>Anchor & Belay Techniques</li>
+            <li>Rock Fall Safety</li>
+        </ul><a href="index.html" class="btn">← BACK TO HOME</a>
+    </div>
+</body>
+
+</html>

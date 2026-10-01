@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gear Shop - Alpine Ascents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- FontAwesome Icons CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+  :root{
+    --bg: #ffffff;
+    --ink: #10233f;
+    --muted: #5b6b82;
+    --line: #dce6f2;
+    --panel: #f2f6fb;
+    --blue: #1d5fd6;
+    --blue-dim: #164cae;
+    --blue-deep: #002147;
+    --gradient-primary: linear-gradient(135deg, #002147, #0056b3);
+    --gradient-hover: linear-gradient(135deg, #0056b3, #002147);
+  }
+
+  *{ box-sizing:border-box; margin: 0; padding: 0; }
+
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Montserrat', sans-serif;
+    line-height:1.6;
+    overflow-x: hidden;
+  }
+
+/* Navbar Main Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: var(--gradient-primary);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 3px;
+}
+
+/* Navigation Links Menu */
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    padding: 10px 5px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dropdown:hover > a {
+    color: #e6e0d8;
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1001;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: var(--gradient-primary);
+    color: #ffffff;
+}
+
+/* Mobile Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #002147;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  header.page-header{
+    background: var(--gradient-primary);
+    color:#fff;
+    padding:64px 0 56px;
+    text-align: center;
+  }
+  header.page-header h1{
+    font-size:clamp(32px, 5vw, 46px);
+    font-weight:800;
+  }
+  header.page-header p{
+    margin:14px auto 0;
+    color:#dce8fb;
+    max-width:60ch;
+    font-size:16px;
+  }
+
+  main{
+    padding:56px 0 80px;
+  }
+
+  /* Gear Products Grid */
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 30px;
+  }
+
+  .product-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  }
+
+  .product-img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+  .product-category {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .product-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue-deep);
+    margin-bottom: 10px;
+  }
+
+  .product-price {
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 18px;
+  }
+
+  .btn-center-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+  }
+
+  .add-to-cart-btn {
+    background: var(--gradient-primary);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 12px 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .add-to-cart-btn:hover {
+    background: var(--gradient-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 86, 179, 0.3);
+  }
+
+  /* Floating Cart Trigger Button */
+  .floating-cart-btn {
+    position: fixed;
+    top: 100px;
+    right: 25px;
+    background: var(--gradient-primary);
+    color: white;
+    border: 2px solid white;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    z-index: 1002;
+    transition: transform 0.2s;
+  }
+
+  .floating-cart-btn:hover {
+    transform: scale(1.1);
+  }
+
+  .cart-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: #e63946;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+  }
+
+  /* Slide-Out Cart Drawer */
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 380px;
+    height: 100%;
+    background: white;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+    z-index: 10000;
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cart-drawer.open {
+    right: 0;
+  }
+
+  .cart-header {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cart-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .close-cart {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
+  .cart-body {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .cart-item-details h4 {
+    font-size: 14px;
+    color: var(--blue-deep);
+  }
+
+  .cart-item-details p {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .cart-qty-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+  }
+
+  .qty-btn {
+    background: var(--line);
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .cart-footer {
+    padding: 20px;
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+  }
+
+  .cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: var(--blue-deep);
+  }
+
+  .checkout-btn {
+    width: 100%;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .checkout-btn:hover {
+    background: var(--gradient-hover);
+  }
+
+  /* Overlay */
+  .cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.4);
+    z-index: 9999;
+    display: none;
+  }
+
+  .cart-overlay.active {
+    display: block;
+  }
+
+  /* ================= SITE FOOTER ================= */
+  footer.site-footer {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      margin-top: 50px;
+      margin-bottom: 0;
+      background: #002147;
+      color: #faf8f5;
+      padding: 40px 0 75px 0;
+      box-sizing: border-box;
+      clear: both;
+      border-top: 1px solid #0056b3;
+  }
+
+  footer.site-footer .footer-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 30px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+  }
+
+  footer.site-footer .footer-col { flex: 1; background: transparent; }
+  footer.site-footer .footer-left { text-align: left; }
+  footer.site-footer .footer-left .contact-text { font-size: 13px; margin: 4px 0; color: #b8aea5; }
+  footer.site-footer .footer-left a { color: #f0eae1; text-decoration: none; }
+  footer.site-footer .social-icons { margin-top: 12px; display: flex; gap: 12px; }
+  footer.site-footer .social-icons a { color: #b8aea5; font-size: 16px; transition: color 0.2s ease; }
+  footer.site-footer .social-icons a:hover { color: #0056b3; }
+  footer.site-footer .footer-center { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  footer.site-footer .logo-circle {
+      width: 60px; height: 60px; border: 1px solid #0056b3; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 8px; background: rgba(255, 255, 255, 0.05);
+  }
+  footer.site-footer .logo-circle span { color: #ffffff; font-size: 18px; font-weight: 600; }
+  footer.site-footer .brand-tagline { font-size: 11px; letter-spacing: 1px; color: #a3978c; text-transform: uppercase; }
+  footer.site-footer .footer-right { text-align: right; }
+  footer.site-footer .footer-right h3 { font-size: 15px; color: #ffffff; margin-bottom: 6px; border-left: none; padding-left: 0; }
+  footer.site-footer .footer-right .sub-text { font-size: 13px; color: #a3978c; max-width: 300px; margin-left: auto; }
+
+  /* ================= LIVE TICKER ================= */
+  .ticker-wrapper {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background-color: #002147;
+      color: #e6e0d8;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      z-index: 99999;
+      border-top: 1px solid #0056b3;
+  }
+
+  .ticker-title {
+      background: var(--gradient-primary);
+      color: #ffffff;
+      padding: 0 14px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+      z-index: 10;
+  }
+
+  .ticker-container {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+  }
+
+  .ticker-content {
+      display: flex;
+      white-space: nowrap;
+      position: absolute;
+      left: 0;
+  }
+
+  .ticker-item {
+      padding: 0 30px;
+      font-size: 13px;
+  }
+
+  @media screen and (max-width: 768px) {
+      footer.site-footer .footer-container {
+          flex-direction: column;
+          gap: 20px;
+          text-align: center;
+      }
+      footer.site-footer .footer-left,
+      footer.site-footer .footer-right {
+          text-align: center;
+      }
+      footer.site-footer .social-icons {
+          justify-content: center;
+      }
+  }
+</style>
+</head>
+<body>
+
+  <!-- Floating Cart Button -->
+  <button class="floating-cart-btn" id="openCartBtn">
+    <i class="fa-solid fa-cart-shopping"></i>
+    <span class="cart-badge" id="cartBadge">0</span>
+  </button>
+
+  <!-- Cart Overlay & Slide Drawer -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h3>Your Shopping Cart</h3>
+      <button class="close-cart" id="closeCartBtn">&times;</button>
+    </div>
+    <div class="cart-body" id="cartItemsContainer">
+      <p style="text-align:center; color: var(--muted); margin-top: 40px;">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total:</span>
+        <span id="cartTotalAmount">$0.00</span>
+      </div>
+      <button class="checkout-btn" onclick="alert('Proceeding to Checkout!')">Proceed to Checkout</button>
+    </div>
+  </div>
+
+  <header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="mount.png" alt="Alpine Ascents Logo">
+                <span>ALPINE<br><b>ASCENTS</b></span>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="dropdown"><a href="index.html">Home</a></li>
+            <li class="dropdown"><a href="Gallery.html">Gallery</a></li>
+            <li class="dropdown"><a href="Climbs.html">Climbs</a></li>
+            <li class="dropdown"><a href="History.html">History</a></li>
+            <li class="dropdown">
+                <a href="treks.html">Treks</a>
+                <div class="dropdown-menu">
+                    <a href="Expeditions.html">Expeditions</a>
+                    <a href="Organization.html">Organization</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Ski.html">Ski</a>
+                <div class="dropdown-menu">
+                    <a href="Hazards.html">Hazards</a>
+                    <a href="Guidelines.html">Guidelines</a>
+                    <a href="Safety.html">Safety</a>
+                    <a href="Records.html">Records</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Gear.htmls">Gear Shop</a>
+                <div class="dropdown-menu">
+                    <a href="Latest-Development.html">Latest-Development</a>
+                </div>
+            </li>
+            <li class="dropdown"><a href="About.html">About Us</a></li>
+            <li class="dropdown"><a href="Contact Us.html">Contact Us</a></li>
+        </ul>
+    </nav>
+</header>
+
+  <header class="page-header">
+    <div class="wrap">
+      <h1>Alpine Gear Store</h1>
+      <p>Equip yourself with tested, expedition-grade technical gear designed for high-altitude survival and peak performance.</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <div class="shop-grid">
+
+        <!-- Item 1 -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80" alt="Expedition Backpack" class="product-img">
+          <div class="product-info">
+            <span class="product-category">Packs & Bags</span>
+            <h3 class="product-title">Pro 70L Summit Backpack</h3>
+            <p class="product-price">$249.99</p>
+            <div class="btn-center-wrap">
+              <button class="add-to-cart-btn" onclick="addToCart('Pro 70L Summit Backpack', 249.99)">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1551698618-1dfe5d97d256?auto=format&fit=crop&w=600&q=80" alt="Mountaineering Boots" class="product-img">
+          <div class="product-info">
+            <span class="product-category">Footwear</span>
+            <h3 class="product-title">Alpine Double Glacier Boots</h3>
+            <p class="product-price">$389.00</p>
+            <div class="btn-center-wrap">
+              <button class="add-to-cart-btn" onclick="addToCart('Alpine Double Glacier Boots', 389.00)">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80" alt="4-Season Tent" class="product-img">
+          <div class="product-info">
+            <span class="product-category">Shelter</span>
+            <h3 class="product-title">4-Season Extreme Summit Tent</h3>
+            <p class="product-price">$450.00</p>
+            <div class="btn-center-wrap">
+              <button class="add-to-cart-btn" onclick="addToCart('4-Season Extreme Summit Tent', 450.00)">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4 -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1609630875171-b1321377ee65?auto=format&fit=crop&w=600&q=80" alt="Trekking Poles" class="product-img">
+          <div class="product-info">
+            <span class="product-category">Climbing Gear</span>
+            <h3 class="product-title">Carbon Fiber Trekking Poles</h3>
+            <p class="product-price">$85.50</p>
+            <div class="btn-center-wrap">
+              <button class="add-to-cart-btn" onclick="addToCart('Carbon Fiber Trekking Poles', 85.50)">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5 -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=600&q=80" alt="Down Jacket" class="product-img">
+          <div class="product-info">
+            <span class="product-category">Technical Apparel</span>
+            <h3 class="product-title">Sub-Zero Thermal Down Jacket</h3>
+            <p class="product-price">$299.00</p>
+            <div class="btn-center-wrap">
+              <button class="add-to-cart-btn" onclick="addToCart('Sub-Zero Thermal Down Jacket', 299.00)">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6 -->
+        <div class="product-card">
+          <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=600&q=80" alt="Climbing Helmet" class="product-img">
+          <div class="product-info">
+            <span class="product-category">Safety</span>
+            <h3 class="product-title">Ultralight Climbing Helmet</h3>
+            <p class="product-price">$75.00</p>
+            <div class="btn-center-wrap">
+              <button class="add-to-cart-btn" onclick="addToCart('Ultralight Climbing Helmet', 75.00)">
+                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ================= SITE FOOTER ================= -->
+  <footer class="site-footer">
+      <div class="footer-container">
+          <div class="footer-col footer-left">
+              <p class="contact-text">Phone: +1 300 303 343</p>
+              <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+              <div class="social-icons">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+              </div>
+          </div>
+
+          <div class="footer-col footer-center">
+              <div class="logo-circle">
+                  <span>AA</span>
+              </div>
+              <p class="brand-tagline">Alpine Ascents</p>
+          </div>
+
+          <div class="footer-col footer-right">
+              <h3>Explore The World</h3>
+              <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.</p>
+          </div>
+      </div>
+  </footer>
+
+  <!-- ================= LIVE TICKER ================= -->
+  <div class="ticker-wrapper">
+      <div class="ticker-title">Live Updates</div>
+      <div class="ticker-container" id="tickerContainer">
+          <div class="ticker-content" id="tickerContent">
+              <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+              <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+              <span class="ticker-item">📍 Location: Karachi</span>
+              <span class="ticker-item">Explore • Climb • Discover</span>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      let cart = [];
+
+      function addToCart(title, price) {
+          const existingItem = cart.find(item => item.title === title);
+          if (existingItem) {
+              existingItem.qty += 1;
+          } else {
+              cart.push({ title, price, qty: 1 });
+          }
+          updateCartUI();
+          openCart();
+      }
+
+      function updateQty(index, change) {
+          cart[index].qty += change;
+          if (cart[index].qty <= 0) {
+              cart.splice(index, 1);
+          }
+          updateCartUI();
+      }
+
+      function updateCartUI() {
+          const container = document.getElementById('cartItemsContainer');
+          const badge = document.getElementById('cartBadge');
+          const totalEl = document.getElementById('cartTotalAmount');
+
+          const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+          badge.innerText = totalQty;
+
+          if (cart.length === 0) {
+              container.innerHTML = `<p style="text-align:center; color: var(--muted); margin-top: 40px;">Your cart is empty.</p>`;
+              totalEl.innerText = `$0.00`;
+              return;
+          }
+
+          let html = '';
+          let total = 0;
+
+          cart.forEach((item, index) => {
+              const itemTotal = item.price * item.qty;
+              total += itemTotal;
+              html += `
+                  <div class="cart-item">
+                      <div class="cart-item-details">
+                          <h4>${item.title}</h4>
+                          <p>$${item.price.toFixed(2)} x ${item.qty}</p>
+                          <div class="cart-qty-ctrl">
+                              <button class="qty-btn" onclick="updateQty(${index}, -1)">-</button>
+                              <span>${item.qty}</span>
+                              <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                          </div>
+                      </div>
+                      <div>
+                          <strong>$${itemTotal.toFixed(2)}</strong>
+                      </div>
+                  </div>
+              `;
+          });
+
+          container.innerHTML = html;
+          totalEl.innerText = `$${total.toFixed(2)}`;
+      }
+
+      function openCart() {
+          document.getElementById('cartDrawer').classList.add('open');
+          document.getElementById('cartOverlay').classList.add('active');
+      }
+
+      function closeCart() {
+          document.getElementById('cartDrawer').classList.remove('open');
+          document.getElementById('cartOverlay').classList.remove('active');
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+          document.getElementById('openCartBtn').addEventListener('click', openCart);
+          document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+          document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+          // Mobile Navigation Toggle
+          const menuToggle = document.getElementById('menuToggle');
+          const navMenu = document.getElementById('navMenu');
+          if (menuToggle && navMenu) {
+              menuToggle.addEventListener('click', () => {
+                  navMenu.classList.toggle('active');
+              });
+          }
+
+          // Live Ticker Script
+          const tickerContent = document.getElementById("tickerContent");
+          const tickerContainer = document.getElementById("tickerContainer");
+
+          function updateDateTime() {
+              const now = new Date();
+              const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+              const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+              document.querySelectorAll("#tickerDate").forEach(el => el.innerText = `📅 Date: ${dateStr}`);
+              document.querySelectorAll("#tickerTime").forEach(el => el.innerText = `⏰ Time: ${timeStr}`);
+          }
+
+          if (tickerContent && tickerContainer) {
+              const clone = tickerContent.cloneNode(true);
+              tickerContainer.appendChild(clone);
+
+              updateDateTime();
+              setInterval(updateDateTime, 1000);
+
+              let speed = 1;
+              let position = 0;
+              let isPaused = false;
+
+              const animateTicker = () => {
+                  const contentWidth = tickerContent.offsetWidth;
+                  if (!isPaused) {
+                      position -= speed;
+                      if (Math.abs(position) >= contentWidth) {
+                          position = 0;
+                      }
+                      tickerContent.style.transform = `translateX(${position}px)`;
+                      clone.style.transform = `translateX(${position}px)`;
+                  }
+                  requestAnimationFrame(animateTicker);
+              };
+
+              tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+              tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+              animateTicker();
+          }
+      });
+  </script>
+
+</body>
+</html>

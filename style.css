@@ -1,0 +1,1432 @@
+/* ====== GENERAL ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+body {
+  
+  color: #e2e8f0;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ====== HEADER ====== */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(rgba(15,23,42,0.8), rgba(15,23,42,0.8)), 
+              url(n3.jpg);
+  background-size: cover;
+  background-position: center;
+}
+
+.hero h1 {
+ 
+  font-weight: 1000;
+  color: #0056b3;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: #cbd5e1;
+}
+
+/* ====== FILTER BUTTONS ====== */
+.filter-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 25px;
+  background: transparent;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+ background: linear-gradient(135deg, #002147, #0056b3);
+    color: #fff;
+    border: none;
+}
+
+.filter-btn:hover {
+  background: #38bdf8;
+  color: #0f172a;
+}
+
+
+/* ====== CARDS GRID ====== */
+.expedition-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #1e293b;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  background: linear-gradient(135deg, #002147 #0056b3);
+  padding: 15px 20px 5px
+}
+
+.card p {
+  padding: 0 20px 15px;
+  color: #94a3b8;
+}
+
+.card .btn {
+  margin: 0 20px 20px;
+  padding: 10px 20px;
+  width: calc(100px 40px) ;
+  background: linear-gradient(135deg, #002147, #0056b3 );
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.card .btn:hover {
+   color: #38bdf8;
+}
+
+/* ====== POPUP ====== */
+.popup {
+  display: none; /* shuru me band rahega */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(5px);
+  overflow-y: auto;
+}
+
+.popup-content {
+  background: #1e293b;
+  margin: 5% auto;
+  padding: 30px;
+  border-radius: 2px solid #38bdf8;
+  width: 90%;
+  max-width: 700px;
+  position: relative;
+  color: #fff;
+  animation: popupfade 0.3s ease;
+}
+
+@keyframes popupfade{
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.popup-content img {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.popup-content h2 {
+  color: #38bdf8;
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.popup-content p {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.popup-content b {
+  color: #38bdf8;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  font-size: 35px;
+  font-weight: bold;
+  color: #94a3b8;
+  cursor: pointer;
+  transition: color 0.3s;
+  z-index: 10000;
+}
+
+.close:hover {
+  color: #ef4444;
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .popup-content { margin: 10% auto; padding: 20px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* =========================
+   ALPINE ASCENTS LOGO
+========================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: white;
+    
+}
+
+/* Mountain Image */
+.mountain {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mountain img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.35));
+    transition: 0.3s ease;
+}
+
+/* Logo Text */
+.logo-name {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 19px;
+    letter-spacing: 2.5px;
+    color: #ffffff;
+    text-transform: uppercase;
+    transition: 0.3s ease;
+}
+
+.logo-name b {
+    color: #65c7ff;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+/* Hover Effect */
+.logo a:hover .mountain img {
+    transform: scale(1.08);
+}
+
+.logo a:hover .logo-name {
+    transform: translateX(3px);
+}
+
+.logo a:hover .logo-name b {
+    color: #b9e7ff;
+}
+
+/* Remove unwanted UL spacing */
+.logo ul {
+    display: none;
+}
+
+/* Responsive Logo */
+@media (max-width: 768px) {
+
+    .mountain {
+        width: 48px;
+        height: 48px;
+    }
+
+    .logo-name {
+        font-size: 17px;
+        line-height: 17px;
+    }
+
+    .logo-name b {
+        font-size: 15px;
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .mountain {
+        width: 42px;
+        height: 42px;
+    }
+
+    .logo-name {
+        font-size: 15px;
+        line-height: 15px;
+        letter-spacing: 1.5px;
+    }
+
+    .logo-name b {
+        font-size: 13px;
+        letter-spacing: 1.5px;
+    }
+}
+
+/* =========================================================
+   GLOBAL STYLING
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1b2a3a;
+    background: #f5f9fd;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    width: 100%;
+    min-height: 78px;
+    padding: 10px 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: linear-gradient(135deg, #002147, #0056b3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+    position: relative;
+    z-index: 1000;
+}
+
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+}
+
+.mountain {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mountain img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,.35));
+    transition: .3s ease;
+}
+
+.logo a:hover .mountain img {
+    transform: scale(1.08);
+}
+
+.logo-name {
+    font-size: 20px;
+    line-height: 19px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+.logo-name b {
+    color: #69c7ff;
+    letter-spacing: 3px;
+}
+
+
+/* =========================================================
+   NAV MENU
+========================================================= */
+
+.navbar {
+  background-color: #0a3d8f; /* Alpine wala blue */
+  padding: 15px 0;
+}
+
+.navlinks {
+  display: flex;
+  justify-content: center; /* beech me lane ke liye */
+  list-style: none;
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.navlinks li a {
+  color: white;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.navlinks li a:hover {
+  color: #ffcc00; /* mouse le jane par yellow */
+  border-bottom: 2px solid #ffcc00;
+}
+
+/* =========================================================
+   DROPDOWN MENU
+========================================================= */
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    min-width: 220px;
+    padding: 18px;
+
+    background: #ffffff;
+    border-top: 4px solid #168bd2;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.2);
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(12px);
+
+    transition: .3s ease;
+    z-index: 999;
+}
+
+.dropdown:hover > .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 9px 5px;
+    color: #18344d;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .25s ease;
+}
+
+.dropdown-menu a:hover {
+    color: #0077c8;
+    padding-left: 10px;
+    background: #eef8ff;
+}
+
+
+/* DROPDOWN HEADINGS */
+/* Dropdown container */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Guidelines button */
+.dropbtn {
+    background: transparent;
+    color: white;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 12px 15px;
+}
+
+/* Dropdown menu */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    background-color: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+/* Dropdown links */
+.dropdown-content a {
+    display: block;
+    padding: 12px 16px;
+    color: #002147;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Hover effect */
+.dropdown-content a:hover {
+    background: #0056b3;
+    color: white;
+}
+
+/* Show dropdown */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+```
+
+.dropdown-menu h3 {
+    color: #0056b3;
+    font-size: 15px;
+    margin: 8px 0 5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #d9e9f5;
+    padding-bottom: 5px;
+}
+
+
+/* MEGA MENU */
+
+.mega-menu {
+    width: 700px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    left: 50%;
+    transform: translate(-50%, 12px);
+}
+
+.dropdown:hover .mega-menu {
+    transform: translate(-50%, 0);
+}
+
+
+/* =========================================================
+   BOOK BUTTON
+========================================================= */
+
+.book-btn {
+    background: linear-gradient(135deg, #00a8ff, #0065c7) !important;
+    border-radius: 5px;
+    margin-left: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,.2);
+}
+
+.book-btn:hover {
+    color: #fff !important;
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.menu-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   HERO SECTION
+========================================================= */
+
+.hero {
+    position: relative;
+    height: 680px;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    inset: 0;
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .8s ease;
+}
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.slide::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0, 25, 55, .85),
+            rgba(0, 65, 120, .35),
+            rgba(0,0,0,.1)
+        );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    color: white;
+}
+
+.hero-content > p:first-child {
+    color: #65caff;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.hero-content h1 {
+    font-size: clamp(42px, 6vw, 75px);
+    line-height: 1.05;
+    letter-spacing: 2px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.hero-text {
+    max-width: 600px;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+
+/* HERO BUTTON */
+
+.main-btn {
+    display: inline-block;
+    padding: 14px 27px;
+
+    color: white;
+    background: linear-gradient(135deg, #0077cc, #00a5ee);
+
+    border: none;
+    border-radius: 4px;
+
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.main-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 100, 180, .35);
+}
+
+
+/* SLIDER BUTTONS */
+
+.slider-buttons {
+    position: absolute;
+    right: 5%;
+    bottom: 40px;
+    z-index: 10;
+    display: flex;
+    gap: 10px;
+}
+
+.slider-buttons button {
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid rgba(255,255,255,.6);
+    background: rgba(0,33,71,.7);
+    color: white;
+
+    cursor: pointer;
+    font-size: 20px;
+
+    transition: .3s ease;
+}
+
+.slider-buttons button:hover {
+    background: #0077cc;
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.intro {
+    padding: 90px 0;
+    text-align: center;
+    background: white;
+}
+
+.small-title {
+    color: #0083d4;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+}
+
+.intro h2,
+.section-heading h2,
+.about-content h2,
+.contact-info h2 {
+    color: #002f5f;
+    font-size: clamp(30px, 4vw, 45px);
+    line-height: 1.15;
+    margin-bottom: 20px;
+}
+
+.intro p:not(.small-title) {
+    max-width: 750px;
+    margin: 0 auto 28px;
+    color: #607080;
+    font-size: 17px;
+}
+
+
+/* OUTLINE BUTTON */
+
+.outline-btn {
+    display: inline-block;
+    padding: 12px 25px;
+    border: 2px solid #0077c8;
+    color: #0065ad;
+    font-weight: 700;
+    transition: .3s ease;
+}
+
+.outline-btn:hover {
+    background: #0077c8;
+    color: white;
+}
+
+
+/* =========================================================
+   FEATURED CLIMBS
+========================================================= */
+
+.featured {
+    padding: 90px 0;
+    background: #eef6fb;
+}
+
+.section-heading {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-heading > p:first-child {
+    color: #0085d4;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: 0 8px 25px rgba(0,40,80,.1);
+    transition: .35s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,50,100,.18);
+}
+
+.card > img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: .5s ease;
+}
+
+.card:hover > img {
+    transform: scale(1.05);
+}
+
+.card-content {
+    padding: 25px;
+}
+
+.card-content span {
+    color: #0084d4;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.card-content h3 {
+    color: #003b6f;
+    font-size: 25px;
+    margin: 8px 0 10px;
+}
+
+.card-content p {
+    color: #667788;
+    margin-bottom: 18px;
+}
+
+.card-content a,
+.school-grid a,
+.blog article a {
+    color: #0077c8;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+}
+
+.about-image {
+    overflow: hidden;
+}
+
+.about-image img {
+    width: 100%;
+    height: 100%;
+    min-height: 600px;
+    object-fit: cover;
+}
+
+.about-content {
+    padding: 80px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #f7fbfe;
+}
+
+.about-content h2 {
+    font-size: 45px;
+}
+
+.about-content p {
+    color: #607080;
+    margin-bottom: 18px;
+}
+
+.dark-btn {
+    align-self: flex-start;
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   SCHOOL
+========================================================= */
+
+.school {
+    padding: 90px 0;
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: white;
+}
+
+.school .section-heading h2,
+.school .section-heading p {
+    color: white;
+}
+
+.school .section-heading > p:first-child {
+    color: #67caff;
+}
+
+.school-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.school-grid > div {
+    padding: 35px 28px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 7px;
+    transition: .3s ease;
+}
+
+.school-grid > div:hover {
+    transform: translateY(-7px);
+    background: rgba(255,255,255,.13);
+}
+
+.school-grid h3 {
+    color: #70d0ff;
+    margin-bottom: 12px;
+}
+
+.school-grid p {
+    color: #dceeff;
+    margin-bottom: 18px;
+}
+
+.school-grid a {
+    color: #fff;
+}
+
+
+/* =========================================================
+   GUIDES
+========================================================= */
+
+.guides {
+    padding: 90px 0;
+    background: white;
+}
+
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.guide {
+    text-align: center;
+    padding-bottom: 25px;
+    background: #f4f9fc;
+    border-radius: 7px;
+    overflow: hidden;
+    box-shadow: 0 7px 20px rgba(0,40,80,.08);
+    transition: .3s ease;
+}
+
+.guide:hover {
+    transform: translateY(-7px);
+}
+
+.guide img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.guide h3 {
+    margin-top: 20px;
+    color: #003b6f;
+    font-size: 21px;
+}
+
+.guide p {
+    color: #718091;
+}
+
+
+/* =========================================================
+   TESTIMONIAL
+========================================================= */
+
+.testimonial {
+    padding: 90px 0;
+    text-align: center;
+    background: #eaf5fc;
+}
+
+.quote-mark {
+    color: #0087d5;
+    font-size: 80px;
+    line-height: .8;
+    margin-bottom: 20px;
+}
+
+blockquote {
+    max-width: 800px;
+    margin: auto;
+    color: #29445d;
+    font-size: 25px;
+    font-style: italic;
+    line-height: 1.6;
+}
+
+#author {
+    margin-top: 25px;
+    color: #0077c8;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.dots {
+    margin-top: 25px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border: none;
+    border-radius: 50%;
+    margin: 0 4px;
+    background: #aac5d8;
+    cursor: pointer;
+}
+
+.active-dot {
+    background: #0077c8;
+}
+
+
+/* =========================================================
+   BLOG
+========================================================= */
+
+.blog {
+    padding: 90px 0;
+    background: white;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.blog article {
+    background: #f4f9fc;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 7px 20px rgba(0,40,80,.08);
+    transition: .3s ease;
+}
+
+.blog article:hover {
+    transform: translateY(-7px);
+}
+
+.blog article > img {
+    width: 100%;
+    height: 230px;
+    object-fit: cover;
+}
+
+.blog article > div {
+    padding: 25px;
+}
+
+.blog small {
+    color: #0084d4;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.blog h3 {
+    color: #003b6f;
+    font-size: 21px;
+    line-height: 1.35;
+    margin: 10px 0 18px;
+}
+
+
+/* =========================================================
+   NEWSLETTER
+========================================================= */
+
+.newsletter {
+    padding: 75px 0;
+    text-align: center;
+    background: linear-gradient(135deg, #002147, #0068b8);
+    color: white;
+}
+
+.newsletter h2 {
+    color: white;
+    margin-bottom: 12px;
+}
+
+.newsletter p {
+    color: #d9edff;
+    margin-bottom: 25px;
+}
+
+.newsletter form {
+    display: flex;
+    max-width: 650px;
+    margin: auto;
+}
+
+.newsletter input {
+    flex: 1;
+    padding: 16px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.newsletter button {
+    padding: 0 28px;
+    border: none;
+    background: #00a3ed;
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.newsletter button:hover {
+    background: #0082c4;
+}
+
+#newsletterMessage {
+    margin-top: 15px;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact {
+    padding: 90px 0;
+    background: #eef6fb;
+}
+
+.contact .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: start;
+}
+
+.contact-info h2 {
+    margin-bottom: 20px;
+}
+
+.contact-info > p {
+    color: #617080;
+    margin-bottom: 22px;
+}
+
+.contact-info strong {
+    color: #003b6f;
+}
+
+
+/* CONTACT FORM */
+
+.contact-form {
+    background: white;
+    padding: 35px;
+    border-radius: 7px;
+    box-shadow: 0 10px 30px rgba(0,40,80,.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 15px;
+
+    border: 1px solid #d2e0ea;
+    outline: none;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    transition: .3s ease;
+}
+
+.contact-form textarea {
+    resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: #0087d5;
+    box-shadow: 0 0 0 3px rgba(0,135,213,.1);
+}
+
+#contactMessage {
+    margin-top: 15px;
+    color: #0077c8;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .nav-menu {
+        gap: 0;
+    }
+
+    .nav-menu > li > a {
+        padding: 10px 8px;
+        font-size: 11px;
+    }
+
+    .mega-menu {
+        width: 650px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+
+        background: linear-gradient(135deg, #002147, #0056b3);
+        padding: 10px 5%;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+
+    .nav-menu > li > a {
+        padding: 14px 10px;
+        border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .dropdown-menu,
+    .mega-menu {
+        position: static;
+        width: 100%;
+        transform: none !important;
+
+        display: none;
+        background: white;
+        box-shadow: none;
+        border-top: none;
+    }
+
+    .dropdown:hover > .dropdown-menu {
+        display: block;
+    }
+
+    .mega-menu {
+        grid-template-columns: 1fr;
+    }
+
+    .cards,
+    .school-grid,
+    .guide-grid,
+    .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about {
+        grid-template-columns: 1fr;
+    }
+
+    .about-image img {
+        min-height: 400px;
+    }
+
+    .contact .container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 10px 4%;
+    }
+
+    .mountain {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo-name {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    .logo-name b {
+        font-size: 14px;
+    }
+
+    .hero {
+        height: 600px;
+    }
+
+    .hero-content h1 {
+        font-size: 40px;
+    }
+
+    .hero-text {
+        font-size: 15px;
+    }
+
+    .cards,
+    .school-grid,
+    .guide-grid,
+    .blog-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .intro,
+    .featured,
+    .guides,
+    .blog,
+    .contact {
+        padding: 65px 0;
+    }
+
+    .about-content {
+        padding: 60px 8%;
+    }
+
+    .about-content h2 {
+        font-size: 35px;
+    }
+
+    blockquote {
+        font-size: 20px;
+    }
+
+    .newsletter form {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .newsletter input {
+        width: 100%;
+    }
+
+    .newsletter button {
+        padding: 15px;
+    }
+
+    .contact-form {
+        padding: 25px;
+    }
+}
+
+
+
+ 
+

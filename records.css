@@ -1,0 +1,619 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7f6;
+    color: #0f172a;
+    overflow-x: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+/* Navbar */
+.main-navbar {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    padding: 15px 0;
+}
+
+.navbar-brand {
+    color: white !important;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.navbar-brand span {
+    color: #38bdf8;
+}
+
+.nav-link {
+    color: white !important;
+    font-weight: 600;
+    margin-left: 18px;
+    transition: 0.3s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #38bdf8 !important;
+}
+
+
+/* Page Header */
+.page-header {
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    color: white;
+    background:
+        linear-gradient(rgba(0, 33, 71, 0.85), rgba(0, 86, 179, 0.78)),
+        url("images/mountains.jpg") center/cover no-repeat;
+}
+
+.page-header h1 {
+    font-size: 54px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    animation: slideDown 1s ease;
+}
+
+.page-header p {
+    max-width: 750px;
+    margin: auto;
+    font-size: 18px;
+    line-height: 1.8;
+    animation: fadeUp 1.2s ease;
+}
+
+
+/* Common Sections */
+.section-padding {
+    padding: 80px 0;
+}
+
+.small-heading {
+    color: #0056b3;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.records-intro h2,
+.section-heading h2 {
+    color: #002147;
+    font-size: 38px;
+    font-weight: 800;
+    margin: 12px 0 18px;
+}
+
+.records-intro p,
+.section-heading p {
+    max-width: 750px;
+    margin: auto;
+    color: #64748b;
+    line-height: 1.8;
+}
+
+
+/* Filter */
+.filter-section {
+    padding: 25px 15px;
+    background: white;
+    border-top: 1px solid #e2e8f0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.filter-btn {
+    border: 1px solid #0056b3;
+    background: transparent;
+    color: #0056b3;
+    padding: 10px 22px;
+    margin: 6px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 86, 179, 0.25);
+}
+
+
+/* Record Cards */
+.record-cards {
+    background: #f5f7f6;
+}
+
+.record-card {
+    height: 100%;
+    overflow: hidden;
+    border-radius: 18px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 33, 71, 0.12);
+    transition: 0.4s ease;
+    animation: cardAppear 0.8s ease;
+}
+
+.record-card:hover {
+    transform: translateY(-9px);
+    box-shadow: 0 16px 35px rgba(0, 33, 71, 0.2);
+}
+
+.record-card img {
+    width: 100%;
+    height: 245px;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.record-card:hover img {
+    transform: scale(1.08);
+}
+
+.record-content {
+    padding: 25px;
+}
+
+.record-year {
+    display: inline-block;
+    color: #0056b3;
+    background: #e0f2fe;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 13px;
+}
+
+.record-content h3 {
+    color: #002147;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+.record-content p {
+    color: #64748b;
+    line-height: 1.7;
+    margin: 15px 0 22px;
+}
+
+.record-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #002147, #0056b3);
+    padding: 11px 22px;
+    border-radius: 25px;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.record-btn:hover {
+    color: #002147;
+    background: #38bdf8;
+    transform: translateY(-3px);
+}
+
+
+/* Filter Animation */
+.record-item {
+    transition: 0.5s ease;
+}
+
+.record-item.hide {
+    display: none;
+}
+
+.record-item.show {
+    display: block;
+    animation: cardAppear 0.6s ease;
+}
+
+
+/* Table */
+.table-section {
+    background: white;
+}
+
+.record-table-wrapper {
+    margin-top: 35px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 33, 71, 0.1);
+}
+
+.record-table {
+    margin-bottom: 0;
+    min-width: 850px;
+}
+
+.record-table thead th {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: white;
+    padding: 18px;
+    border: none;
+}
+
+.record-table tbody td {
+    padding: 18px;
+    color: #475569;
+    border-color: #e2e8f0;
+}
+
+.record-table tbody tr {
+    transition: 0.3s ease;
+}
+
+.record-table tbody tr:hover {
+    background: #e0f2fe;
+}
+
+
+/* Achievement Cards */
+.achievement-section {
+    background: #f5f7f6;
+}
+
+.achievement-card {
+    height: 100%;
+    text-align: center;
+    padding: 30px 22px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0, 33, 71, 0.1);
+    transition: 0.4s ease;
+    animation: cardAppear 1s ease;
+}
+
+.achievement-card:hover {
+    transform: translateY(-8px);
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: white;
+}
+
+.achievement-icon {
+    font-size: 45px;
+    margin-bottom: 18px;
+}
+
+.achievement-card h4 {
+    color: #002147;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.achievement-card p {
+    color: #64748b;
+    line-height: 1.7;
+}
+
+.achievement-card:hover h4,
+.achievement-card:hover p {
+    color: white;
+}
+
+
+/* CTA */
+.records-cta {
+    color: white;
+    background:
+        linear-gradient(rgba(0, 33, 71, 0.92), rgba(0, 86, 179, 0.88)),
+        url("images/mountains.jpg") center/cover no-repeat;
+}
+
+.records-cta h2 {
+    font-size: 38px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.records-cta p {
+    color: #e2e8f0;
+    margin-bottom: 30px;
+}
+
+.main-btn,
+.outline-btn {
+    display: inline-block;
+    text-decoration: none;
+    padding: 13px 28px;
+    border-radius: 30px;
+    font-weight: bold;
+    margin: 7px;
+    transition: 0.3s ease;
+}
+
+.main-btn {
+    background: #38bdf8;
+    color: #002147;
+}
+
+.main-btn:hover {
+    background: white;
+    color: #002147;
+    transform: translateY(-4px);
+}
+
+.outline-btn {
+    color: white;
+    border: 2px solid white;
+}
+
+.outline-btn:hover {
+    background: white;
+    color: #002147;
+    transform: translateY(-4px);
+}
+
+
+/* Footer */
+footer.site-footer {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    margin-top: 0;
+    margin-bottom: 0;
+    background: #002147;
+    color: #faf8f5;
+    padding: 40px 0 75px;
+    border-top: 3px solid #0056b3;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 35px;
+}
+
+.footer-left,
+.footer-center,
+.footer-right {
+    flex: 1;
+}
+
+.footer-left h4,
+.footer-right h4 {
+    color: #38bdf8;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+.footer-left p,
+.footer-right p {
+    color: #dbeafe;
+    line-height: 1.7;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.footer-logo {
+    width: 80px;
+    height: 80px;
+    margin: auto;
+    border: 3px solid #38bdf8;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #38bdf8;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.footer-center p {
+    color: #dbeafe;
+    margin-top: 15px;
+}
+
+.social-links a {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    margin-right: 12px;
+    transition: 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #38bdf8;
+}
+
+
+/* Live Ticker */
+.live-ticker {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    background: #002147;
+    border-top: 2px solid #0056b3;
+    z-index: 99999;
+    overflow: hidden;
+}
+
+.ticker-title {
+    min-width: 125px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    background: linear-gradient(135deg, #0056b3, #38bdf8);
+    z-index: 2;
+}
+
+.ticker-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+.ticker-content {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+    width: max-content;
+    color: white;
+    white-space: nowrap;
+    animation: tickerMove 30s linear infinite;
+}
+
+.ticker-content span {
+    font-size: 14px;
+}
+
+
+/* Animations */
+@keyframes tickerMove {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* Responsive */
+@media (max-width: 991px) {
+    .page-header h1 {
+        font-size: 42px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        min-height: 290px;
+    }
+
+    .page-header h1 {
+        font-size: 35px;
+    }
+
+    .page-header p {
+        font-size: 16px;
+    }
+
+    .records-intro h2,
+    .section-heading h2,
+    .records-cta h2 {
+        font-size: 30px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-left,
+    .footer-center,
+    .footer-right {
+        width: 100%;
+    }
+
+    .ticker-title {
+        min-width: 100px;
+        font-size: 12px;
+    }
+
+    .ticker-content span {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-padding {
+        padding: 55px 0;
+    }
+
+    .filter-btn {
+        padding: 9px 15px;
+        font-size: 13px;
+    }
+
+    .record-card img {
+        height: 220px;
+    }
+
+    .main-btn,
+    .outline-btn {
+        display: block;
+        width: 90%;
+        margin: 10px auto;
+    }
+}
+.explore-btn {
+    display: inline-block;
+    background: #38bdf8;
+    color: #002147 !important;
+    padding: 12px 28px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.explore-btn:hover {
+    background: #002147;
+    color: #ffffff !important;
+    border: 1px solid #38bdf8;
+}

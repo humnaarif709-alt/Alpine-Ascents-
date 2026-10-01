@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine Ascents | Trekking Expeditions</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: #f8f9fa;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* ================= NAVIGATION BAR ================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            color: #ffffff;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .logo img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            border-radius: 50%;
+            background: white;
+            padding: 3px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            list-style: none;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a {
+            padding: 10px 5px;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .dropdown:hover > a {
+            color: #e6e0d8;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #ffffff;
+            min-width: 180px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            z-index: 1001;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: #333;
+            font-size: 14px;
+            text-decoration: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-menu a:hover {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ffffff;
+        }
+
+        /* ================= MOBILE RESPONSIVENESS ================= */
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                background: #002147;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+                padding: 15px 0;
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ================= HERO SECTION ================= */
+        .treks-hero {
+            position: relative;
+            height: 55vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            background: linear-gradient(rgba(0, 33, 71, 0.65), rgba(0, 86, 179, 0.65)), 
+                        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1800&q=80') center/cover no-repeat;
+        }
+
+        .treks-hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .treks-hero-content h1 {
+            font-size: 44px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .treks-hero-content p {
+            font-size: 17px;
+            color: #e2e8f0;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* ================= FILTER TABS ================= */
+        .filter-section {
+            padding: 40px 5% 10px;
+            text-align: center;
+        }
+
+        .filter-container {
+            display: inline-flex;
+            gap: 12px;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-btn {
+            border: none;
+            background: transparent;
+            padding: 10px 24px;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: #64748b;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 33, 71, 0.25);
+        }
+
+        /* ================= TREKS GRID ================= */
+        .treks-grid-section {
+            padding: 30px 5% 60px;
+        }
+
+        .treks-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .trek-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .trek-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+        }
+
+        .trek-img-wrapper {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .trek-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .trek-card:hover .trek-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .badge-difficulty {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .badge-easy { background: #10b981; }
+        .badge-moderate { background: #f59e0b; }
+        .badge-challenging { background: #ef4444; }
+
+        .trek-info {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .trek-location {
+            font-size: 12px;
+            font-weight: 700;
+            color: #0056b3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+        }
+
+        .trek-title {
+            font-size: 20px;
+            color: #002147;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .trek-meta {
+            display: flex;
+            justify-content: space-between;
+            background: #f8fafc;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-size: 12.5px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .trek-meta item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .trek-meta i {
+            color: #0056b3;
+        }
+
+        .trek-desc {
+            font-size: 13.5px;
+            color: #64748b;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .trek-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 15px;
+        }
+
+        .trek-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #002147;
+        }
+
+        .trek-price span {
+            font-size: 12px;
+            color: #94a3b8;
+            font-weight: 500;
+        }
+
+        .btn-view {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 9px 18px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view:hover {
+            background: linear-gradient(135deg, #0056b3, #002147);
+            box-shadow: 0 4px 10px rgba(0, 33, 71, 0.3);
+        }
+
+        /* ================= ESSENTIALS SECTION ================= */
+        .essentials-section {
+            background: #ffffff;
+            padding: 70px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 40px;
+        }
+
+        .section-header h2 {
+            font-size: 30px;
+            color: #002147;
+            font-weight: 800;
+        }
+
+        .essentials-grid {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 25px;
+        }
+
+        .essential-box {
+            background: #f8fafc;
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+
+        .essential-box:hover {
+            transform: translateY(-5px);
+            border-color: #0056b3;
+        }
+
+        .essential-box i {
+            font-size: 36px;
+            color: #0056b3;
+            margin-bottom: 15px;
+        }
+
+        .essential-box h4 {
+            font-size: 16px;
+            color: #002147;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .essential-box p {
+            font-size: 13px;
+            color: #64748b;
+        }
+
+        /* ================= SITE FOOTER ================= */
+        footer.site-footer {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 0;
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #faf8f5;
+            padding: 45px 0 80px 0;
+            box-sizing: border-box;
+            clear: both;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer.site-footer .footer-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        footer.site-footer .footer-col { flex: 1; }
+        footer.site-footer .footer-left { text-align: left; }
+        footer.site-footer .footer-left .contact-text { font-size: 13px; margin: 5px 0; color: #cbd5e1; }
+        footer.site-footer .footer-left a { color: #f8fafc; }
+
+        footer.site-footer .social-icons {
+            margin-top: 15px;
+            display: flex;
+            gap: 12px;
+        }
+
+        footer.site-footer .social-icons a {
+            color: #ffffff;
+            width: 34px;
+            height: 34px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        footer.site-footer .social-icons a:hover {
+            background: #ffffff;
+            color: #002147;
+            transform: translateY(-2px);
+        }
+
+        footer.site-footer .footer-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        footer.site-footer .logo-circle {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        footer.site-footer .logo-circle span {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        footer.site-footer .brand-tagline {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        footer.site-footer .footer-right { text-align: right; }
+        footer.site-footer .footer-right h3 { font-size: 15px; color: #ffffff; margin-bottom: 6px; }
+        footer.site-footer .footer-right .sub-text { font-size: 13px; color: #cbd5e1; max-width: 300px; margin-left: auto; }
+
+        /* ================= LIVE TICKER ================= */
+        .ticker-wrapper {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 42px;
+            background-color: #002147;
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 99999;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .ticker-title {
+            background: linear-gradient(135deg, #002147, #0056b3);
+            color: #ffffff;
+            padding: 0 16px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            z-index: 10;
+        }
+
+        .ticker-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .ticker-content {
+            display: flex;
+            white-space: nowrap;
+            position: absolute;
+            left: 0;
+        }
+
+        .ticker-item {
+            padding: 0 25px;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ticker-item i { color: #38bdf8; }
+
+        /* Mobile View */
+        @media screen and (max-width: 768px) {
+            .treks-hero-content h1 { font-size: 30px; }
+            footer.site-footer .footer-container { flex-direction: column; gap: 25px; text-align: center; }
+            footer.site-footer .footer-left, footer.site-footer .footer-right { text-align: center; }
+            footer.site-footer .footer-right .sub-text { margin: 0 auto; }
+            footer.site-footer .social-icons { justify-content: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER / NAVBAR ================= -->
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="mount.png" alt="img">
+                    <span>ALPINE<br><b>ASCENTS</b></span>
+                </a>
+            </div>
+
+            <button class="menu-toggle" id="menuToggle">☰</button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li class="dropdown">
+                    <a href="index.html">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Gallery.html">Gallery</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Climbs.html">Climbs</a>
+                </li>
+                <li class="dropdown">
+                    <a href="History.html">History</a>
+                </li>
+                <li class="dropdown">
+                    <a href="treks.html">Treks</a>
+                    <div class="dropdown-menu">
+                        <a href="Expeditions.html">Expeditions</a>
+                        <a href="Organization.html">Organization</a>
+                    
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Ski.html">Ski</a>
+                    <div class="dropdown-menu">
+                        <a href="Hazards.html">Hazards</a>
+                        <a href="Guidelines.html">Guidelines</a>
+                        <a href="Safety.html">Safety</a>
+                        <a href="Records.html">Records</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="Gear.html">Gear Shop</a>
+                    <div class="dropdown-menu">
+                        <a href="Latest-Development.html">Latest-Development</a>
+                    </div>
+                </li>
+                <li class="dropdown">
+                    <a href="About.html">About Us</a>
+                </li>
+                <li class="dropdown">
+                    <a href="Contact Us.html">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+
+      <script>
+         document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener("click", () => {
+                    navMenu.classList.toggle("active");
+                });
+            }});
+    </script>
+
+    <!-- TREKS HERO -->
+    <section class="treks-hero">
+        <div class="treks-hero-content">
+            <h1>TREKKING EXPEDITIONS</h1>
+            <p>Journey through pristine wilderness, ancient mountain trails, and breathtaking Alpine pass routes with world-class guides.</p>
+        </div>
+    </section>
+
+    <!-- FILTER TABS -->
+    <div class="filter-section">
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterTreks('all')">All Treks</button>
+            <button class="filter-btn" onclick="filterTreks('easy')">Easy / Moderate</button>
+            <button class="filter-btn" onclick="filterTreks('challenging')">Challenging Pass</button>
+        </div>
+    </div>
+
+    <!-- TREKS GRID -->
+    <section class="treks-grid-section">
+        <div class="treks-container">
+            
+            <!-- Trek Item 1 -->
+            <article class="trek-card" data-category="challenging">
+                <div class="trek-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1464278533981-50106e6176b1?auto=format&fit=crop&w=900&q=80" alt="Everest Circuit">
+                    <span class="badge-difficulty badge-challenging">Challenging</span>
+                </div>
+                <div class="trek-info">
+                    <span class="trek-location">NEPAL • HIMALAYAS</span>
+                    <h3 class="trek-title">Everest Base Camp Trek</h3>
+                    <div class="trek-meta">
+                        <span class="item"><i class="fa-regular fa-clock"></i> 14 Days</span>
+                        <span class="item"><i class="fa-solid fa-mountain"></i> 5,364m Max</span>
+                    </div>
+                    <p class="trek-desc">Walk among towering giant peaks and immerse yourself in classic Sherpa culture on this world-famous mountain route.</p>
+                    <div class="trek-footer">
+                        <div class="trek-price">$2,450 <span>/ person</span></div>
+                        <a href="t.html" class="btn-view">View Details</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Trek Item 2 -->
+            <article class="trek-card" data-category="easy">
+                <div class="trek-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=80" alt="Inca Trail">
+                    <span class="badge-difficulty badge-moderate">Moderate</span>
+                </div>
+                <div class="trek-info">
+                    <span class="trek-location">PERU • ANDES</span>
+                    <h3 class="trek-title">Classic Inca Trail Expedition</h3>
+                    <div class="trek-meta">
+                        <span class="item"><i class="fa-regular fa-clock"></i> 7 Days</span>
+                        <span class="item"><i class="fa-solid fa-mountain"></i> 4,215m Max</span>
+                    </div>
+                    <p class="trek-desc">Traverse high cloud forests and ancient stone pathways leading directly to the iconic sun gate of Machu Picchu.</p>
+                    <div class="trek-footer">
+                        <div class="trek-price">$1,850 <span>/ person</span></div>
+                        <a href="t1.html" class="btn-view">View Details</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Trek Item 3 -->
+            <article class="trek-card" data-category="challenging">
+                <div class="trek-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80" alt="K2 Base Camp">
+                    <span class="badge-difficulty badge-challenging">Challenging</span>
+                </div>
+                <div class="trek-info">
+                    <span class="trek-location">PAKISTAN • KARAKORAM</span>
+                    <h3 class="trek-title">K2 & Concordia Trek</h3>
+                    <div class="trek-meta">
+                        <span class="item"><i class="fa-regular fa-clock"></i> 20 Days</span>
+                        <span class="item"><i class="fa-solid fa-mountain"></i> 5,150m Max</span>
+                    </div>
+                    <p class="trek-desc">Journey through the mighty Baltoro Glacier to stand surrounded by four of the world's fourteen 8,000m summits.</p>
+                    <div class="trek-footer">
+                        <div class="trek-price">$3,200 <span>/ person</span></div>
+                        <a href="t2.html" class="btn-view">View Details</a>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Trek Item 4 -->
+            <article class="trek-card" data-category="easy">
+                <div class="trek-img-wrapper">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80" alt="Tour du Mont Blanc">
+                    <span class="badge-difficulty badge-easy">Easy-Moderate</span>
+                </div>
+                <div class="trek-info">
+                    <span class="trek-location">EUROPE • ALPS</span>
+                    <h3 class="trek-title">Tour du Mont Blanc</h3>
+                    <div class="trek-meta">
+                        <span class="item"><i class="fa-regular fa-clock"></i> 10 Days</span>
+                        <span class="item"><i class="fa-solid fa-mountain"></i> 2,665m Max</span>
+                    </div>
+                    <p class="trek-desc">Circle Europe's most famous mountain massif while enjoying scenic mountain passes, alpine huts, and local cuisine.</p>
+                    <div class="trek-footer">
+                        <div class="trek-price">$2,100 <span>/ person</span></div>
+                        <a href="t3.html" class="btn-view">View Details</a>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- TREK ESSENTIALS -->
+    <section class="essentials-section">
+        <div class="section-header">
+            <span style="color: #0056b3; font-weight: 700; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;">PREPARATION MATTERS</span>
+            <h2>TREK PREPARATION & ESSENTIALS</h2>
+        </div>
+        <div class="essentials-grid">
+            <div class="essential-box">
+                <i class="fa-solid fa-person-hiking"></i>
+                <h4>Fitness Standard</h4>
+                <p>Cardio and endurance training guidelines tailored for multi-day high-altitude trekking.</p>
+            </div>
+            <div class="essential-box">
+                <i class="fa-solid fa-kit-medical"></i>
+                <h4>Safety First</h4>
+                <p>Comprehensive wilderness first aid gear and experienced emergency medical protocols.</p>
+            </div>
+            <div class="essential-box">
+                <i class="fa-solid fa-campground"></i>
+                <h4>Quality Gear</h4>
+                <p>Pro-grade alpine tents, weather protection gear, and insulated sleeping equipment provided.</p>
+            </div>
+            <div class="essential-box">
+                <i class="fa-solid fa-leaf"></i>
+                <h4>Eco Ethics</h4>
+                <p>Strict Leave-No-Trace policies protecting pristine wilderness and mountain environments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col footer-left">
+                <p class="contact-text"><i class="fa-solid fa-phone" style="color: #38bdf8; margin-right: 6px;"></i> +1 300 303 343</p>
+                <p class="contact-text"><i class="fa-solid fa-envelope" style="color: #38bdf8; margin-right: 6px;"></i> <a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col footer-center">
+                <div class="logo-circle">
+                    <span>AA</span>
+                </div>
+                <p class="brand-tagline">Alpine Ascents</p>
+            </div>
+
+            <div class="footer-col footer-right">
+                <h3>Explore The World</h3>
+                <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LIVE TICKER -->
+    <div class="ticker-wrapper">
+        <div class="ticker-title"><i class="fa-solid fa-bolt"></i> Live Updates</div>
+        <div class="ticker-container" id="tickerContainer">
+            <div class="ticker-content" id="tickerContent">
+                <span class="ticker-item" id="tickerDate"><i class="fa-regular fa-calendar"></i> Date: Loading...</span>
+                <span class="ticker-item" id="tickerTime"><i class="fa-regular fa-clock"></i> Time: Loading...</span>
+                <span class="ticker-item"><i class="fa-solid fa-location-dot"></i> Location: Karachi</span>
+                <span class="ticker-item"><i class="fa-solid fa-mountain"></i> Explore • Climb • Discover</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("menuToggle");
+            const navMenu = document.getElementById("navMenu");
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener("click", () => {
+                    navMenu.classList.toggle("active");
+                });
+            }
+
+            const tickerContent = document.getElementById("tickerContent");
+            const tickerContainer = document.getElementById("tickerContainer");
+
+            function updateDateTime() {
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+                document.querySelectorAll("#tickerDate").forEach(el => {
+                    el.innerHTML = `<i class="fa-regular fa-calendar"></i> Date: ${dateStr}`;
+                });
+                document.querySelectorAll("#tickerTime").forEach(el => {
+                    el.innerHTML = `<i class="fa-regular fa-clock"></i> Time: ${timeStr}`;
+                });
+            }
+
+            if (tickerContent && tickerContainer) {
+                const clone = tickerContent.cloneNode(true);
+                tickerContainer.appendChild(clone);
+
+                updateDateTime();
+                setInterval(updateDateTime, 1000);
+
+                let speed = 1;
+                let position = 0;
+                let isPaused = false;
+
+                const animateTicker = () => {
+                    const contentWidth = tickerContent.offsetWidth;
+                    if (!isPaused) {
+                        position -= speed;
+                        if (Math.abs(position) >= contentWidth) {
+                            position = 0;
+                        }
+                        tickerContent.style.transform = `translateX(${position}px)`;
+                        clone.style.transform = `translateX(${position}px)`;
+                    }
+                    requestAnimationFrame(animateTicker);
+                };
+
+                tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+                tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+                animateTicker();
+            }
+        });
+
+        // Filter Functionality
+        function filterTreks(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.trek-card');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

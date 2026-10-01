@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Find My Location</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f8ff;
+            color: #17365d;
+        }
+
+        /* ===== NAVBAR ===== */
+
+        .navbar {
+            background: #123b70;
+            padding: 18px 8%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+        }
+
+        .nav-links a:hover {
+            color: #75b6ff;
+        }
+
+
+        /* ===== MAIN ===== */
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 55px auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-size: 38px;
+            color: #123b70;
+            margin-bottom: 12px;
+        }
+
+        .heading p {
+            color: #63758a;
+            font-size: 16px;
+        }
+
+
+        /* ===== CARD ===== */
+
+        .location-card {
+            background: white;
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 25px rgba(18, 59, 112, 0.12);
+            border: 1px solid #dce8f7;
+        }
+
+        .location-card h2 {
+            color: #123b70;
+            margin-bottom: 10px;
+        }
+
+        .location-card .description {
+            color: #687b91;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+
+        /* ===== BUTTON ===== */
+
+        .location-btn {
+            background: #1769e0;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .location-btn:hover {
+            background: #0e52b5;
+            transform: translateY(-2px);
+        }
+
+
+        /* ===== RESULT ===== */
+
+        #output {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f2f7ff;
+            border: 1px solid #d5e4f7;
+            border-radius: 10px;
+            line-height: 1.8;
+            color: #365878;
+        }
+
+        .result-title {
+            color: #123b70;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+
+        /* ===== MAP BUTTON ===== */
+
+        .map-btn {
+            display: inline-block;
+            margin-top: 12px;
+            background: #123b70;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+        }
+
+        .map-btn:hover {
+            background: #1769e0;
+        }
+
+
+        /* ===== INFO ===== */
+
+        .info {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .info-box {
+            flex: 1;
+            padding: 18px;
+            background: #f7faff;
+            border: 1px solid #dce8f7;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .info-box h3 {
+            color: #1769e0;
+            margin-bottom: 7px;
+        }
+
+        .info-box p {
+            color: #687b91;
+            font-size: 14px;
+        }
+
+
+        /* ===== MOBILE ===== */
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .heading h1 {
+                font-size: 29px;
+            }
+
+            .location-card {
+                padding: 25px;
+            }
+
+            .info {
+                flex-direction: column;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- NAVBAR -->
+
+    <!-- <nav class="navbar">
+
+        <div class="logo">
+            📍 GeoLocator
+        </div>
+
+        <div class="nav-links">
+
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Map</a>
+            <a href="#">Contact</a>
+
+        </div>
+
+    </nav> -->
+
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <div class="heading">
+
+            <h1>Find Your Location</h1>
+
+            <p>
+                Use your current location to find nearby places
+                and view your position on the map.
+            </p>
+
+        </div>
+
+
+
+        <!-- LOCATION CARD -->
+
+        <div class="location-card">
+
+            <h2>📍 Location / Find Near Me</h2>
+
+            <p class="description">
+                Click the button below to find your current
+                geographical location.
+            </p>
+
+
+            <button
+                class="location-btn"
+                onclick="getLocation()">
+
+                📍 Find My Location
+
+            </button>
+
+
+            <!-- RESULT -->
+
+            <div id="output">
+
+                Your location will appear here.
+
+            </div>
+
+
+            <!-- INFO -->
+
+            <div class="info">
+
+                <div class="info-box">
+
+                    <h3>Latitude</h3>
+
+                    <p>
+                        Your north-south position
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>Longitude</h3>
+
+                    <p>
+                        Your east-west position
+                    </p>
+
+                </div>
+
+
+                <div class="info-box">
+
+                    <h3>Map</h3>
+
+                    <p>
+                        View your location
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        function getLocation() {
+
+            if (navigator.geolocation) {
+
+                navigator.geolocation.getCurrentPosition(
+                    showPosition,
+                    showError
+                );
+
+            } else {
+
+                document.getElementById("output").innerHTML =
+                    "Geolocation is not supported by this browser.";
+
+            }
+
+        }
+
+
+
+        function showPosition(position) {
+
+            let lat = position.coords.latitude;
+
+            let lon = position.coords.longitude;
+
+
+            let mapLink =
+                "https://www.openstreetmap.org/#map=18/"
+                + lat + "/" + lon;
+
+
+            document.getElementById("output").innerHTML =
+
+                "<div class='result-title'>📍 Your Location</div>" +
+
+                "Latitude: " + lat.toFixed(6) +
+
+                "<br>" +
+
+                "Longitude: " + lon.toFixed(6) +
+
+                "<br><br>" +
+
+                "<a class='map-btn' href='" +
+                mapLink +
+                "' target='_blank'>" +
+
+                "🗺️ Open Location on Map" +
+
+                "</a>";
+
+        }
+
+
+
+        function showError(error) {
+
+            if (error.code === 1) {
+
+                document.getElementById("output").innerHTML =
+                    "⚠️ Please allow location permission.";
+
+            }
+
+            else if (error.code === 2) {
+
+                document.getElementById("output").innerHTML =
+                    "⚠️ Location is not available.";
+
+            }
+
+            else {
+
+                document.getElementById("output").innerHTML =
+                    "⚠️ Unable to get your location.";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+</html>

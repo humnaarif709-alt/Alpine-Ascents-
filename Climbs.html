@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Climbs - Alpine Ascents</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    /* General Reset */
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    /* Navbar Main Container */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: linear-gradient(135deg, #002147, #0056b3);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* Logo Styling */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    color: #ffffff;
+    font-size: 18px;
+    text-decoration: none;
+}
+
+.logo img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 3px;
+}
+
+/* Navigation Links Menu */
+.nav-menu {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 0;
+    list-style: none;
+    padding: 0;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown > a {
+    padding: 10px 5px;
+    font-weight: 600;
+    color: #ffffff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.dropdown:hover > a {
+    color: #e6e0d8;
+}
+
+/* Dropdown Menu Items */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 180px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1001;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    text-decoration: none;
+}
+
+.dropdown-menu a:hover {
+    background: linear-gradient(135deg, #002147, #0056b3);
+    color: #ffffff;
+}
+
+/* Mobile Toggle Button */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+/* Responsive Styling for Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #002147;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 0;
+    }
+
+    .nav-menu.active {
+        display: flex;
+    }
+}
+
+    /* Linear Gradient Theme */
+    .hero-header {
+      background: linear-gradient(135deg, #002147, #0056b3);
+      color: #ffffff;
+      padding: 60px 0;
+    }
+
+    .btn-gradient {
+      background: linear-gradient(135deg, #002147, #0056b3);
+      color: #ffffff;
+      border: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-gradient:hover {
+      background: linear-gradient(135deg, #0056b3, #002147);
+      color: #ffffff;
+      opacity: 0.95;
+    }
+
+    .badge-gradient {
+      background: linear-gradient(135deg, #002147, #0056b3);
+      color: #ffffff;
+    }
+
+    /* Card Styling & Button Alignment */
+    .card-img-top {
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 33, 71, 0.15) !important;
+    }
+
+    .btn-center-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* --- SITE FOOTER --- */
+    footer.site-footer {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+      margin-top: 50px;
+      margin-bottom: 0;
+      background: #002147;
+      color: #faf8f5;
+      padding: 40px 0 75px 0;
+      box-sizing: border-box;
+      clear: both;
+      border-top: 1px solid #0056b3;
+    }
+
+    footer.site-footer .footer-container {
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 30px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+    }
+
+    footer.site-footer .footer-col { flex: 1; background: transparent; }
+    footer.site-footer .footer-left { text-align: left; }
+    footer.site-footer .footer-left .contact-text { font-size: 13px; margin: 4px 0; color: #b8aea5; }
+    footer.site-footer .footer-left a { color: #f0eae1; text-decoration: none; }
+    footer.site-footer .social-icons { margin-top: 12px; display: flex; gap: 12px; }
+    footer.site-footer .social-icons a { color: #b8aea5; font-size: 16px; transition: color 0.2s ease; }
+    footer.site-footer .social-icons a:hover { color: #0056b3; }
+    footer.site-footer .footer-center { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    footer.site-footer .logo-circle {
+      width: 60px; height: 60px; border: 1px solid #0056b3; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; margin-bottom: 8px; background: rgba(255, 255, 255, 0.05);
+    }
+    footer.site-footer .logo-circle span { color: #ffffff; font-size: 18px; font-weight: 600; }
+    footer.site-footer .brand-tagline { font-size: 11px; letter-spacing: 1px; color: #a3978c; text-transform: uppercase; margin: 0; }
+    footer.site-footer .footer-right { text-align: right; }
+    footer.site-footer .footer-right h3 { font-size: 15px; color: #ffffff; margin-bottom: 6px; border-left: none; padding-left: 0; }
+    footer.site-footer .footer-right .sub-text { font-size: 13px; color: #a3978c; max-width: 300px; margin-left: auto; margin-bottom: 0; }
+
+    /* --- LIVE TICKER --- */
+    .ticker-wrapper {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background-color: #002147;
+      color: #e6e0d8;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      font-family: inherit;
+      z-index: 99999;
+      border-top: 1px solid #0056b3;
+    }
+
+    .ticker-title {
+      background: linear-gradient(135deg, #002147, #0056b3);
+      color: #ffffff;
+      padding: 0 14px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      font-weight: 600;
+      font-size: 13px;
+      white-space: nowrap;
+      z-index: 10;
+    }
+
+    .ticker-container {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-content {
+      display: flex;
+      white-space: nowrap;
+      position: absolute;
+      left: 0;
+      will-change: transform;
+    }
+
+    .ticker-item {
+      padding: 0 30px;
+      font-size: 13px;
+      color: #f0eae1;
+    }
+
+    @media (max-width: 768px) {
+      footer.site-footer .footer-container {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+      }
+      footer.site-footer .footer-left,
+      footer.site-footer .footer-right {
+        text-align: center;
+      }
+      footer.site-footer .footer-right .sub-text {
+        margin-right: auto;
+      }
+      footer.site-footer .social-icons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="mount.png" alt="Alpine Ascents Logo">
+                <span>ALPINE<br><b>ASCENTS</b></span>
+            </a>
+        </div>
+
+        <button class="menu-toggle" id="menuToggle">☰</button>
+
+        <ul class="nav-menu" id="navMenu">
+            <li class="dropdown">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="dropdown">
+                <a href="Gallery.html">Gallery</a>
+            </li>
+            <li class="dropdown">
+                <a href="Climbs.html">Climbs</a>
+            </li>
+            <li class="dropdown">
+                <a href="History.html">History</a>
+            </li>
+            <li class="dropdown">
+                <a href="treks.html">Treks</a>
+                <div class="dropdown-menu">
+                    <a href="Expeditions.html">Expeditions</a>
+                    <a href="Organization.html">Organization</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Ski.html">Ski</a>
+                <div class="dropdown-menu">
+                    <a href="Hazards.html">Hazards</a>
+                    <a href="Guidelines.html">Guidelines</a>
+                    <a href="Safety.html">Safety</a>
+                    <a href="Records.html">Records</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="Gear.html">Gear Shop</a>
+                <div class="dropdown-menu">
+                    <a href="Latest-Development.html">Latest-Development</a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <a href="About.html">About Us</a>
+            </li>
+            <li class="dropdown">
+                <a href="Contact Us.html">Contact Us</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+
+  <!-- Hero Header -->
+  <div class="hero-header text-center mb-5">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Featured Mountain Climbs</h1>
+      <p class="lead">Explore iconic peaks, technical routes, and comprehensive mountain guides.</p>
+    </div>
+  </div>
+
+  <!-- Climbs Cards Section -->
+  <div class="container mb-5">
+    <div class="row g-4">
+
+      <!-- Climb 1: Mount Everest -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Mount Everest">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge badge-gradient">Nepal / Tibet</span>
+              <small class="text-muted"><i class="fa-solid fa-mountain"></i> 8,848m</small>
+            </div>
+            <h4 class="card-title fw-bold text-center">Mount Everest</h4>
+            <p class="card-text text-muted flex-grow-1">The roof of the world. Standard South Col route via Nepal offers classic high-altitude mountaineering challenges.</p>
+            <div class="btn-center-wrapper mt-3">
+              <button class="btn btn-gradient px-4" data-bs-toggle="modal" data-bs-target="#everestModal">
+                Explore Peak Guide
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Climb 2: K2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="K2 Peak">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge badge-gradient">Pakistan</span>
+              <small class="text-muted"><i class="fa-solid fa-mountain"></i> 8,611m</small>
+            </div>
+            <h4 class="card-title fw-bold text-center">K2 (Savage Mountain)</h4>
+            <p class="card-text text-muted flex-grow-1">Known as the ultimate test in technical climbing, featuring steep ice pitches and severe weather conditions.</p>
+            <div class="btn-center-wrapper mt-3">
+              <button class="btn btn-gradient px-4" data-bs-toggle="modal" data-bs-target="#k2Modal">
+                Explore Peak Guide
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Climb 3: Mont Blanc -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm border-0">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" class="card-img-top" alt="Mont Blanc">
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="badge badge-gradient">France / Italy</span>
+              <small class="text-muted"><i class="fa-solid fa-mountain"></i> 4,809m</small>
+            </div>
+            <h4 class="card-title fw-bold text-center">Mont Blanc</h4>
+            <p class="card-text text-muted flex-grow-1">The highest peak in Western Europe. Perfect for climbers stepping up into glacier navigation and ice axe skills.</p>
+            <div class="btn-center-wrapper mt-3">
+              <button class="btn btn-gradient px-4" data-bs-toggle="modal" data-bs-target="#montBlancModal">
+                Explore Peak Guide
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- EXPLANATION MODALS -->
+
+  <!-- Everest Modal -->
+  <div class="modal fade" id="everestModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(135deg, #002147, #0056b3); color: white;">
+          <h5 class="modal-title fw-bold">Mount Everest Detailed Guide</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <img src="https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded mb-3" alt="Everest Full">
+          <h5 class="fw-bold text-dark">Route Overview & Acclimatization</h5>
+          <p>Mount Everest requires approximately 6 to 8 weeks for acclimatization, rotative climbs to higher camps, and waiting for favorable weather windows in May. Key technical sections include crossing the dangerous Khumbu Icefall, Lhotse Face, and Hillary Step.</p>
+          <hr>
+          <ul class="list-unstyled mb-0">
+            <li><strong>Expedition Duration:</strong> 60 Days</li>
+            <li><strong>Difficulty Grade:</strong> Extreme High-Altitude</li>
+            <li><strong>Optimal Season:</strong> April - May</li>
+          </ul>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+          <a href="expeditions.html" class="btn btn-gradient px-4">Book Expedition</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- K2 Modal -->
+  <div class="modal fade" id="k2Modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(135deg, #002147, #0056b3); color: white;">
+          <h5 class="modal-title fw-bold">K2 Detailed Guide</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded mb-3" alt="K2 Full">
+          <h5 class="fw-bold text-dark">Technical Challenge & Strategy</h5>
+          <p>K2 presents technical rock and ice climbing with near-vertical ascents along the Abruzzi Spur. Climbers face the Bottleneck couloir under treacherous ice seracs above 8,000m altitude.</p>
+          <hr>
+          <ul class="list-unstyled mb-0">
+            <li><strong>Expedition Duration:</strong> 50 Days</li>
+            <li><strong>Difficulty Grade:</strong> Expert / Highly Technical</li>
+            <li><strong>Optimal Season:</strong> June - August</li>
+          </ul>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+          <a href="expeditions.html" class="btn btn-gradient px-4">Book Expedition</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mont Blanc Modal -->
+  <div class="modal fade" id="montBlancModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header" style="background: linear-gradient(135deg, #002147, #0056b3); color: white;">
+          <h5 class="modal-title fw-bold">Mont Blanc Detailed Guide</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body p-4">
+          <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80" class="img-fluid rounded mb-3" alt="Mont Blanc Full">
+          <h5 class="fw-bold text-dark">Classic Alpine Route</h5>
+          <p>The Goûter Route provides standard access to the summit. Climbers traverse snowy ridges, cross crevasse fields, and scramble past the Goûter hut in early morning hours to summit before afternoon temperatures rise.</p>
+          <hr>
+          <ul class="list-unstyled mb-0">
+            <li><strong>Expedition Duration:</strong> 6 Days</li>
+            <li><strong>Difficulty Grade:</strong> Intermediate Alpine</li>
+            <li><strong>Optimal Season:</strong> June - September</li>
+          </ul>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+          <a href="expeditions.html" class="btn btn-gradient px-4">Book Expedition</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-col footer-left">
+        <p class="contact-text">Phone: +1 300 303 343</p>
+        <p class="contact-text"><a href="mailto:info@alpineascents.com">info@alpineascents.com</a></p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-col footer-center">
+        <div class="logo-circle">
+          <span>AA</span>
+        </div>
+        <p class="brand-tagline">Alpine Ascents</p>
+      </div>
+
+      <div class="footer-col footer-right">
+        <h3>Explore The World</h3>
+        <p class="sub-text">Discover unique immersive mountain expedition experiences for your next adventure.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- LIVE DYNAMIC TICKER -->
+  <div class="ticker-wrapper">
+    <div class="ticker-title">Live Updates</div>
+    <div class="ticker-container" id="tickerContainer">
+      <div class="ticker-content" id="tickerContent">
+        <span class="ticker-item" id="tickerDate">📅 Date: Loading...</span>
+        <span class="ticker-item" id="tickerTime">⏰ Time: Loading...</span>
+        <span class="ticker-item">📍 Location: Karachi</span>
+        <span class="ticker-item">Explore • Climb • Discover</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Ticker JS Logic -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const tickerContent = document.getElementById("tickerContent");
+      const tickerContainer = document.getElementById("tickerContainer");
+
+      function updateDateTime() {
+        const now = new Date();
+        const optionsDate = { month: 'long', day: 'numeric', year: 'numeric' };
+        const dateStr = now.toLocaleDateString('en-US', optionsDate);
+        const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+        const timeStr = now.toLocaleTimeString('en-US', optionsTime);
+
+        document.querySelectorAll("#tickerDate").forEach(el => {
+          el.innerText = `📅 Date: ${dateStr}`;
+        });
+        document.querySelectorAll("#tickerTime").forEach(el => {
+          el.innerText = `⏰ Time: ${timeStr}`;
+        });
+      }
+
+      if (tickerContent && tickerContainer) {
+        const clone = tickerContent.cloneNode(true);
+        clone.id = "tickerContentClone";
+        tickerContainer.appendChild(clone);
+
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        let speed = 1;
+        let position = 0;
+        let isPaused = false;
+
+        const animateTicker = () => {
+          const contentWidth = tickerContent.offsetWidth;
+          if (!isPaused) {
+            position -= speed;
+            if (Math.abs(position) >= contentWidth) {
+              position = 0;
+            }
+            tickerContent.style.transform = `translateX(${position}px)`;
+            clone.style.transform = `translateX(${position}px)`;
+          }
+          requestAnimationFrame(animateTicker);
+        };
+
+        tickerContainer.addEventListener("mouseenter", () => isPaused = true);
+        tickerContainer.addEventListener("mouseleave", () => isPaused = false);
+
+        animateTicker();
+      }
+    });
+  </script>
+</body>
+</html>
